@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package screens;
+package com.bdeb1.unfaithful.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bdeb1.unfaithful.Assets;
-import com.bdeb1.unfaithful.Main;
+import com.bdeb1.unfaithful.Unfaithful;
 
 /**
  *
@@ -27,9 +27,9 @@ import com.bdeb1.unfaithful.Main;
  */
 public class MainMenu implements Screen {
 
-    private Main game;
+    private Unfaithful game;
     
-    public MainMenu(Main game) {
+    public MainMenu(Unfaithful game) {
         this.game = game;
     }
     

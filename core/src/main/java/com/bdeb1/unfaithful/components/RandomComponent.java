@@ -13,26 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.components;
+package com.bdeb1.unfaithful.components;
 
 import com.badlogic.ashley.core.Component;
+import java.util.Random;
 
 /**
  *
  * @author Soheib El-Harrache
  */
-public class StateComponent implements Component {
-    public int state = 0;
-    public float time = 0.0f;
-    public boolean isLooping = false;
-
-    public int get(){
-        return state;
-    }
-    
-    public void set(int newState){
-        state = newState;
-        time = 0.0f;
-    }
-    
+public class RandomComponent implements Component {
+    public static Random rand = new Random();
+    public float value = 0;
 }

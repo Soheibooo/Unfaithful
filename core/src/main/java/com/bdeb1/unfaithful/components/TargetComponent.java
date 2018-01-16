@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.components;
+package com.bdeb1.unfaithful.components;
 
 import com.badlogic.ashley.core.Component;
 
@@ -21,11 +21,17 @@ import com.badlogic.ashley.core.Component;
  *
  * @author Soheib El-Harrache
  */
-public class CharacterComponent implements Component {
-
-    public static final int STATE_ALIVE = 0;
-    public static final int STATE_DEAD = 1;
+public class TargetComponent implements Component {
+    public static final int STATE_UNSUSPICIOUS = 0;
+    public static final int STATE_SUSPICIOUS = 1;
     public static final int STATE_FRENZY = 2;
+    public static final int STATE_DONE = 3;
     
-    public float aCertainScore = 0.0f;
+    public static final int ACTION_TALKING = 10;
+    public static final int ACTION_WALKING_LEFT = 11;
+    public static final int ACTION_WALKING_RIGHT = 12;
+    public static final int ACTION_LEFT_SCREEN = 13;
+    public static final int ACTION_RIGHT_SCREEN = 14;
+    
+    public float suspicion_gauge = 0;
 }

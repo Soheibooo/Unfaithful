@@ -3,7 +3,7 @@ package com.soheibo.template.desktop;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.bdeb1.unfaithful.Main;
+import com.bdeb1.unfaithful.Unfaithful;
 
 /** Launches the desktop (LWJGL) application. */
 public class DesktopLauncher {
@@ -12,7 +12,7 @@ public class DesktopLauncher {
     }
 
     private static LwjglApplication createApplication() {
-        return new LwjglApplication(new Main(), getDefaultConfiguration());
+        return new LwjglApplication(new Unfaithful(), getDefaultConfiguration());
     }
 
     private static LwjglApplicationConfiguration getDefaultConfiguration() {

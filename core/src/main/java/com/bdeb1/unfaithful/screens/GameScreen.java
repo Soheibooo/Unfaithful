@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package screens;
+package com.bdeb1.unfaithful.screens;
 
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
@@ -23,10 +23,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.bdeb1.unfaithful.GameWorld;
-import com.bdeb1.unfaithful.Main;
-import com.soheibo.template.systems.AnimationSystem;
-import com.soheibo.template.systems.RenderingSystem;
-import com.soheibo.template.systems.StateSystem;
+import com.bdeb1.unfaithful.Unfaithful;
+import com.bdeb1.unfaithful.systems.AnimationSystem;
+import com.bdeb1.unfaithful.systems.RenderingSystem;
+import com.bdeb1.unfaithful.systems.StateSystem;
 
 /**
  *
@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
     private PooledEngine engine;
     private Game game;
 
-    public GameScreen(Main game) {
+    public GameScreen(Unfaithful game) {
         super();
         this.game = game;
         this.world = new World(new Vector2(0f, -9.8f), true);

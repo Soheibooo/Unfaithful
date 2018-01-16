@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.systems;
+package com.bdeb1.unfaithful.components;
 
-import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.Component;
 
 /**
  *
  * @author Soheib El-Harrache
  */
-public class StateSystem extends EntitySystem {
-    
+public class MovementComponent implements Component {
+    public float speed;
 }

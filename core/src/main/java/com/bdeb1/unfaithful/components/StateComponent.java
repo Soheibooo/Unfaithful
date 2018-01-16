@@ -13,16 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.components;
+package com.bdeb1.unfaithful.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.utils.IntMap;
 
 /**
  *
  * @author Soheib El-Harrache
  */
-public class AnimationComponent implements Component {
-    public IntMap<Animation> animations = new IntMap<Animation>();
+public class StateComponent implements Component {
+    public int state = 0;
+    public float time = 0.0f;
+    public boolean isLooping = false;
+
+    public int get(){
+        return state;
+    }
+    
+    public void set(int newState){
+        state = newState;
+        time = 0.0f;
+    }
+    
 }

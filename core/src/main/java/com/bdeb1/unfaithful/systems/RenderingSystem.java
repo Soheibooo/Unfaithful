@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.systems;
+package com.bdeb1.unfaithful.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -22,8 +22,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.soheibo.template.components.TextureComponent;
-import com.soheibo.template.components.TransformComponent;
+import com.bdeb1.unfaithful.components.TextureComponent;
+import com.bdeb1.unfaithful.components.TransformComponent;
 
 /**
  *

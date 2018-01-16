@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.soheibo.template.components;
+package com.bdeb1.unfaithful.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 /**
  *
  * @author Soheib El-Harrache
  */
-public class TransformComponent implements Component {
-    public final Vector3 position = new Vector3();
-    public final Vector2 scale = new Vector2(1.0f, 1.0f);
-    public float rotation = 0.0f;
-    public boolean isHidden = false;
+public class HackerComponent implements Component {
+    public static final int ACTION_HACKING = 0;
+    public static final int ACTION_NOT_HACKING = 1;
+    
+    //Later
+    public float score = 0;
+    
+    public float hacking_gauge = 0; 
 }

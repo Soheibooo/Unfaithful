@@ -16,7 +16,7 @@
 package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.PooledEngine;
-import screens.MainMenu;
+import com.bdeb1.unfaithful.screens.MainMenu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,7 +27,7 @@ import com.badlogic.gdx.physics.box2d.World;
  *
  * @author Soheib El-Harrache
  */
-public class Main extends Game {
+public class Unfaithful extends Game {
     
     public SpriteBatch sb;
     public ShapeRenderer sp;

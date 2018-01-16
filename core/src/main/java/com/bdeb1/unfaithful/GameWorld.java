@@ -17,11 +17,11 @@ package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.soheibo.template.components.AnimationComponent;
-import com.soheibo.template.components.CharacterComponent;
-import com.soheibo.template.components.StateComponent;
-import com.soheibo.template.components.TextureComponent;
-import com.soheibo.template.components.TransformComponent;
+import com.bdeb1.unfaithful.components.AnimationComponent;
+import com.bdeb1.unfaithful.components.StateComponent;
+import com.bdeb1.unfaithful.components.TargetComponent;
+import com.bdeb1.unfaithful.components.TextureComponent;
+import com.bdeb1.unfaithful.components.TransformComponent;
 
 /**
  *
@@ -33,7 +33,7 @@ public class GameWorld {
 
     public GameWorld(PooledEngine engine) {
         this.engine = engine;
-        createCharacter();
+        createTarget();
         generateLevel();
     }
 
@@ -41,33 +41,33 @@ public class GameWorld {
 
     }
 
-    private void createCharacter() {
+    private void createTarget() {
         Entity entity = engine.createEntity();
 
         AnimationComponent animC
                 = engine.createComponent(AnimationComponent.class);
-        CharacterComponent charC
-                = engine.createComponent(CharacterComponent.class);
         TransformComponent positionC
                 = engine.createComponent(TransformComponent.class);
         StateComponent stateC
                 = engine.createComponent(StateComponent.class);
         TextureComponent textureC
                 = engine.createComponent(TextureComponent.class);
+        TargetComponent targetC
+                = engine.createComponent(TargetComponent.class);
 
 //        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
 
         positionC.position.set(5.0f, 1.0f, 0.0f);
+        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
 
-        stateC.set(CharacterComponent.STATE_ALIVE);
-
+        entity.add(textureC);
         entity.add(animC);
-        entity.add(charC);
+        entity.add(targetC);
         entity.add(positionC);
         entity.add(stateC);
-        entity.add(textureC);
+        
 
         engine.addEntity(entity);
     }
