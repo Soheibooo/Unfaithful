@@ -1,0 +1,62 @@
+
+ecran_pas_hacking_lvl1.png
+size: 512,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Cat_not_hacking0000
+  rotate: false
+  xy: 0, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0001
+  rotate: false
+  xy: 0, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0002
+  rotate: false
+  xy: 100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0003
+  rotate: false
+  xy: 100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0006
+  rotate: false
+  xy: 100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0007
+  rotate: false
+  xy: 100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0004
+  rotate: false
+  xy: 200, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+Cat_not_hacking0005
+  rotate: false
+  xy: 200, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1

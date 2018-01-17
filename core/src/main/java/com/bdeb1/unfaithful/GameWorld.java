@@ -20,13 +20,14 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.IntMap;
+import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
+import java.util.HashMap;
 
 /**
  *
@@ -107,35 +108,41 @@ public class GameWorld {
                 = engine.createComponent(TextureComponent.class);
         HackerComponent hackerC
                 = engine.createComponent(HackerComponent.class);
+        ActionComponent actionC
+                = engine.createComponent(ActionComponent.class);
 
 //        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
 
-        positionC.position.set(5.0f, 1.0f, 0.0f);
-        stateC.set(HackerComponent.ACTION_NOT_HACKING);
-
+        positionC.position.set(5f, 2.9f, 0.0f);
+        //PAS DE STATE POUR LE HACKER
+        stateC.set(0);
+        actionC.set(HackerComponent.ACTION_NOT_HACKING);
         
         TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
         TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
         
-        IntMap<Animation> animeList = new IntMap<Animation>();
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
         
         
-        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1f, texAtHacking.getRegions());
-        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1f, texAtNOTHacking.getRegions());
+        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(0.1f, texAtHacking.getRegions());
+        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(0.2f, texAtNOTHacking.getRegions());
         
-        animeList.put(0, animeHacking);
-        animeList.put(1, animeNotHacking);
+        animeList.put(1, animeHacking);
+        animeList.put(2, animeNotHacking);
         
-        animC.animations.put(0,animeList);
+        //DEFAULT
+        animC.animations.put(0 ,animeList);
+        
         
         entity.add(textureC);
         entity.add(animC);
+        
         entity.add(hackerC);
         entity.add(positionC);
         entity.add(stateC);
-        
+        entity.add(actionC);
 
         engine.addEntity(entity);
         

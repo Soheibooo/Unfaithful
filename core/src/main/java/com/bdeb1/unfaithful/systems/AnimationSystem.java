@@ -21,6 +21,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.IntMap;
+import com.badlogic.gdx.utils.IntMap.Entries;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
@@ -55,14 +57,23 @@ public class AnimationSystem extends IteratingSystem {
         StateComponent stateC = stateM.get(entity);
         ActionComponent actionC = actionM.get(entity);
         AnimationComponent animationC = animationM.get(entity);
+        
+        
+        
 
+//        for (int i : animationC.animations.keySet()) {
+//            System.out.println("CLE: " + i);
+//            System.out.println("VALUE: " + animationC.animations.get(i).toString());
+//            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
+//        }
         if (animationC.animations.containsKey(stateC.get())) {
+            System.out.println("Enter");
             TextureComponent tex = textureM.get(entity);
             Animation animation = 
                     animationC.animations.get(stateC.get()).get(actionC.get());
             tex.region = (TextureRegion) animation.getKeyFrame(stateC.time);
         }
 
-        stateC.time += deltaTime;
+        //stateC.time += deltaTime;
     }
 }

@@ -21,6 +21,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.TransformComponent;
 /**
  *
  * @author Samuel
@@ -28,14 +29,20 @@ import com.bdeb1.unfaithful.components.HackerComponent;
 public class HackerSystem extends IteratingSystem {
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
+    private ComponentMapper<TransformComponent> transformM;
+    
     private boolean isHacking = false;
     public HackerSystem() {
         super(Family.all(
                 HackerComponent.class,
-                ActionComponent.class
+                ActionComponent.class,
+                TransformComponent.class
         ).get());
+        transformM = ComponentMapper.getFor(TransformComponent.class);
         hackerM = ComponentMapper.getFor(HackerComponent.class);
         actionM = ComponentMapper.getFor(ActionComponent.class);
+        
+        
     }
     public void setIsHacking(boolean b) {
         isHacking = b;
@@ -43,6 +50,7 @@ public class HackerSystem extends IteratingSystem {
     
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        transformM.get(entity).isHidden = false;
         HackerComponent hackerC = hackerM.get(entity);
         ActionComponent actionC = actionM.get(entity);
         

@@ -94,8 +94,8 @@ public class GameScreen implements Screen {
         Button btnPause = gui.addButton(10, 10, 64, 32, "Pause", Assets.getInstance().manager.get(Assets.SPRITE_NAME));
         ProgressBar progressBarHack = gui.addProgressBar(100, 40, 50, 16, 2, Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME));
 
-        stage.addActor(btnPause);
-        stage.addActor(progressBarHack);
+        //stage.addActor(btnPause);
+        //stage.addActor(progressBarHack);
     }
 
     @Override
@@ -105,15 +105,16 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        draw();
+        draw(delta);
+        engine.update(delta);
     }
 
     private void update(float delta) {
         background.update (delta);
         
-        engine.update(delta);
+        
 		
-        updateKeys();
+        updateInput();
 		
 		
         if(gWorld.isHacked(gWorld.getIDLevel())) {
@@ -127,7 +128,7 @@ public class GameScreen implements Screen {
             }
         }
     }
-    private void updateKeys() {
+    private void updateInput() {
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
             if(isPaused)
                 resume();
@@ -135,25 +136,25 @@ public class GameScreen implements Screen {
                 pause();
         }
         if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-            System.out.println("Space");
             engine.getSystem(HackerSystem.class).setIsHacking(true);
         }
         else {
-            System.out.println("No space");
             engine.getSystem(HackerSystem.class).setIsHacking(false);
         }
         
     }
-    private void draw() {
+    private void draw(float delta) {
         //UI
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.setProjectionMatrix (background.camera.combined);
 
         batch.begin ();
+        
+        
         background.draw(batch);
         batch.end ();
-
+        
         stage.draw();
     }
 

@@ -45,15 +45,19 @@ public class Assets {
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/test_animation.atlas", TextureAtlas.class);
+                    "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
     
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/hacking_animation_lvl_1.atlas", TextureAtlas.class);
+                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
         
         public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
     
     //------------------------SPRITES
     public static final AssetDescriptor<Texture> SPRITE_NAME
@@ -89,6 +93,7 @@ public class Assets {
         manager.load(ATLAS_NOTHACKING);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND);
+        manager.load(ATLAS_RIGHT_TO_LEFT);
         
         //Sprites
         manager.load(SPRITE_NAME);
