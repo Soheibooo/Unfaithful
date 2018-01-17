@@ -64,22 +64,13 @@ public class GameScreen implements Screen {
         super();
         this.game = game;
         this.stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-
-
-        stage.act();
-
-        batch = new SpriteBatch ();
-
-        backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
-
+        this.batch = new SpriteBatch ();
+        this.backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
         Animation<TextureRegion> animation = new Animation<TextureRegion>
               (1f/2f, backgroundAtlas.getRegions ());
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
                                                     Gdx.graphics.getHeight ());
-
-        background = new Scene (visibleDimension, animation);
-
+        this.background = new Scene (visibleDimension, animation);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -90,16 +81,14 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
         this.gWorld = new GameWorld(engine);
+
         isPaused = false;
+
         Gdx.input.setInputProcessor(stage);
         GUI gui = GUI.getInstance();
-//        Texture textureBtnPause =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-//        Texture textureBtnPauseHover =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
 
-        Texture textureBtnPause = Assets.getInstance ().manager.get (Assets
-                                                                           .TEXTURE_NAME);
-        Texture textureBtnPauseHover = Assets.getInstance ().manager.get
-              (Assets.TEXTURE_NAME);
+        Texture textureBtnPause = Assets.getInstance().manager.get(Assets.BTN_PAUSE);
+        Texture textureBtnPauseHover = Assets.getInstance().manager.get(Assets.TEXTURE_NAME);
 
         int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
         int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;

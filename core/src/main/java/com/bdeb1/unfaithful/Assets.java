@@ -55,14 +55,29 @@ public class Assets {
         public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+
+        public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/progression_bar_hacking.atlas", TextureAtlas.class);
+
+        public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICION
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/progression_bar_suspicion.atlas", TextureAtlas.class);
+
+        public static final AssetDescriptor<TextureAtlas> ATLAS_MENU
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/barre_menu.atlas", TextureAtlas.class);
     
     //------------------------SPRITES
     public static final AssetDescriptor<Texture> TEXTURE_NAME = new
-          AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture
-          .class);
+          AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture.class);
     public static final AssetDescriptor<Pixmap> SPRITE_NAME
             = new AssetDescriptor<Pixmap>(
                     "sprite/exemple_sprite.png", Pixmap.class);
+    public static final AssetDescriptor<Texture> BTN_PAUSE = new
+            AssetDescriptor<Texture> ("sprite/bouton_pause.png", Texture.class);
+    public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER = new
+            AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
     
     //------------------------IMAGES
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1
@@ -93,10 +108,15 @@ public class Assets {
         manager.load(ATLAS_NOTHACKING);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND);
-        
+        manager.load(ATLAS_BAR_HACKING);
+        manager.load(ATLAS_BAR_SUSPICION);
+        manager.load(ATLAS_MENU);
+
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load (TEXTURE_NAME);
+        manager.load(BTN_PAUSE);
+        manager.load(BTN_PAUSE_HOVER);
 
         //Images
         manager.load(IMAGE_BACKGROUND_1);
