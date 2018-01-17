@@ -20,6 +20,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
@@ -29,6 +30,9 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
+import com.bdeb1.unfaithful.util.Constants;
+import com.bdeb1.unfaithful.util.Dimension;
+import com.bdeb1.unfaithful.util.Scene;
 
 /**
  *
@@ -40,9 +44,19 @@ public class GameScreen implements Screen {
     private PooledEngine engine;
     private Game game;
 
+    private Scene background;
+    private SpriteBatch batch;
+
     public GameScreen(Unfaithful game) {
         super();
         this.game = game;
+
+        batch = new SpriteBatch ();
+
+        Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
+                                                    Gdx.graphics.getHeight ());
+        background = new Scene (visibleDimension, Constants.World
+              .SCENE_DIMENSION, Constants.Path.BACKGROUND);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -64,6 +78,12 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(delta);
         draw();
+
+        batch.setProjectionMatrix (background.camera.combined);
+
+        batch.begin ();
+        background.draw (batch);
+        batch.end ();
     }
 
     private void update(float delta) {
@@ -78,6 +98,8 @@ public class GameScreen implements Screen {
                 //Later
             }
         }
+
+        background.update ();
     }
 
     private void draw() {
