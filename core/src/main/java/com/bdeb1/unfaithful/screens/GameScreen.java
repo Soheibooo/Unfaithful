@@ -24,9 +24,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
+import com.bdeb1.unfaithful.systems.ActionSystem;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
+import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
+import com.bdeb1.unfaithful.systems.TargetSystem;
 
 /**
  *
@@ -48,7 +51,10 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new RenderingSystem(game.sb));
         this.engine.addSystem(new AnimationSystem());
         this.engine.addSystem(new StateSystem());
-
+        this.engine.addSystem(new ActionSystem());
+        this.engine.addSystem(new MovementSystem());
+        this.engine.addSystem(new TargetSystem());
+        
         this.gWorld = new GameWorld(engine);
     }
 

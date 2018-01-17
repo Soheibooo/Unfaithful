@@ -20,7 +20,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.bdeb1.unfaithful.components.ActionComponent;
-import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.RandomComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
@@ -33,13 +32,14 @@ import com.bdeb1.unfaithful.components.TransformComponent;
 public class TargetSystem extends IntervalIteratingSystem {
 
     private static final float TIME_STEP = 1 / 45f;
-    
+
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<StateComponent> stateM;
     private ComponentMapper<TargetComponent> targetM;
     private ComponentMapper<RandomComponent> randomM;
-    
-    public TargetSystem(Family family) {
+    private ComponentMapper<TransformComponent> transformM;
+
+    public TargetSystem() {
         super(Family.all(
                 ActionComponent.class,
                 StateComponent.class,
@@ -47,6 +47,12 @@ public class TargetSystem extends IntervalIteratingSystem {
                 RandomComponent.class,
                 TransformComponent.class
         ).get(), TIME_STEP);
+
+        actionM = ComponentMapper.getFor(ActionComponent.class);
+        stateM = ComponentMapper.getFor(StateComponent.class);
+        targetM = ComponentMapper.getFor(TargetComponent.class);
+        randomM = ComponentMapper.getFor(RandomComponent.class);
+        transformM = ComponentMapper.getFor(TransformComponent.class);
     }
 
     @Override
@@ -54,8 +60,32 @@ public class TargetSystem extends IntervalIteratingSystem {
         ActionComponent actionC = actionM.get(entity);
         StateComponent stateC = stateM.get(entity);
         TargetComponent targetC = targetM.get(entity);
+        TransformComponent transformC = transformM.get(entity);
+
+        //Time between changing action
         RandomComponent randomC = randomM.get(entity);
         
+        //Out of screen
+        //if (transformC.position.x < )
+                
+        if (actionC.time > randomC.value
+                && (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
+                || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN)) {
+
+            //TO ADJUST TO DIFFICULTY
+            randomC.value = RandomComponent.rand.nextInt(
+                    20 - Math.max(10, (int) targetC.suspicion_gauge / 5)
+            );
+        } else {
+
+        }
+
+        if (targetC.suspicion_gauge
+                >= TargetComponent.TRIGGER_POINT_DONE) {
+            stateC.state = TargetComponent.STATE_DONE;
+        } else if (targetC.suspicion_gauge
+                >= TargetComponent.TRIGGER_POINT_FRENZY) {
+            stateC.state = TargetComponent.STATE_FRENZY;
+        }
     }
-    
 }

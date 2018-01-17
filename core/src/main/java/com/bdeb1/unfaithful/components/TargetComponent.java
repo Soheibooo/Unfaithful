@@ -33,5 +33,9 @@ public class TargetComponent implements Component {
     public static final int ACTION_LEFT_SCREEN = 13;
     public static final int ACTION_RIGHT_SCREEN = 14;
     
+    public static final int TRIGGER_POINT_SUSPICIOUS = 30;
+    public static final int TRIGGER_POINT_FRENZY = 70;
+    public static final int TRIGGER_POINT_DONE = 100;
+    
     public float suspicion_gauge = 0;
 }

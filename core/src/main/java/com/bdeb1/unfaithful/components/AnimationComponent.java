@@ -24,5 +24,7 @@ import com.badlogic.gdx.utils.IntMap;
  * @author Soheib El-Harrache
  */
 public class AnimationComponent implements Component {
-    public IntMap<Animation> animations = new IntMap<Animation>();
+
+    public IntMap<IntMap<Animation>> animations
+            = new IntMap<IntMap<Animation>>();
 }
