@@ -3,9 +3,8 @@ package com.bdeb1.unfaithful.screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.actions.EventAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -34,6 +33,7 @@ public class GUI {
         textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()));
         textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(texture, -2, -2, texture.getWidth(), texture.getHeight()));
         textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(textureHover, 0, 0, textureHover.getWidth(), textureHover.getHeight()));
+        textButtonStyle.checkedOver = new TextureRegionDrawable(new TextureRegion(textureHover, 0, 0, textureHover.getWidth(), textureHover.getHeight()));
 
         TextButton button = new TextButton("", textButtonStyle);
         button.setPosition(x, y);
