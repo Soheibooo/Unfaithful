@@ -25,6 +25,7 @@ public class HackerComponent implements Component {
     public static final int ACTION_HACKING = 0;
     public static final int ACTION_NOT_HACKING = 1;
     
+    
     //Later
     public float score = 0;
     

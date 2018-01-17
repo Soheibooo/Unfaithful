@@ -25,6 +25,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
+import com.bdeb1.unfaithful.systems.HackerSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new RenderingSystem(game.sb));
         this.engine.addSystem(new AnimationSystem());
         this.engine.addSystem(new StateSystem());
+        this.engine.addSystem(new HackerSystem());
 
         this.gWorld = new GameWorld(engine);
     }
