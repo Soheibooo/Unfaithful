@@ -3,11 +3,13 @@ package com.bdeb1.unfaithful.util;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.Assets;
 
 public class Scene {
@@ -16,6 +18,7 @@ public class Scene {
 	private Rectangle          bounds;
 	private Direction          directionCamera;
 	private Vector3            cameraOrigin;
+	private Array<Layer>    layers;
 
 
 	private Animation<TextureRegion> animation;
@@ -38,6 +41,8 @@ public class Scene {
 		bounds = new Rectangle (0, 0, Constants.World.SCENE_DIMENSION.width,
 		                        Constants.World.SCENE_DIMENSION.height);
 
+
+		layers = new Array<> ();
 
 		directionCamera = Direction.Center;
 	}
@@ -88,8 +93,20 @@ public class Scene {
 		textureRegion = animation.getKeyFrame (deltaTime, true);
 		batch.draw (textureRegion, bounds.x, bounds.y, bounds.width,
 		            bounds.height );
+
+		for (Layer layer: layers) {
+			layer.draw (batch);
+		}
+	}
+
+	public int addLayer(Layer layer) {
+		layers.add (layer);
+		return layers.size - 1;
 	}
 
 	public void dispose () {
+		for (Layer layer: layers) {
+			layer.dispose ();
+		}
 	}
 }

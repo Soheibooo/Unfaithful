@@ -74,7 +74,8 @@ public class Assets {
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_3
             = new AssetDescriptor<Texture>(
                     "image/background.png", Texture.class);
-    
+    public static final AssetDescriptor<Texture> COMPTOIR = new
+	      AssetDescriptor<Texture> ("image/comptoir.png", Texture.class);
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
             = new AssetDescriptor<Sound>(
@@ -102,6 +103,7 @@ public class Assets {
         manager.load(IMAGE_BACKGROUND_1);
         manager.load(IMAGE_BACKGROUND_2);
         manager.load(IMAGE_BACKGROUND_3);
+        manager.load (COMPTOIR);
 
         //Sounds
         manager.load(SOUND_NAME);
