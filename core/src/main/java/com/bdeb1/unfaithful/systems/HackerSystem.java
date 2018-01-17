@@ -27,8 +27,6 @@ import com.bdeb1.unfaithful.components.HackerComponent;
  * @author Samuel
  */
 public class HackerSystem extends IteratingSystem {
-
-    private final float HACK_MAX_GAUGE = 60.0f;
     
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;

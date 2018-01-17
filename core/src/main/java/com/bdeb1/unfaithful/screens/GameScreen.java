@@ -38,7 +38,6 @@ import com.bdeb1.unfaithful.systems.TargetSystem;
  */
 public class GameScreen implements Screen {
 
-    private World world;
     private GameWorld gWorld;
     private PooledEngine engine;
     private Game game;
@@ -46,7 +45,6 @@ public class GameScreen implements Screen {
     public GameScreen(Unfaithful game) {
         super();
         this.game = game;
-        this.world = new World(new Vector2(0f, -9.8f), true);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -72,6 +70,16 @@ public class GameScreen implements Screen {
 
     private void update(float delta) {
         engine.update(delta);
+        
+        if(gWorld.isHacked(gWorld.getIDLevel())) {
+            if(gWorld.getIDLevel() < 3) {
+                gWorld.generateLevel(gWorld.getIDLevel()+1);
+            }
+            else {
+                //Insert Code for End screen
+                //Later
+            }
+        }
     }
 
     private void draw() {
@@ -86,10 +94,26 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+        
+        engine.getSystem(ActionSystem.class).setProcessing(false);
+        engine.getSystem(AnimationSystem.class).setProcessing(false);
+        engine.getSystem(HackerSystem.class).setProcessing(false);
+        engine.getSystem(MovementSystem.class).setProcessing(false);
+        engine.getSystem(RenderingSystem.class).setProcessing(false);
+        engine.getSystem(StateSystem.class).setProcessing(false);
+        engine.getSystem(TargetSystem.class).setProcessing(false);
+        
     }
 
     @Override
     public void resume() {
+        engine.getSystem(ActionSystem.class).setProcessing(true);
+        engine.getSystem(AnimationSystem.class).setProcessing(true);
+        engine.getSystem(HackerSystem.class).setProcessing(true);
+        engine.getSystem(MovementSystem.class).setProcessing(true);
+        engine.getSystem(RenderingSystem.class).setProcessing(true);
+        engine.getSystem(StateSystem.class).setProcessing(true);
+        engine.getSystem(TargetSystem.class).setProcessing(true);
     }
 
     @Override

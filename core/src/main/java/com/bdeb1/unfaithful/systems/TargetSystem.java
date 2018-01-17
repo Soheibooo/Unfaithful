@@ -32,7 +32,9 @@ import com.bdeb1.unfaithful.components.TransformComponent;
 public class TargetSystem extends IntervalIteratingSystem {
 
     private static final float TIME_STEP = 1 / 45f;
-
+    
+    
+    
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<StateComponent> stateM;
     private ComponentMapper<TargetComponent> targetM;
@@ -47,7 +49,9 @@ public class TargetSystem extends IntervalIteratingSystem {
                 RandomComponent.class,
                 TransformComponent.class
         ).get(), TIME_STEP);
-
+        
+        
+        
         actionM = ComponentMapper.getFor(ActionComponent.class);
         stateM = ComponentMapper.getFor(StateComponent.class);
         targetM = ComponentMapper.getFor(TargetComponent.class);
@@ -72,9 +76,10 @@ public class TargetSystem extends IntervalIteratingSystem {
                 && (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
                 || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN)) {
 
-            //TO ADJUST TO DIFFICULTY
+            //TO ADJUST DIFFICULTY
             randomC.value = RandomComponent.rand.nextInt(
-                    20 - Math.max(10, (int) targetC.suspicion_gauge / 5)
+                    (int)(35 + targetC.difficultyAddition) - 
+                    Math.max(15, (int) targetC.suspicion_gauge / 5 + 2)
             );
         } else {
 
