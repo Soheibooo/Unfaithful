@@ -57,7 +57,13 @@ public class Assets {
                     "sprite/exemple_sprite.png", Texture.class);
     
     //------------------------IMAGES
-    public static final AssetDescriptor<Texture> IMAGE_BACKGROUND
+    public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1
+            = new AssetDescriptor<Texture>(
+                    "image/background.png", Texture.class);
+    public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_2
+            = new AssetDescriptor<Texture>(
+                    "image/background.png", Texture.class);
+    public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_3
             = new AssetDescriptor<Texture>(
                     "image/background.png", Texture.class);
     
@@ -83,7 +89,9 @@ public class Assets {
         manager.load(SPRITE_NAME);
 
         //Images
-        manager.load(IMAGE_BACKGROUND);
+        manager.load(IMAGE_BACKGROUND_1);
+        manager.load(IMAGE_BACKGROUND_2);
+        manager.load(IMAGE_BACKGROUND_3);
 
         //Sounds
         manager.load(SOUND_NAME);

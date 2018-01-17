@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
                                                     Gdx.graphics.getHeight ());
         background = new Scene (visibleDimension, Constants.World
-              .SCENE_DIMENSION);
+              .SCENE_DIMENSION, 1);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -105,6 +105,8 @@ public class GameScreen implements Screen {
     }
 
     private void update(float delta) {
+        background.update ();
+        
         engine.update(delta);
 		
         updateKeys();
@@ -121,7 +123,7 @@ public class GameScreen implements Screen {
             }
         }
 
-        background.update ();
+        
     }
     private void updateKeys() {
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
@@ -131,9 +133,11 @@ public class GameScreen implements Screen {
                 pause();
         }
         if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+            System.out.println("Space");
             engine.getSystem(HackerSystem.class).setIsHacking(true);
         }
         else {
+            System.out.println("No space");
             engine.getSystem(HackerSystem.class).setIsHacking(false);
         }
         
