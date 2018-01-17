@@ -30,6 +30,8 @@ import java.util.ArrayList;
  */
 public class Assets {
 
+    public static String ATLAS_BACKGROUND_1;
+
     public AssetManager manager;
 
     private static Assets instance = null;
@@ -48,34 +50,17 @@ public class Assets {
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
-<<<<<<< HEAD
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
     
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
         
-        public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
-        
         public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
     
-=======
-                    "atlas/test_animation.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/hacking_animation_lvl_1.atlas", TextureAtlas.class);
-
-    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
-
->>>>>>> d135f71adf1e1c5ad5f1d948eb775a55b7850295
-    //------------------------SPRITES
     public static final AssetDescriptor<Texture> SPRITE_NAME
             = new AssetDescriptor<Texture>(
                     "sprite/exemple_sprite.png", Texture.class);
@@ -112,7 +97,6 @@ public class Assets {
         //Atlas
         manager.load(ATLAS_NOTHACKING);
         manager.load(ATLAS_HACKING);
-        manager.load(ATLAS_BACKGROUND);
         manager.load(ATLAS_RIGHT_TO_LEFT);
         //Sprites
         manager.load(SPRITE_NAME);

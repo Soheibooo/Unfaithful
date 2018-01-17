@@ -70,7 +70,7 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch ();
 
-        backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
+        backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_1);
         
         Animation<TextureRegion> animation = new Animation<TextureRegion>
               (1f/2f, backgroundAtlas.getRegions ());
