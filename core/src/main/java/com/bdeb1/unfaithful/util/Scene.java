@@ -18,9 +18,9 @@ public class Scene {
 	private Vector3            anchorPoint;
 
 	public Scene (Dimension visible, Dimension dimension, String
-		  backgroundPath)
-	{
 
+		backgroundPath)
+		{
 		background = new Texture (backgroundPath);
 		directionCamera = Direction.Center;
 
