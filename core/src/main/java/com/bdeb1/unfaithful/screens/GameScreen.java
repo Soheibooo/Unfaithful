@@ -20,7 +20,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
@@ -44,8 +47,9 @@ public class GameScreen implements Screen {
     private PooledEngine engine;
     private Game game;
 
-    private Scene background;
-    private SpriteBatch batch;
+    private Scene        background;
+    private SpriteBatch  batch;
+    private TextureAtlas backgroundAtlas;
 
     public GameScreen(Unfaithful game) {
         super();
@@ -53,10 +57,12 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch ();
 
+        backgroundAtlas = new TextureAtlas (Constants.Path.BACKGROUND_ATLAS);
+        Animation<TextureRegion> animation = new Animation<TextureRegion>
+              (1f/2f, backgroundAtlas.getRegions ());
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
                                                     Gdx.graphics.getHeight ());
-        background = new Scene (visibleDimension, Constants.World
-              .SCENE_DIMENSION, Constants.Path.BACKGROUND);
+        background = new Scene (visibleDimension, animation);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -99,7 +105,7 @@ public class GameScreen implements Screen {
             }
         }
 
-        background.update ();
+        background.update (delta);
     }
 
     private void draw() {
@@ -143,5 +149,7 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         background.dispose ();
+        backgroundAtlas.dispose ();
+        batch.dispose ();
     }
 }
