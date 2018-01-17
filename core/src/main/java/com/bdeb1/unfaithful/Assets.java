@@ -19,6 +19,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import java.io.File;
@@ -29,7 +30,6 @@ import java.util.ArrayList;
  * @author Soheib El-Harrache
  */
 public class Assets {
-
     public AssetManager manager;
 
     private static Assets instance = null;
@@ -44,25 +44,25 @@ public class Assets {
         }
         return instance;
     }
-
+    
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
 <<<<<<< HEAD
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
-    
+
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
-        
+
         public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
-        
+
         public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
-    
+
 =======
                     "atlas/test_animation.atlas", TextureAtlas.class);
 
@@ -74,8 +74,31 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
 
+        public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/progression_bar_hacking.atlas", TextureAtlas.class);
+
+        public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICION
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/progression_bar_suspicion.atlas", TextureAtlas.class);
+
+        public static final AssetDescriptor<TextureAtlas> ATLAS_MENU
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/barre_menu.atlas", TextureAtlas.class);
+
+
 >>>>>>> d135f71adf1e1c5ad5f1d948eb775a55b7850295
     //------------------------SPRITES
+    public static final AssetDescriptor<Texture> TEXTURE_NAME = new
+          AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture.class);
+    public static final AssetDescriptor<Pixmap> SPRITE_NAME
+            = new AssetDescriptor<Pixmap>(
+                    "sprite/exemple_sprite.png", Pixmap.class);
+    public static final AssetDescriptor<Texture> BTN_PAUSE = new
+            AssetDescriptor<Texture> ("sprite/bouton_pause.png", Texture.class);
+    public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER = new
+            AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
+    
     public static final AssetDescriptor<Texture> SPRITE_NAME
             = new AssetDescriptor<Texture>(
                     "sprite/exemple_sprite.png", Texture.class);
@@ -113,9 +136,16 @@ public class Assets {
         manager.load(ATLAS_NOTHACKING);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND);
+        manager.load(ATLAS_BAR_HACKING);
+        manager.load(ATLAS_BAR_SUSPICION);
+        manager.load(ATLAS_MENU);
+
         manager.load(ATLAS_RIGHT_TO_LEFT);
         //Sprites
         manager.load(SPRITE_NAME);
+        manager.load (TEXTURE_NAME);
+        manager.load(BTN_PAUSE);
+        manager.load(BTN_PAUSE_HOVER);
 
         //Images
         manager.load(IMAGE_BACKGROUND_1);
@@ -135,11 +165,11 @@ public class Assets {
         HACKING_PROGRESS_LV1.add("Found old contacts");
         HACKING_PROGRESS_LV1.add("Found interestingly weird convos");
         HACKING_PROGRESS_LV1.add("Found encrypted archives");
-        
+
         //Font
 //        manager.load(font_pixel);
     }
-
+    
     /**
      * Disposes the manager.
      */
