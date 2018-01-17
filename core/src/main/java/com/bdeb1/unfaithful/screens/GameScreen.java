@@ -21,6 +21,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -63,6 +64,7 @@ public class GameScreen implements Screen {
         super();
         this.game = game;
         this.stage = new Stage();
+<<<<<<< HEAD
         Gdx.input.setInputProcessor(stage);
 
 
@@ -72,13 +74,15 @@ public class GameScreen implements Screen {
 
         backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_1);
         
+=======
+        this.batch = new SpriteBatch ();
+        this.backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
+>>>>>>> de89d1cbee3a17a81e4c0ab69b204b7ec9925b11
         Animation<TextureRegion> animation = new Animation<TextureRegion>
               (1f/2f, backgroundAtlas.getRegions ());
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
                                                     Gdx.graphics.getHeight ());
-
-        background = new Scene (visibleDimension, animation);
-
+        this.background = new Scene (visibleDimension, animation);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -89,32 +93,53 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
         this.gWorld = new GameWorld(engine);
+
         isPaused = false;
+
         Gdx.input.setInputProcessor(stage);
         GUI gui = GUI.getInstance();
-        Texture textureBtnPause =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-        Texture textureBtnPauseHover =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+
+        Texture textureBtnPause = Assets.getInstance().manager.get(Assets.BTN_PAUSE);
+        Texture textureBtnPauseHover = Assets.getInstance().manager.get(Assets.TEXTURE_NAME);
+
         int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
         int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;
         Button btnPause = gui.addButton(btnX, btnY, textureBtnPause, textureBtnPauseHover);
 
-        Texture textureProgressBarHackBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-        Texture textureProgressBarHackFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Pixmap pixmapPBHB = Assets.getInstance ().manager.get(Assets
+                                                                   .SPRITE_NAME);
+        Pixmap pixmapPBHF = Assets.getInstance ().manager.get(Assets
+                                                                    .SPRITE_NAME);
+
+//        Texture textureProgressBarHackBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+//        Texture textureProgressBarHackFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Pixmap pbhb = new Pixmap (10, 10, pixmapPBHB.getFormat ());
+        pbhb.drawPixmap (pixmapPBHB,0, 0 ,pixmapPBHB.getWidth (), pixmapPBHB
+              .getHeight (), 0, 0,  pbhb.getWidth (), pbhb.getHeight ());
+
+        Pixmap pbhf = new Pixmap (10, 10, pixmapPBHF.getFormat ());
+        pbhf.drawPixmap (pixmapPBHF, 0, 0, pixmapPBHF.getWidth (),
+                         pixmapPBHF.getHeight (), 0, 0, pbhf.getWidth (),
+                         pbhf.getHeight ());
+
+        Texture textureProgressBarHackBackground = new Texture (pbhb);
+        Texture textureProgressBarHackFill = new Texture (pbhf);
+
         int progressBarHackX = 5;
         int progressBarHackY = Gdx.graphics.getHeight() - textureProgressBarHackBackground.getHeight() - 5;
         ProgressBar progressBarHack = gui.addProgressBar(progressBarHackX, progressBarHackY, textureProgressBarHackBackground, textureProgressBarHackFill);
 
-        Texture textureProgressBarSuspiciousBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-        Texture textureProgressBarSuspiciousFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Texture textureProgressBarSuspiciousBackground = Assets.getInstance()
+              .manager.get(Assets.TEXTURE_NAME);
+        Texture textureProgressBarSuspiciousFill = Assets.getInstance()
+              .manager.get(Assets.TEXTURE_NAME);
         int progressBarSuspicousX = Gdx.graphics.getWidth() / 2 - textureProgressBarHackBackground.getWidth() / 2;
         int progressBarSuspicousY = Gdx.graphics.getHeight() - textureProgressBarSuspiciousBackground.getHeight() - 5;
         ProgressBar progressBarSuspicious = gui.addProgressBar(progressBarSuspicousX, progressBarSuspicousY, textureProgressBarSuspiciousBackground, textureProgressBarSuspiciousFill);
 
-
-        //stage.addActor(btnPause);
-        //stage.addActor(progressBarHack);
-        //stage.addActor(progressBarSuspicious);
-
+        stage.addActor(btnPause);
+        stage.addActor(progressBarHack);
+        stage.addActor(progressBarSuspicious);
     }
 
     @Override
@@ -131,8 +156,8 @@ public class GameScreen implements Screen {
     private void update(float delta) {
         background.update (delta);
         
-        
-		
+
+
         updateInput();
 		
 		
@@ -155,9 +180,11 @@ public class GameScreen implements Screen {
                 pause();
         }
         if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+            System.out.println("Space");
             engine.getSystem(HackerSystem.class).setIsHacking(true);
         }
         else {
+            System.out.println("No space");
             engine.getSystem(HackerSystem.class).setIsHacking(false);
         }
         
@@ -169,11 +196,9 @@ public class GameScreen implements Screen {
         batch.setProjectionMatrix (background.camera.combined);
 
         batch.begin ();
-        
-        
         background.draw(batch);
         batch.end ();
-        
+
         stage.draw();
     }
 
