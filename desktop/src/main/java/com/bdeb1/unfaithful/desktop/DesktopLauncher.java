@@ -18,7 +18,7 @@ public class DesktopLauncher {
     private static LwjglApplicationConfiguration getDefaultConfiguration() {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.title = "Unfaithful";
-        configuration.width = 640;
+        configuration.width = 320;
         configuration.height = 180;
         configuration.resizable = false;
 
