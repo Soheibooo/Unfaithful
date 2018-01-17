@@ -1,0 +1,90 @@
+
+madame_rotation_soupcon.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 410, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 5
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 475, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 0
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 540, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 1
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 605, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 2
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 670, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 3
+madame_soupcon_droite_to_gauche
+  rotate: false
+  xy: 735, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 4
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 2, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 0
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 70, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 3
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 138, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 2
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 206, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 1
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 274, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 4
+madame_soupcon_gauche_to_droite
+  rotate: false
+  xy: 342, 2
+  size: 66, 121
+  orig: 66, 121
+  offset: 0, 0
+  index: 5

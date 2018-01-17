@@ -22,10 +22,10 @@ import com.badlogic.ashley.core.Component;
  * @author Soheib El-Harrache
  */
 public class TargetComponent implements Component {
-    public static final int STATE_UNSUSPICIOUS = 0;
-    public static final int STATE_SUSPICIOUS = 1;
-    public static final int STATE_FRENZY = 2;
-    public static final int STATE_DONE = 3;
+    public static final int STATE_UNSUSPICIOUS = 1;
+    public static final int STATE_SUSPICIOUS = 2;
+    public static final int STATE_FRENZY = 3;
+    public static final int STATE_DONE = 4;
     
     public static final int ACTION_TALKING = 10;
     public static final int ACTION_WALKING_LEFT = 11;

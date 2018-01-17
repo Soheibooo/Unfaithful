@@ -1,0 +1,90 @@
+
+madame_rotation.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+madame_droite_to_gauche
+  rotate: false
+  xy: 67, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 5
+madame_droite_to_gauche
+  rotate: false
+  xy: 132, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 0
+madame_droite_to_gauche
+  rotate: false
+  xy: 197, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 1
+madame_droite_to_gauche
+  rotate: false
+  xy: 262, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 2
+madame_droite_to_gauche
+  rotate: false
+  xy: 327, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 3
+madame_droite_to_gauche
+  rotate: false
+  xy: 392, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 4
+madame_gauche_to_droite
+  rotate: false
+  xy: 2, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 4
+madame_gauche_to_droite
+  rotate: false
+  xy: 457, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 5
+madame_gauche_to_droite
+  rotate: false
+  xy: 522, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 1
+madame_gauche_to_droite
+  rotate: false
+  xy: 587, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 0
+madame_gauche_to_droite
+  rotate: false
+  xy: 652, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 2
+madame_gauche_to_droite
+  rotate: false
+  xy: 717, 2
+  size: 63, 121
+  orig: 63, 121
+  offset: 0, 0
+  index: 3

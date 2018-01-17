@@ -1,0 +1,608 @@
+
+hacking_bureau_lvl1.png
+size: 2048,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hacking_bureau0000
+  rotate: false
+  xy: 0, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0018
+  rotate: false
+  xy: 0, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0001
+  rotate: false
+  xy: 0, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0002
+  rotate: false
+  xy: 1400, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0003
+  rotate: false
+  xy: 100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0004
+  rotate: false
+  xy: 200, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0005
+  rotate: false
+  xy: 1100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0006
+  rotate: false
+  xy: 300, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0007
+  rotate: false
+  xy: 300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0008
+  rotate: false
+  xy: 1400, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0009
+  rotate: false
+  xy: 400, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0010
+  rotate: false
+  xy: 700, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0011
+  rotate: false
+  xy: 700, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0012
+  rotate: false
+  xy: 1100, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0013
+  rotate: false
+  xy: 800, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0014
+  rotate: false
+  xy: 800, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0015
+  rotate: false
+  xy: 900, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0016
+  rotate: false
+  xy: 900, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0017
+  rotate: false
+  xy: 1000, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0022
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0020
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0021
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0023
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0024
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0025
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0026
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0040
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0041
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0042
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0043
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0044
+  rotate: false
+  xy: 500, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0027
+  rotate: false
+  xy: 1200, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0028
+  rotate: false
+  xy: 1200, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0029
+  rotate: false
+  xy: 1300, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0030
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0031
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0032
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0033
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0034
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0035
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0036
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0037
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0038
+  rotate: false
+  xy: 1300, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0039
+  rotate: false
+  xy: 600, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0046
+  rotate: false
+  xy: 100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0019
+  rotate: false
+  xy: 100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0045
+  rotate: false
+  xy: 100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0047
+  rotate: false
+  xy: 100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0048
+  rotate: false
+  xy: 100, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0049
+  rotate: false
+  xy: 200, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0058
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0050
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0051
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0052
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0053
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0054
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0055
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0056
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0057
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0059
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0060
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0061
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0071
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0072
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0073
+  rotate: false
+  xy: 500, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0062
+  rotate: false
+  xy: 1200, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0063
+  rotate: false
+  xy: 1200, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0064
+  rotate: false
+  xy: 1200, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0066
+  rotate: false
+  xy: 400, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0065
+  rotate: false
+  xy: 400, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0067
+  rotate: false
+  xy: 400, 57
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0069
+  rotate: false
+  xy: 1000, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0068
+  rotate: false
+  xy: 1000, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0070
+  rotate: false
+  xy: 1000, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0076
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0074
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0075
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0077
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0078
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0079
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0080
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0081
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0082
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0083
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0084
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1
+hacking_bureau0085
+  rotate: false
+  xy: 600, 0
+  size: 100, 57
+  orig: 100, 57
+  offset: 0, 0
+  index: -1

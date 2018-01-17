@@ -17,7 +17,7 @@ package com.bdeb1.unfaithful.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.utils.IntMap;
+import java.util.HashMap;
 
 /**
  *
@@ -25,6 +25,6 @@ import com.badlogic.gdx.utils.IntMap;
  */
 public class AnimationComponent implements Component {
 
-    public IntMap<IntMap<Animation>> animations
-            = new IntMap<IntMap<Animation>>();
+    public HashMap<Integer, HashMap<Integer, Animation>> animations
+            = new HashMap<Integer, HashMap<Integer, Animation>>();
 }

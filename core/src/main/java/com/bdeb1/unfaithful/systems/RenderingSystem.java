@@ -22,6 +22,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
 
@@ -90,6 +91,9 @@ public class RenderingSystem extends IteratingSystem {
                     PixelsToMeters(t.scale.y),
                     t.rotation);
             batch.end();
+            
+        } else if (entity.getComponent(TargetComponent.class) == null) {
+            System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
         }
     }
 
