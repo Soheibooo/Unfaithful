@@ -26,6 +26,7 @@ import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
+import com.bdeb1.unfaithful.systems.HackerSystem;
 import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new ActionSystem());
         this.engine.addSystem(new MovementSystem());
         this.engine.addSystem(new TargetSystem());
+        this.engine.addSystem(new HackerSystem());
         
         this.gWorld = new GameWorld(engine);
     }
