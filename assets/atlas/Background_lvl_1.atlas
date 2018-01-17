@@ -1,0 +1,146 @@
+
+Background_lvl_1.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_lvl
+  rotate: false
+  xy: 0, 1260
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10010
+background_lvl
+  rotate: false
+  xy: 0, 1080
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10011
+background_lvl
+  rotate: false
+  xy: 640, 1260
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10012
+background_lvl
+  rotate: false
+  xy: 0, 900
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10013
+background_lvl
+  rotate: false
+  xy: 640, 1080
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10014
+background_lvl
+  rotate: false
+  xy: 1280, 1260
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10015
+background_lvl
+  rotate: false
+  xy: 0, 720
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10016
+background_lvl
+  rotate: false
+  xy: 640, 900
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10017
+background_lvl
+  rotate: false
+  xy: 1280, 1080
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10018
+background_lvl
+  rotate: false
+  xy: 0, 540
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10019
+background_lvl
+  rotate: false
+  xy: 640, 720
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10000
+background_lvl
+  rotate: false
+  xy: 1280, 900
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10001
+background_lvl
+  rotate: false
+  xy: 0, 360
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10002
+background_lvl
+  rotate: false
+  xy: 640, 540
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10003
+background_lvl
+  rotate: false
+  xy: 1280, 720
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10004
+background_lvl
+  rotate: false
+  xy: 0, 180
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10005
+background_lvl
+  rotate: false
+  xy: 640, 360
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10006
+background_lvl
+  rotate: false
+  xy: 1280, 540
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10007
+background_lvl
+  rotate: false
+  xy: 0, 0
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10008
+background_lvl
+  rotate: false
+  xy: 640, 180
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10009
