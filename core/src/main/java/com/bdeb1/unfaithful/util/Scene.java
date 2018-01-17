@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class Scene {
 
@@ -14,8 +14,8 @@ public class Scene {
 	private Rectangle          bounds;
 	private Direction          directionCamera;
 	private Texture            background;
-	private Vector2            cameraOrigin;
-	private Vector2            anchorPoint;
+	private Vector3            cameraOrigin;
+	private Vector3            anchorPoint;
 
 	public Scene (Dimension visible, Dimension dimension, String
 		  backgroundPath)
@@ -25,12 +25,13 @@ public class Scene {
 		directionCamera = Direction.Center;
 
 		camera = new OrthographicCamera (visible.width, visible.height);
-		cameraOrigin = new Vector2 (visible.width / 2, visible.height / 2);
+		cameraOrigin = new Vector3 (visible.width / 2, visible.height / 2, 0);
 		bounds = new Rectangle (0, 0, dimension.width, dimension.height);
 
-		anchorPoint = new Vector2 (
+		anchorPoint = new Vector3 (
 			  cameraOrigin.x + bounds.width * Constants.World.SCENE_PARTITION,
-			  cameraOrigin.y + 0);
+			  cameraOrigin.y + 0,
+			  0);
 
 		camera.translate (anchorPoint.x, anchorPoint.y);
 		directionCamera = Direction.Center;
@@ -63,9 +64,9 @@ public class Scene {
 			                    camera.viewportWidth;
 		}
 
-		if (camera.position.x < anchorPoint.x) {
+		if (camera.position.x < anchorPoint.x - 0.5f) {
 			directionCamera = Direction.Left;
-		} else if (camera.position.x > anchorPoint.y) {
+		} else if (camera.position.x > anchorPoint.x + 0.5f) {
 			directionCamera = Direction.Right;
 		} else {
 			directionCamera = Direction.Center;
