@@ -19,34 +19,19 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
-import com.bdeb1.unfaithful.systems.ActionSystem;
-import com.bdeb1.unfaithful.systems.AnimationSystem;
-import com.bdeb1.unfaithful.systems.HackerSystem;
-import com.bdeb1.unfaithful.systems.MovementSystem;
-import com.bdeb1.unfaithful.systems.RenderingSystem;
-import com.bdeb1.unfaithful.systems.StateSystem;
-import com.bdeb1.unfaithful.systems.TargetSystem;
+import com.bdeb1.unfaithful.systems.*;
 import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
 
-import static com.bdeb1.unfaithful.Assets.SPRITE_NAME;
 
 /**
  *
@@ -66,17 +51,9 @@ public class GameScreen implements Screen {
         super();
         this.game = game;
         this.stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-
-
-        stage.act();
-
-        batch = new SpriteBatch ();
-
-        Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
-                                                    Gdx.graphics.getHeight ());
-        background = new Scene (visibleDimension, Constants.World
-              .SCENE_DIMENSION, Constants.Path.BACKGROUND);
+        this.batch = new SpriteBatch();
+        Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (), Gdx.graphics.getHeight ());
+        this.background = new Scene (visibleDimension, Constants.World.SCENE_DIMENSION, Constants.Path.BACKGROUND);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -86,8 +63,15 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new MovementSystem());
         this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
-        
         this.gWorld = new GameWorld(engine);
+
+        Gdx.input.setInputProcessor(stage);
+        GUI gui = GUI.getInstance();
+        Button btnPause = gui.addButton(10, 10, 64, 32, "Pause", Assets.getInstance().manager.get(Assets.SPRITE_NAME));
+        ProgressBar progressBarHack = gui.addProgressBar(100, 40, 50, 16, 2, Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME));
+
+        stage.addActor(btnPause);
+        stage.addActor(progressBarHack);
     }
 
     @Override
