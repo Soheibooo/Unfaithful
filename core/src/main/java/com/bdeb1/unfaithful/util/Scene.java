@@ -1,0 +1,84 @@
+package com.bdeb1.unfaithful.util;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+
+public class Scene {
+
+	public  OrthographicCamera camera;
+	private Rectangle          bounds;
+	private Direction          directionCamera;
+	private Texture            background;
+	private Vector2            cameraOrigin;
+	private Vector2            anchorPoint;
+
+	public Scene (Dimension visible, Dimension dimension, String
+		  backgroundPath)
+	{
+
+		background = new Texture (backgroundPath);
+		directionCamera = Direction.Center;
+
+		camera = new OrthographicCamera (visible.width, visible.height);
+		cameraOrigin = new Vector2 (visible.width / 2, visible.height / 2);
+		bounds = new Rectangle (0, 0, dimension.width, dimension.height);
+
+		anchorPoint = new Vector2 (
+			  cameraOrigin.x + bounds.width * Constants.World.SCENE_PARTITION,
+			  cameraOrigin.y + 0);
+
+		camera.translate (anchorPoint.x, anchorPoint.y);
+		directionCamera = Direction.Center;
+	}
+
+
+	public void update () {
+
+		//FIXME: fix flickering
+		float dx = Math.min (1 + Math.abs (anchorPoint.x - camera.position.x) *
+		                         Constants.World.CAMERA_PAN_EASE,
+		                     camera.position.x);
+		if (Gdx.input.isKeyPressed (Input.Keys.RIGHT)) {
+			camera.translate (dx, 0);
+		} else if (Gdx.input.isKeyPressed (Input.Keys.LEFT)) {
+			camera.translate (- dx, 0);
+		} else if (directionCamera == Direction.Right) {
+			camera.translate (- dx, 0);
+		} else if (directionCamera == Direction.Left) {
+			camera.translate (dx, 0);
+		}
+
+		// bound checking
+		if (camera.position.x < cameraOrigin.x) {
+			camera.position.x = cameraOrigin.x;
+		} else if (camera.position.x >
+		           cameraOrigin.x + bounds.width - camera.viewportWidth)
+		{
+			camera.position.x = cameraOrigin.x + bounds.width -
+			                    camera.viewportWidth;
+		}
+
+		if (camera.position.x < anchorPoint.x) {
+			directionCamera = Direction.Left;
+		} else if (camera.position.x > anchorPoint.y) {
+			directionCamera = Direction.Right;
+		} else {
+			directionCamera = Direction.Center;
+		}
+		camera.update ();
+	}
+
+	public void draw (Batch batch) {
+		batch.draw (background, bounds.x, bounds.y, bounds.width,
+		            bounds.height);
+	}
+
+	public void dispose () {
+		background.dispose ();
+	}
+}
