@@ -20,6 +20,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
  *
@@ -40,6 +41,15 @@ public class Assets {
         }
         return instance;
     }
+    
+    //------------------------SPRITES
+    public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/test_animation.atlas", TextureAtlas.class);
+    
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_animation_lvl_1.atlas", TextureAtlas.class);
     
     //------------------------SPRITES
     public static final AssetDescriptor<Texture> SPRITE_NAME
@@ -65,6 +75,10 @@ public class Assets {
      * Loads assets.
      */
     public void load() {
+        //Atlas
+        manager.load(ATLAS_NOTHACKING);
+        manager.load(ATLAS_HACKING);
+        
         //Sprites
         manager.load(SPRITE_NAME);
 

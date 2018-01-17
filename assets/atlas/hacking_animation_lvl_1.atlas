@@ -1,0 +1,608 @@
+
+hacking_animation_lvl_1.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10043
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10044
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10020
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10001
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10002
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10014
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10004
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10022
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10006
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10007
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10008
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10009
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10082
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10069
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10079
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10000
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10074
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10041
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10025
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10023
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10050
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10051
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10055
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10053
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10052
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10010
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10011
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10028
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10013
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10058
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10015
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10016
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10017
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 610
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10018
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10045
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10019
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10047
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10084
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10078
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10054
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10005
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10056
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10060
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10072
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10061
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10059
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10073
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 610
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10049
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10062
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10021
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10066
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10024
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10040
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10026
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10027
+hacking_animation_lvl
+  rotate: false
+  xy: 1418, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10029
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 306
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10057
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 306
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10071
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10070
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 610
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10075
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10067
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10065
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10046
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10048
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10030
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10034
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10031
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10033
+hacking_animation_lvl
+  rotate: false
+  xy: 1418, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10035
+hacking_animation_lvl
+  rotate: false
+  xy: 1595, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10036
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 154
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10037
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 306
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10038
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10039
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 610
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10080
+hacking_animation_lvl
+  rotate: false
+  xy: 710, 762
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10063
+hacking_animation_lvl
+  rotate: false
+  xy: 887, 914
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10068
+hacking_animation_lvl
+  rotate: false
+  xy: 1064, 1066
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10032
+hacking_animation_lvl
+  rotate: false
+  xy: 1241, 1218
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10064
+hacking_animation_lvl
+  rotate: false
+  xy: 1418, 1370
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10077
+hacking_animation_lvl
+  rotate: false
+  xy: 1595, 1522
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10076
+hacking_animation_lvl
+  rotate: false
+  xy: 1772, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10081
+hacking_animation_lvl
+  rotate: false
+  xy: 1772, 1674
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10083
+hacking_animation_lvl
+  rotate: false
+  xy: 2, 2
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10003
+hacking_animation_lvl
+  rotate: false
+  xy: 179, 154
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10085
+hacking_animation_lvl
+  rotate: false
+  xy: 356, 306
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10042
+hacking_animation_lvl
+  rotate: false
+  xy: 533, 458
+  size: 175, 150
+  orig: 175, 150
+  offset: 0, 0
+  index: 10012

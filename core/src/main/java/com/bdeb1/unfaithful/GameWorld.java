@@ -17,6 +17,10 @@ package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.IntMap;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
@@ -111,6 +115,21 @@ public class GameWorld {
         positionC.position.set(5.0f, 1.0f, 0.0f);
         stateC.set(HackerComponent.ACTION_NOT_HACKING);
 
+        
+        TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
+        TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
+        
+        IntMap<Animation> animeList = new IntMap<Animation>();
+        
+        
+        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1f, texAtHacking.getRegions());
+        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1f, texAtNOTHacking.getRegions());
+        
+        animeList.put(0, animeHacking);
+        animeList.put(1, animeNotHacking);
+        
+        animC.animations.put(0,animeList);
+        
         entity.add(textureC);
         entity.add(animC);
         entity.add(hackerC);
