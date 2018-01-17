@@ -21,12 +21,15 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
  * @author Soheib El-Harrache
  */
 public class Assets {
+
     public AssetManager manager;
 
     private static Assets instance = null;
@@ -41,10 +44,11 @@ public class Assets {
         }
         return instance;
     }
-    
+
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
+<<<<<<< HEAD
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
     
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
@@ -59,11 +63,23 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
     
+=======
+                    "atlas/test_animation.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_animation_lvl_1.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+
+>>>>>>> d135f71adf1e1c5ad5f1d948eb775a55b7850295
     //------------------------SPRITES
     public static final AssetDescriptor<Texture> SPRITE_NAME
             = new AssetDescriptor<Texture>(
                     "sprite/exemple_sprite.png", Texture.class);
-    
+
     //------------------------IMAGES
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1
             = new AssetDescriptor<Texture>(
@@ -74,17 +90,21 @@ public class Assets {
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_3
             = new AssetDescriptor<Texture>(
                     "image/background.png", Texture.class);
-    
+
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
             = new AssetDescriptor<Sound>(
                     "sound/exemple_sound.ogg", Sound.class);
-    
+
     //------------------------MUSICS
     public static final AssetDescriptor<Music> MUSIC_NAME
             = new AssetDescriptor<Music>(
                     "music/exemple_music.ogg", Music.class);
-    
+
+    //------------------------TEXTS
+    public static final ArrayList<String> HACKING_PROGRESS_LV1
+            = new ArrayList<>();
+
     /**
      * Loads assets.
      */
@@ -94,7 +114,6 @@ public class Assets {
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND);
         manager.load(ATLAS_RIGHT_TO_LEFT);
-        
         //Sprites
         manager.load(SPRITE_NAME);
 
@@ -109,10 +128,18 @@ public class Assets {
         //Musics
         manager.load(MUSIC_NAME);
 
+        //Texts
+        HACKING_PROGRESS_LV1.add("Found IP address of a suspicious account");
+        HACKING_PROGRESS_LV1.add("Found unuseful naked pictures!");
+        HACKING_PROGRESS_LV1.add("Found old data sets");
+        HACKING_PROGRESS_LV1.add("Found old contacts");
+        HACKING_PROGRESS_LV1.add("Found interestingly weird convos");
+        HACKING_PROGRESS_LV1.add("Found encrypted archives");
+        
         //Font
 //        manager.load(font_pixel);
     }
-    
+
     /**
      * Disposes the manager.
      */

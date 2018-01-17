@@ -13,9 +13,18 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 
-public class Toast
-{
+public class Toast {
 
+    /**
+     * USAGE
+     * 
+     * Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
+                .font(new BitmapFont())
+                .build();
+        Toast toast = toastFactory.create("Hello world!", Toast.Length.LONG);
+     IN RENDER:
+     * toast.render(Gdx.graphics.getDeltaTime());
+     */
     public enum Length {
         SHORT(2),
         LONG(3.5f);
@@ -74,7 +83,7 @@ public class Toast
 
         float screenWidth = Gdx.graphics.getWidth();
         float maxTextWidth = screenWidth * maxRelativeWidth;
-        
+
         if (fontWidth > maxTextWidth) {
             BitmapFontCache cache = new BitmapFontCache(this.font, true);
             GlyphLayout layout = cache.addText(text, 0, 0, maxTextWidth, Align.center, true);
@@ -94,8 +103,10 @@ public class Toast
     /**
      * Displays toast<br/>
      * Must be called at the end of {@link Game#render()}<br/>
+     *
      * @param delta {@link Graphics#getDeltaTime()}
-     * @return activeness of the toast (true while being displayed, false otherwise)
+     * @return activeness of the toast (true while being displayed, false
+     * otherwise)
      */
     public boolean render(float delta) {
         timeToLive -= delta;
@@ -105,12 +116,24 @@ public class Toast
         }
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.circle(positionX, positionY + toastHeight / 2, toastHeight / 2);
-        renderer.rect(positionX, positionY, toastWidth, toastHeight);
-        renderer.circle(positionX + toastWidth, positionY + toastHeight / 2, toastHeight / 2);
+
+        int radius = 3;
+        
+        renderer.rect(positionX + radius, positionY + radius, toastWidth - 2 * radius, toastHeight - 2 * radius);
+
+        renderer.rect(positionX + radius, positionY, toastWidth - 2 * radius, radius);
+        renderer.rect(positionX + toastWidth - radius, positionY + radius, radius, toastHeight - 2 * radius);
+        renderer.rect(positionX + radius, positionY + toastHeight - radius, toastWidth - 2 * radius, radius);
+        renderer.rect(positionX, positionY + radius, radius, toastHeight - 2 * radius);
+
+        renderer.arc(positionX + radius, positionY + radius, radius, 180f, 90f);
+        renderer.arc(positionX + toastWidth - radius, positionY + radius, radius, 270f, 90f);
+        renderer.arc(positionX + toastWidth - radius, positionY + toastHeight - radius, radius, 0f, 90f);
+        renderer.arc(positionX + radius, positionY + toastHeight - radius, radius, 90f, 90f);
+
         renderer.end();
 
-        spriteBatch.begin(); 
+        spriteBatch.begin();
 
         if (timeToLive > 0 && opacity > 0.15) {
             if (timeToLive < fadingDuration) {
@@ -147,6 +170,7 @@ public class Toast
 
         /**
          * Creates new toast
+         *
          * @param text message
          * @param length toast duration
          * @return newly created toast
@@ -174,6 +198,7 @@ public class Toast
 
             /**
              * Specify font for toasts
+             *
              * @param font font
              * @return this
              */
@@ -187,6 +212,7 @@ public class Toast
              * Specify background color for toasts.<br/>
              * Note: Alpha channel is not supported (yet).<br/>
              * Default: rgb(55,55,55)
+             *
              * @param color background color
              * @return this
              */
@@ -199,6 +225,7 @@ public class Toast
             /**
              * Specify font color for toasts.<br/>
              * Default: white
+             *
              * @param color font color
              * @return this
              */
@@ -211,6 +238,7 @@ public class Toast
             /**
              * Specify vertical position for toasts<br/>
              * Default: bottom part
+             *
              * @param positionY vertical position of bottom left corner
              * @return this
              */
@@ -223,7 +251,9 @@ public class Toast
             /**
              * Specify fading duration for toasts<br/>
              * Default: 0.5s
-             * @param fadingDuration duration in seconds which it takes to disappear
+             *
+             * @param fadingDuration duration in seconds which it takes to
+             * disappear
              * @return this
              */
             public Builder fadingDuration(float fadingDuration) {
@@ -238,7 +268,9 @@ public class Toast
             /**
              * Specify max text width for toasts<br/>
              * Default: 0.65
-             * @param maxTextRelativeWidth max text width relative to screen (Eg. 0.5 = max text width is equal to 50% of screen width)
+             *
+             * @param maxTextRelativeWidth max text width relative to screen
+             * (Eg. 0.5 = max text width is equal to 50% of screen width)
              * @return this
              */
             public Builder maxTextRelativeWidth(float maxTextRelativeWidth) {
@@ -250,6 +282,7 @@ public class Toast
             /**
              * Specify text margin for toasts<br/>
              * Default: line height
+             *
              * @param margin margin in px
              * @return this
              */
@@ -261,6 +294,7 @@ public class Toast
 
             /**
              * Builds factory
+             *
              * @return new factory
              */
             public ToastFactory build() {

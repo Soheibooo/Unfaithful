@@ -21,6 +21,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -91,11 +92,29 @@ public class GameScreen implements Screen {
         isPaused = false;
         Gdx.input.setInputProcessor(stage);
         GUI gui = GUI.getInstance();
-        Button btnPause = gui.addButton(10, 10, 64, 32, "Pause", Assets.getInstance().manager.get(Assets.SPRITE_NAME));
-        ProgressBar progressBarHack = gui.addProgressBar(100, 40, 50, 16, 2, Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME), Assets.getInstance().manager.get(Assets.SPRITE_NAME));
+        Texture textureBtnPause =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Texture textureBtnPauseHover =  Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
+        int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;
+        Button btnPause = gui.addButton(btnX, btnY, textureBtnPause, textureBtnPauseHover);
+
+        Texture textureProgressBarHackBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Texture textureProgressBarHackFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        int progressBarHackX = 5;
+        int progressBarHackY = Gdx.graphics.getHeight() - textureProgressBarHackBackground.getHeight() - 5;
+        ProgressBar progressBarHack = gui.addProgressBar(progressBarHackX, progressBarHackY, textureProgressBarHackBackground, textureProgressBarHackFill);
+
+        Texture textureProgressBarSuspiciousBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        Texture textureProgressBarSuspiciousFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+        int progressBarSuspicousX = Gdx.graphics.getWidth() / 2 - textureProgressBarHackBackground.getWidth() / 2;
+        int progressBarSuspicousY = Gdx.graphics.getHeight() - textureProgressBarSuspiciousBackground.getHeight() - 5;
+        ProgressBar progressBarSuspicious = gui.addProgressBar(progressBarSuspicousX, progressBarSuspicousY, textureProgressBarSuspiciousBackground, textureProgressBarSuspiciousFill);
+
 
         //stage.addActor(btnPause);
         //stage.addActor(progressBarHack);
+        //stage.addActor(progressBarSuspicious);
+
     }
 
     @Override

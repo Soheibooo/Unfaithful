@@ -23,29 +23,26 @@ public class GUI {
         this.font = new BitmapFont();
     }
 
-    public Button addButton(int x, int y, int width, int height, String text, Texture texture) {
-        TextButton.TextButtonStyle textButtonPauseStyle = new TextButton.TextButtonStyle();
-        textButtonPauseStyle.font = font;
-        textButtonPauseStyle.up = new TextureRegionDrawable(new TextureRegion(texture, 0, 0, width, height));
-        textButtonPauseStyle.down = new TextureRegionDrawable(new TextureRegion(texture, -2, -2, width, height));
+    public Button addButton(int x, int y, Texture texture, Texture textureHover) {
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.up = new TextureRegionDrawable(new TextureRegion(texture, 0, 0, texture.getWidth(), texture.getHeight()));
+        textButtonStyle.down = new TextureRegionDrawable(new TextureRegion(texture, -2, -2, texture.getWidth(), texture.getHeight()));
+        textButtonStyle.over = new TextureRegionDrawable(new TextureRegion(textureHover, 0, 0, textureHover.getWidth(), textureHover.getHeight()));
 
-        TextButton button = new TextButton(text, textButtonPauseStyle);
+        TextButton button = new TextButton("", textButtonStyle);
         button.setPosition(x, y);
         return button;
     }
 
-    public ProgressBar addProgressBar(int x, int y, int width, int height, float value, Texture textureBackground, Texture textureKnob, Texture textureBefore) {
+    public ProgressBar addProgressBar(int x, int y, Texture textureBackground, Texture textureFill) {
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
         progressBarStyle.background = new TextureRegionDrawable(new TextureRegion(textureBackground));
-        progressBarStyle.knob = new TextureRegionDrawable(new TextureRegion(textureKnob));
-        progressBarStyle.knobBefore = new TextureRegionDrawable(new TextureRegion(textureBefore));
+        progressBarStyle.knobBefore = new TextureRegionDrawable(new TextureRegion(textureFill));
 
-
-        ProgressBar progressBar = new ProgressBar(0.0f, 1.0f, 0.01f, false, progressBarStyle);
-        progressBar.setBounds(x, y, width, height);
-        progressBar.setValue(value);
-        progressBar.setAnimateDuration(0.25f);
-        progressBar.setValue(0.5f);
+        ProgressBar progressBar = new ProgressBar(0, 100, 1, false, progressBarStyle);
+        progressBar.setBounds(x, y, textureBackground.getWidth(), textureBackground.getHeight());
+        progressBar.setValue(25);
         return progressBar;
     }
 }
