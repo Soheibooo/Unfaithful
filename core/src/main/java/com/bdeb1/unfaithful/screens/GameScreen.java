@@ -19,11 +19,24 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
@@ -37,6 +50,8 @@ import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
 
+import static com.bdeb1.unfaithful.Assets.SPRITE_NAME;
+
 /**
  *
  * @author Soheib El-Harrache
@@ -46,6 +61,7 @@ public class GameScreen implements Screen {
     private GameWorld gWorld;
     private PooledEngine engine;
     private Game game;
+    private Stage stage;
 
     private Scene        background;
     private SpriteBatch  batch;
@@ -54,6 +70,11 @@ public class GameScreen implements Screen {
     public GameScreen(Unfaithful game) {
         super();
         this.game = game;
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+
+
+        stage.act();
 
         batch = new SpriteBatch ();
 
@@ -84,17 +105,11 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(delta);
         draw();
-
-        batch.setProjectionMatrix (background.camera.combined);
-
-        batch.begin ();
-        background.draw (batch);
-        batch.end ();
     }
 
     private void update(float delta) {
         engine.update(delta);
-        
+
         if(gWorld.isHacked(gWorld.getIDLevel())) {
             if(gWorld.getIDLevel() < 3) {
                 gWorld.generateLevel(gWorld.getIDLevel()+1);
@@ -112,6 +127,13 @@ public class GameScreen implements Screen {
         //UI
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.setProjectionMatrix (background.camera.combined);
+
+        batch.begin ();
+        background.draw(batch);
+        batch.end ();
+
+        stage.draw();
     }
 
     @Override
