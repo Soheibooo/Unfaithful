@@ -21,7 +21,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 
 /**
  *
@@ -33,7 +32,6 @@ public class Unfaithful extends Game {
     public ShapeRenderer sp;
     public OrthographicCamera cam;
     
-    private World world;
     private PooledEngine engine;
 
     @Override

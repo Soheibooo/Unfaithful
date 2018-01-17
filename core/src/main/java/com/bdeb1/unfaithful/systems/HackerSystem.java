@@ -21,31 +21,22 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
-import com.bdeb1.unfaithful.components.StateComponent;
-
 /**
  *
  * @author Samuel
  */
 public class HackerSystem extends IteratingSystem {
-
-    private final float HACK_MAX_GAUGE = 60.0f;
-    
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
     private boolean isHacking = false;
-    
-    
-    
     public HackerSystem() {
-        super(Family.all(HackerComponent.class,
-                         ActionComponent.class
-                         ).get());
-        
+        super(Family.all(
+                HackerComponent.class,
+                ActionComponent.class
+        ).get());
         hackerM = ComponentMapper.getFor(HackerComponent.class);
         actionM = ComponentMapper.getFor(ActionComponent.class);
     }
-    
     public void setIsHacking(boolean b) {
         isHacking = b;
     }

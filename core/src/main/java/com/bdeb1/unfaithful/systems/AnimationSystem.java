@@ -21,6 +21,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
@@ -34,6 +35,7 @@ public class AnimationSystem extends IteratingSystem {
     private ComponentMapper<TextureComponent> textureM;
     private ComponentMapper<AnimationComponent> animationM;
     private ComponentMapper<StateComponent> stateM;
+    private ComponentMapper<ActionComponent> actionM;
 
     public AnimationSystem() {
         super(Family.all(
@@ -45,16 +47,19 @@ public class AnimationSystem extends IteratingSystem {
         textureM = ComponentMapper.getFor(TextureComponent.class);
         animationM = ComponentMapper.getFor(AnimationComponent.class);
         stateM = ComponentMapper.getFor(StateComponent.class);
+        actionM = ComponentMapper.getFor(ActionComponent.class);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         StateComponent stateC = stateM.get(entity);
+        ActionComponent actionC = actionM.get(entity);
         AnimationComponent animationC = animationM.get(entity);
 
         if (animationC.animations.containsKey(stateC.get())) {
             TextureComponent tex = textureM.get(entity);
-            Animation animation = animationC.animations.get(stateC.get());
+            Animation animation = 
+                    animationC.animations.get(stateC.get()).get(actionC.get());
             tex.region = (TextureRegion) animation.getKeyFrame(stateC.time);
         }
 

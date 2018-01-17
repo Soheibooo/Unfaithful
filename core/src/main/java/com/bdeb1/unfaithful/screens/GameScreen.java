@@ -20,14 +20,15 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
+import com.bdeb1.unfaithful.systems.ActionSystem;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
-import com.bdeb1.unfaithful.systems.HackerSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
+import com.bdeb1.unfaithful.systems.TargetSystem;
+import com.bdeb1.unfaithful.systems.MovementSystem;
+import com.bdeb1.unfaithful.systems.HackerSystem;
 
 /**
  *
@@ -35,7 +36,6 @@ import com.bdeb1.unfaithful.systems.StateSystem;
  */
 public class GameScreen implements Screen {
 
-    private World world;
     private GameWorld gWorld;
     private PooledEngine engine;
     private Game game;
@@ -43,14 +43,16 @@ public class GameScreen implements Screen {
     public GameScreen(Unfaithful game) {
         super();
         this.game = game;
-        this.world = new World(new Vector2(0f, -9.8f), true);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
         this.engine.addSystem(new AnimationSystem());
         this.engine.addSystem(new StateSystem());
+        this.engine.addSystem(new ActionSystem());
+        this.engine.addSystem(new MovementSystem());
+        this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
-
+        
         this.gWorld = new GameWorld(engine);
     }
 
@@ -66,6 +68,16 @@ public class GameScreen implements Screen {
 
     private void update(float delta) {
         engine.update(delta);
+        
+        if(gWorld.isHacked(gWorld.getIDLevel())) {
+            if(gWorld.getIDLevel() < 3) {
+                gWorld.generateLevel(gWorld.getIDLevel()+1);
+            }
+            else {
+                //Insert Code for End screen
+                //Later
+            }
+        }
     }
 
     private void draw() {
@@ -80,10 +92,26 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+        
+        engine.getSystem(ActionSystem.class).setProcessing(false);
+        engine.getSystem(AnimationSystem.class).setProcessing(false);
+        engine.getSystem(HackerSystem.class).setProcessing(false);
+        engine.getSystem(MovementSystem.class).setProcessing(false);
+        engine.getSystem(RenderingSystem.class).setProcessing(false);
+        engine.getSystem(StateSystem.class).setProcessing(false);
+        engine.getSystem(TargetSystem.class).setProcessing(false);
+        
     }
 
     @Override
     public void resume() {
+        engine.getSystem(ActionSystem.class).setProcessing(true);
+        engine.getSystem(AnimationSystem.class).setProcessing(true);
+        engine.getSystem(HackerSystem.class).setProcessing(true);
+        engine.getSystem(MovementSystem.class).setProcessing(true);
+        engine.getSystem(RenderingSystem.class).setProcessing(true);
+        engine.getSystem(StateSystem.class).setProcessing(true);
+        engine.getSystem(TargetSystem.class).setProcessing(true);
     }
 
     @Override
