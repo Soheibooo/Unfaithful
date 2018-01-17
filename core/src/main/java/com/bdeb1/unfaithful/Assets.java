@@ -19,6 +19,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -56,9 +57,12 @@ public class Assets {
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
     
     //------------------------SPRITES
-    public static final AssetDescriptor<Texture> SPRITE_NAME
-            = new AssetDescriptor<Texture>(
-                    "sprite/exemple_sprite.png", Texture.class);
+    public static final AssetDescriptor<Texture> TEXTURE_NAME = new
+          AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture
+          .class);
+    public static final AssetDescriptor<Pixmap> SPRITE_NAME
+            = new AssetDescriptor<Pixmap>(
+                    "sprite/exemple_sprite.png", Pixmap.class);
     
     //------------------------IMAGES
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1
@@ -92,6 +96,7 @@ public class Assets {
         
         //Sprites
         manager.load(SPRITE_NAME);
+        manager.load (TEXTURE_NAME);
 
         //Images
         manager.load(IMAGE_BACKGROUND_1);

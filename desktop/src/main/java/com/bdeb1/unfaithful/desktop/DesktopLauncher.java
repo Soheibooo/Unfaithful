@@ -20,7 +20,8 @@ public class DesktopLauncher {
         configuration.title = "Unfaithful";
         configuration.width = 320;
         configuration.height = 180;
-        configuration.resizable = true;
+        configuration.resizable = false;
+        //configuration.fullscreen = true;
 
         for (int size : new int[] { 128, 64, 32, 16 }) {
             configuration.addIcon("libgdx" + size + ".png", FileType.Internal);
