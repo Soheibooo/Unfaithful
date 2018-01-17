@@ -67,7 +67,7 @@ public class AnimationSystem extends IteratingSystem {
 //            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
 //        }
         if (animationC.animations.containsKey(stateC.get())) {
-            System.out.println("Enter");
+            
             TextureComponent tex = textureM.get(entity);
             Animation animation = 
                     animationC.animations.get(stateC.get()).get(actionC.get());

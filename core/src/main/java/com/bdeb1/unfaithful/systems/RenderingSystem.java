@@ -71,7 +71,6 @@ public class RenderingSystem extends IteratingSystem {
         TextureComponent tex = textureM.get(entity);
         TransformComponent t = transformM.get(entity);
         
-        System.out.println(t.position.x + " , " + t.position.y + " : " + tex.region);
         if (!(tex.region == null || t.isHidden)) {
             float width = tex.region.getRegionWidth();
             float height = tex.region.getRegionHeight();

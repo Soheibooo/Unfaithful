@@ -18,12 +18,7 @@ public class Toast {
     /**
      * USAGE
      * 
-     * Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
-                .font(new BitmapFont())
-                .build();
-        Toast toast = toastFactory.create("Hello world!", Toast.Length.LONG);
-     IN RENDER:
-     * toast.render(Gdx.graphics.getDeltaTime());
+     * 
      */
     public enum Length {
         SHORT(2),
@@ -158,7 +153,7 @@ public class Toast {
         private Color backgroundColor = new Color(0, 0, 0, 1);
         private Color fontColor = new Color(256, 256, 256, 1);
         private float positionY;
-        private float fadingDuration = 0.8f;
+        private float fadingDuration = 0.2f;
         private float maxRelativeWidth = 0.65f;
         private Integer customMargin;
 

@@ -18,6 +18,7 @@ package com.bdeb1.unfaithful;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bdeb1.unfaithful.components.ActionComponent;
@@ -115,7 +116,7 @@ public class GameWorld {
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
 
-        positionC.position.set(5f, 2.9f, 0.0f);
+        positionC.position.set(5f, 3.5f, 0.0f);
         //PAS DE STATE POUR LE HACKER
         stateC.set(0);
         actionC.set(HackerComponent.ACTION_NOT_HACKING);
@@ -126,8 +127,9 @@ public class GameWorld {
         HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
         
         
-        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(0.1f, texAtHacking.getRegions());
-        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(0.2f, texAtNOTHacking.getRegions());
+        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1/12f, texAtHacking.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1/12f, texAtNOTHacking.getRegions(), PlayMode.LOOP);
+        
         
         animeList.put(1, animeHacking);
         animeList.put(2, animeNotHacking);
