@@ -1,4 +1,4 @@
-package com.bdeb1.unfaithful.desktop;
+package com.soheibo.template.desktop;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -12,14 +12,16 @@ public class DesktopLauncher {
     }
 
     private static LwjglApplication createApplication() {
-        return new LwjglApplication(new Unfaithful(), getDefaultConfiguration());
+        return new LwjglApplication(new Unfaithful (), getDefaultConfiguration());
     }
 
     private static LwjglApplicationConfiguration getDefaultConfiguration() {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.title = "Unfaithful";
-        configuration.width = 1200;
-        configuration.height = 800;
+        configuration.width = 640;
+        configuration.height = 180;
+        configuration.resizable = false;
+
         for (int size : new int[] { 128, 64, 32, 16 }) {
             configuration.addIcon("libgdx" + size + ".png", FileType.Internal);
         }
