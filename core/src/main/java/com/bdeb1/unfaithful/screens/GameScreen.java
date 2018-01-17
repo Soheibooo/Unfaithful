@@ -18,6 +18,8 @@ package com.bdeb1.unfaithful.screens;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bdeb1.unfaithful.GameWorld;
@@ -39,6 +41,7 @@ public class GameScreen implements Screen {
     private GameWorld gWorld;
     private PooledEngine engine;
     private Game game;
+    private boolean isPaused;
 
     public GameScreen(Unfaithful game) {
         super();
@@ -54,6 +57,7 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new HackerSystem());
         
         this.gWorld = new GameWorld(engine);
+        isPaused = false;
     }
 
     @Override
@@ -69,8 +73,11 @@ public class GameScreen implements Screen {
     private void update(float delta) {
         engine.update(delta);
         
+        updateKeys();
+        
         if(gWorld.isHacked(gWorld.getIDLevel())) {
             if(gWorld.getIDLevel() < 3) {
+                //add transitions
                 gWorld.generateLevel(gWorld.getIDLevel()+1);
             }
             else {
@@ -79,7 +86,21 @@ public class GameScreen implements Screen {
             }
         }
     }
-
+    private void updateKeys() {
+        if(Gdx.input.isKeyPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
+            if(isPaused)
+                resume();
+            else
+                pause();
+        }
+        if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+            engine.getSystem(HackerSystem.class).setIsHacking(true);
+        }
+        else {
+            engine.getSystem(HackerSystem.class).setIsHacking(false);
+        }
+        
+    }
     private void draw() {
         //UI
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -100,11 +121,13 @@ public class GameScreen implements Screen {
         engine.getSystem(RenderingSystem.class).setProcessing(false);
         engine.getSystem(StateSystem.class).setProcessing(false);
         engine.getSystem(TargetSystem.class).setProcessing(false);
+        isPaused = true;
         
     }
 
     @Override
     public void resume() {
+        
         engine.getSystem(ActionSystem.class).setProcessing(true);
         engine.getSystem(AnimationSystem.class).setProcessing(true);
         engine.getSystem(HackerSystem.class).setProcessing(true);
@@ -112,6 +135,7 @@ public class GameScreen implements Screen {
         engine.getSystem(RenderingSystem.class).setProcessing(true);
         engine.getSystem(StateSystem.class).setProcessing(true);
         engine.getSystem(TargetSystem.class).setProcessing(true);
+        isPaused = false;
     }
 
     @Override
@@ -121,4 +145,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
     }
+
+    
 }
