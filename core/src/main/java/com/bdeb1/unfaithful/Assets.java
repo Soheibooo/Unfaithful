@@ -69,15 +69,15 @@ public class Assets {
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/progression_bar_hacking.atlas", TextureAtlas.class);
+                    "atlas/UI/progression_bar_hacking.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICION
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/progression_bar_suspicion.atlas", TextureAtlas.class);
+                    "atlas/UI/progression_bar_suspicion.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_MENU
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/barre_menu.atlas", TextureAtlas.class);
+                    "atlas/UI/barre_menu.atlas", TextureAtlas.class);
 
     //------------------------SPRITES
     public static final AssetDescriptor<Texture> TEXTURE_NAME
@@ -91,7 +91,7 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER
             = new AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
->>>>>>> de89d1cbee3a17a81e4c0ab69b204b7ec9925b11
+
 
     //------------------------IMAGES
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1

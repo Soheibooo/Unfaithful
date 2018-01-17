@@ -64,20 +64,14 @@ public class GameScreen implements Screen {
         super();
         this.game = game;
         this.stage = new Stage();
-<<<<<<< HEAD
         Gdx.input.setInputProcessor(stage);
 
 
         stage.act();
 
-        batch = new SpriteBatch ();
-
-        backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_1);
-        
-=======
         this.batch = new SpriteBatch ();
         this.backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
->>>>>>> de89d1cbee3a17a81e4c0ab69b204b7ec9925b11
+
         Animation<TextureRegion> animation = new Animation<TextureRegion>
               (1f/2f, backgroundAtlas.getRegions ());
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
