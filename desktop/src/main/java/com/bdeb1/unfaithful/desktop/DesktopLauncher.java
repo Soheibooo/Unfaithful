@@ -1,4 +1,4 @@
-package com.soheibo.template.desktop;
+package com.bdeb1.unfaithful.desktop;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

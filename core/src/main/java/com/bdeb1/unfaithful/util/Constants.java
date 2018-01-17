@@ -2,11 +2,6 @@ package com.bdeb1.unfaithful.util;
 
 public final class Constants {
 
-	public static final class Path {
-
-		public static final String BACKGROUND = "assets/image/background.png";
-	}
-
 	public static final class World {
 
 		public static final Dimension SCENE_DIMENSION = new Dimension (640,

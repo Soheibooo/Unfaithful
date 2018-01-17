@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.bdeb1.unfaithful.Assets;
 
 public class Scene {
 
@@ -17,11 +18,9 @@ public class Scene {
 	private Vector3            cameraOrigin;
 	private Vector3            anchorPoint;
 
-	public Scene (Dimension visible, Dimension dimension, String
-
-		backgroundPath)
+	public Scene (Dimension visible, Dimension dimension)
 		{
-		background = new Texture (backgroundPath);
+		background = Assets.getInstance().manager.get(Assets.IMAGE_BACKGROUND);
 		directionCamera = Direction.Center;
 
 		camera = new OrthographicCamera (visible.width, visible.height);
@@ -40,7 +39,7 @@ public class Scene {
 
 	public void update () {
 
-		//FIXME: fix flickering
+		
 		float dx = Math.min (1 + Math.abs (anchorPoint.x - camera.position.x) *
 		                         Constants.World.CAMERA_PAN_EASE,
 		                     camera.position.x);

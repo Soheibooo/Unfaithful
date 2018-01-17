@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
                                                     Gdx.graphics.getHeight ());
         background = new Scene (visibleDimension, Constants.World
-              .SCENE_DIMENSION, Constants.Path.BACKGROUND);
+              .SCENE_DIMENSION);
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));

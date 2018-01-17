@@ -42,7 +42,7 @@ public class Assets {
         return instance;
     }
     
-    //------------------------SPRITES
+    //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/test_animation.atlas", TextureAtlas.class);
@@ -57,9 +57,9 @@ public class Assets {
                     "sprite/exemple_sprite.png", Texture.class);
     
     //------------------------IMAGES
-    public static final AssetDescriptor<Texture> IMAGE_NAME
+    public static final AssetDescriptor<Texture> IMAGE_BACKGROUND
             = new AssetDescriptor<Texture>(
-                    "image/exemple_image.png", Texture.class);
+                    "image/background.png", Texture.class);
     
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
@@ -83,7 +83,7 @@ public class Assets {
         manager.load(SPRITE_NAME);
 
         //Images
-        manager.load(IMAGE_NAME);
+        manager.load(IMAGE_BACKGROUND);
 
         //Sounds
         manager.load(SOUND_NAME);
