@@ -48,27 +48,15 @@ public class Assets {
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
-<<<<<<< HEAD
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
 
-        public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
-
         public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
-
-=======
-                    "atlas/test_animation.atlas", TextureAtlas.class);
-
-    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/hacking_animation_lvl_1.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
@@ -86,43 +74,36 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/barre_menu.atlas", TextureAtlas.class);
 
-
->>>>>>> d135f71adf1e1c5ad5f1d948eb775a55b7850295
     //------------------------SPRITES
-    public static final AssetDescriptor<Texture> TEXTURE_NAME = new
-          AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture.class);
+    public static final AssetDescriptor<Texture> TEXTURE_NAME
+            = new AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture.class);
+
     public static final AssetDescriptor<Pixmap> SPRITE_NAME
-            = new AssetDescriptor<Pixmap>(
-                    "sprite/exemple_sprite.png", Pixmap.class);
-    public static final AssetDescriptor<Texture> BTN_PAUSE = new
-            AssetDescriptor<Texture> ("sprite/bouton_pause.png", Texture.class);
-    public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER = new
-            AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
-    
-    public static final AssetDescriptor<Texture> SPRITE_NAME
-            = new AssetDescriptor<Texture>(
-                    "sprite/exemple_sprite.png", Texture.class);
+            = new AssetDescriptor<Pixmap>("sprite/exemple_sprite.png", Pixmap.class);
+
+    public static final AssetDescriptor<Texture> BTN_PAUSE
+            = new AssetDescriptor<Texture> ("sprite/bouton_pause.png", Texture.class);
+
+    public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER
+            = new AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
 
     //------------------------IMAGES
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_1
-            = new AssetDescriptor<Texture>(
-                    "image/background.png", Texture.class);
+            = new AssetDescriptor<Texture>("image/background.png", Texture.class);
+
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_2
-            = new AssetDescriptor<Texture>(
-                    "image/background.png", Texture.class);
+            = new AssetDescriptor<Texture>( "image/background.png", Texture.class);
+
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_3
-            = new AssetDescriptor<Texture>(
-                    "image/background.png", Texture.class);
+            = new AssetDescriptor<Texture>("image/background.png", Texture.class);
 
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
-            = new AssetDescriptor<Sound>(
-                    "sound/exemple_sound.ogg", Sound.class);
+            = new AssetDescriptor<Sound>("sound/exemple_sound.ogg", Sound.class);
 
     //------------------------MUSICS
     public static final AssetDescriptor<Music> MUSIC_NAME
-            = new AssetDescriptor<Music>(
-                    "music/exemple_music.ogg", Music.class);
+            = new AssetDescriptor<Music>( "music/exemple_music.ogg", Music.class);
 
     //------------------------TEXTS
     public static final ArrayList<String> HACKING_PROGRESS_LV1
