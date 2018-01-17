@@ -69,7 +69,8 @@ public class GameScreen implements Screen {
 
         batch = new SpriteBatch ();
 
-        backgroundAtlas = new TextureAtlas (Constants.Path.BACKGROUND_ATLAS);
+        backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
+        
         Animation<TextureRegion> animation = new Animation<TextureRegion>
               (1f/2f, backgroundAtlas.getRegions ());
         Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
@@ -108,7 +109,7 @@ public class GameScreen implements Screen {
     }
 
     private void update(float delta) {
-        background.update ();
+        background.update (delta);
         
         engine.update(delta);
 		
@@ -125,10 +126,6 @@ public class GameScreen implements Screen {
                 //Later
             }
         }
-
-
-        background.update (delta);
-
     }
     private void updateKeys() {
         if(Gdx.input.isKeyPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
