@@ -18,9 +18,21 @@ public class Scene {
 	private Vector3            cameraOrigin;
 	private Vector3            anchorPoint;
 
-	public Scene (Dimension visible, Dimension dimension)
+	public Scene (Dimension visible, Dimension dimension, int level)
 		{
-		background = Assets.getInstance().manager.get(Assets.IMAGE_BACKGROUND);
+		
+                    switch(level) {
+                        case 1:
+                            background = Assets.getInstance().manager.get(Assets.IMAGE_BACKGROUND_1);
+                            break;
+                        case 2:
+                            background = Assets.getInstance().manager.get(Assets.IMAGE_BACKGROUND_2);
+                            break;
+                        case 3:
+                            background = Assets.getInstance().manager.get(Assets.IMAGE_BACKGROUND_3);
+                            break;
+                    }
+                    
 		directionCamera = Direction.Center;
 
 		camera = new OrthographicCamera (visible.width, visible.height);
