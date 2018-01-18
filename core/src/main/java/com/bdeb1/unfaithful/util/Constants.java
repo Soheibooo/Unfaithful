@@ -17,7 +17,7 @@ public final class Constants {
 			  SCENE_ORIGIN.x + SCENE_DIMENSION.width / 4, SCENE_ORIGIN.y, 0);
 		public static final float     CAMERA_PAN_EASE         = 0.05f;
 		public static final Vector3   HACKER_INITIAL_POSITION = new Vector3
-			  (5f, 5f, 0f);
+			  (SCENE_ANCHOR.x - SCENE_ORIGIN.x, 0f, 0f);
 		public static boolean PAUSE = false;
 	}
 }
