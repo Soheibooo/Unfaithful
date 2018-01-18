@@ -21,6 +21,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.LaptopComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
 /**
  *
@@ -30,6 +31,7 @@ public class HackerSystem extends IteratingSystem {
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<TransformComponent> transformM;
+
     
     private boolean isHacking = false;
     public HackerSystem() {
@@ -65,6 +67,7 @@ public class HackerSystem extends IteratingSystem {
         }
         else{
             actionC.set(HackerComponent.ACTION_NOT_HACKING);
+            
         }
         
     }

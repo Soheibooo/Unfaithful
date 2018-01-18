@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.*;
+import com.bdeb1.unfaithful.screens.GUI;
 
 import java.util.HashMap;
 
@@ -34,7 +35,8 @@ import java.util.HashMap;
 public class GameWorld {
 
     private PooledEngine engine;
-    private Entity hacker, target, suspiciousGauge, hackingGauge;
+
+    private Entity hacker, target, suspiciousGauge, hackingGauge, menu;
     private int level;
 
     private final int DISTANCE_BETWEEB_BARS = 10;
@@ -53,6 +55,111 @@ public class GameWorld {
         target = createTarget();
         hacker = createHacker();
         suspiciousGauge = createSuspiciousGauge();
+        menu = registerGUI();
+    }
+
+    public Entity registerGUI() {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        MenuComponent menuC =
+                engine.createComponent(MenuComponent.class);
+        StateComponent stateC =
+                engine.createComponent(StateComponent.class);
+        ActionComponent actionC =
+                engine.createComponent(ActionComponent.class);
+        TransformComponent transformC =
+                engine.createComponent(TransformComponent.class);
+        TextureComponent textureC =
+                engine.createComponent(TextureComponent.class);
+
+        transformC.position.set(10, 10, 0);
+        actionC.action = 0;
+
+        stateC.set(MenuComponent.STATE_INACTIVE);
+        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_MENU);
+
+        TextureAtlas.AtlasRegion menuImage = texAtlas.findRegion("menu_bar0000");
+
+        Array<TextureAtlas.AtlasRegion> menuRegion = new Array<TextureAtlas.AtlasRegion>();
+        menuRegion.add(menuImage);
+
+        Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
+        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.findRegions("menu_bar_select"), Animation.PlayMode.LOOP);
+
+
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+
+        animeList.put(0, menuStill);
+        animeList2.put(0, MenuAnim);
+
+        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList2);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
+
+        entity.add(textureC);
+        entity.add(menuC);
+        entity.add(stateC);
+        entity.add(transformC);
+        entity.add(actionC);
+        entity.add(animC);
+
+        engine.addEntity(entity);
+
+        laptopScreen(hacker);
+        return entity;
+		//suspiciousGauge = createSuspiciousGauge();
+    }
+
+
+    private Entity laptopScreen(Entity hacker) {
+        Entity entity = engine.createEntity();
+
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+				TextureComponent textureC
+                = engine.createComponent(TextureComponent.class);
+        ActionComponent actionC
+                = engine.createComponent(ActionComponent.class);
+
+        StateComponent stateC
+                = engine.createComponent(StateComponent.class);
+        LaptopComponent laptopC
+                = engine.createComponent(LaptopComponent.class);
+
+
+        stateC.set(0);
+        actionC.set(LaptopComponent.ACTION_NOT_HACKING);
+
+        TextureAtlas atTextureLaptopHack = Assets.getInstance().manager.get(Assets.ATLAS_HACKING_LAPSCREEN);
+        TextureAtlas atTextureLaptop = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING_LAPSCREEN);
+
+        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(1/12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(1/12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
+
+        HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
+        anime.put(1, laptopHack);
+        anime.put(2, laptopNotHack);
+
+        animC.animations.put(0, anime);
+
+        TransformComponent positionRel = hacker.getComponent(TransformComponent.class);
+
+
+        positionC.position.set(positionRel.position.x + 5, positionRel.position.y + 5, 0);
+
+        entity.add(textureC);
+        entity.add(animC);
+        entity.add(positionC);
+        entity.add(actionC);
+        entity.add(laptopC);
+
+        engine.addEntity(entity);
+        return entity;
+
     }
 
     private Entity createSuspiciousGauge() {
@@ -60,17 +167,16 @@ public class GameWorld {
 
         AnimationComponent animC
                 = engine.createComponent(AnimationComponent.class);
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        StateComponent stateC
-                = engine.createComponent(StateComponent.class);
         TextureComponent textureC
                 = engine.createComponent(TextureComponent.class);
         ActionComponent actionC
                 = engine.createComponent(ActionComponent.class);
-
-        positionC.position.set(
-                5.0f, Gdx.graphics.getHeight() - DISTANCE_BETWEEB_BARS, 0.0f);
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        StateComponent stateC
+                = engine.createComponent(StateComponent.class);
+		        positionC.position.set(5.0f, Gdx.graphics.getHeight()
+                                - DISTANCE_BETWEEB_BARS, 0.0f);
 
         entity.add(textureC);
         entity.add(animC);
@@ -172,24 +278,20 @@ public class GameWorld {
         //PAS DE STATE POUR LE HACKER
         stateC.set(0);
         actionC.set(HackerComponent.ACTION_NOT_HACKING);
-
-        TextureAtlas texAtHacking
-                = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
-        TextureAtlas texAtNOTHacking
-                = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
-
-        HashMap<Integer, Animation> animeList = new HashMap<>();
-
-        Animation<TextureRegion> animeHacking
-                = new Animation<>(
-                        1 / 12f, texAtHacking.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> animeNotHacking
-                = new Animation<>(
-                        1 / 12f, texAtNOTHacking.getRegions(), PlayMode.LOOP);
-
-        animeList.put(HackerComponent.ACTION_HACKING, animeHacking);
-        animeList.put(HackerComponent.ACTION_NOT_HACKING, animeNotHacking);
-
+        
+        TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
+        TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets .ATLAS_NOTHACKING);
+        
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        
+        
+        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1/12f, texAtHacking.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1/12f, texAtNOTHacking.getRegions(), PlayMode.LOOP);
+        
+        
+        animeList.put(1, animeHacking);
+        animeList.put(2, animeNotHacking);
+        
         //DEFAULT
         animC.animations.put(0, animeList);
 

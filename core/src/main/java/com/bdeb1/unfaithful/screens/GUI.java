@@ -1,12 +1,23 @@
 package com.bdeb1.unfaithful.screens;
 
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
+import com.bdeb1.unfaithful.Assets;
+import com.bdeb1.unfaithful.components.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GUI {
     private static GUI instance;
@@ -35,6 +46,55 @@ public class GUI {
         button.setPosition(x, y);
         return button;
     }
+
+   /* public Entity registerGUI(PooledEngine engine) {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        MenuComponent menuC =
+                engine.createComponent(MenuComponent.class);
+        StateComponent stateC =
+                engine.createComponent(StateComponent.class);
+        ActionComponent actionC =
+                engine.createComponent(ActionComponent.class);
+        TransformComponent transformC =
+                engine.createComponent(TransformComponent.class);
+
+        transformC.position.set(5f, 10f, 0);
+        actionC.action = 0;
+
+        stateC.set(MenuComponent.STATE_INACTIVE);
+        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_MENU);
+
+        TextureAtlas.AtlasRegion menuImage = texAtlas.findRegion("menu_bar0000");
+
+        Array<TextureAtlas.AtlasRegion> menuRegion = new Array<TextureAtlas.AtlasRegion>();
+        menuRegion.add(menuImage);
+
+        Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
+        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.getRegions(), Animation.PlayMode.LOOP);
+
+
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+
+        animeList.put(0, menuStill);
+        animeList2.put(0, MenuAnim);
+
+        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList2);
+
+        entity.add(menuC);
+        entity.add(stateC);
+        entity.add(transformC);
+        entity.add(actionC);
+        entity.add(animC);
+
+        engine.addEntity(entity);
+
+        return entity;
+    }*/
 
     public ProgressBar addProgressBar(int x, int y, Texture textureBackground, Texture textureFill) {
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
