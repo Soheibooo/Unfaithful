@@ -54,6 +54,9 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
             "atlas/homescreen.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<TextureAtlas> ATLAS_TUTO
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/tuto.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -202,6 +205,7 @@ public class Assets {
     public void load() {
         //Atlas
         manager.load(ATLAS_NOTHACKING);
+        manager.load(ATLAS_TUTO);
         manager.load(ATLAS_HOMESCREEN);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);

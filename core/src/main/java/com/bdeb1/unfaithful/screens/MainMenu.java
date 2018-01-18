@@ -89,37 +89,58 @@ public class MainMenu implements Screen {
         Sprite defaultSprite = new Sprite(defaultRegion);
         String[] regions = new String[]{"menu_bar_select0000", "menu_bar_select0001", "menu_bar_select0002", "menu_bar_select0003"};
 
-        AnimatedTextButton playButton = new AnimatedTextButton("Play", textButtonStyle, defaultSprite);
-        playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
-        playButton.setPosition(Gdx.graphics.getWidth() / 2 - 250, 400);
-        playButton.setWidth(500);
-        playButton.setHeight(100);
-        playButton.addListener(new InputListener() {
+        AnimatedTextButton button = new AnimatedTextButton("Play", textButtonStyle, defaultSprite);
+        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        button.setPosition(Gdx.graphics.getWidth() / 2 - 250, 450);
+        button.setWidth(500);
+        button.setHeight(100);
+        button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 mainMenuActive = false;
                 return true;
             }
         });
-        stage.addActor(playButton);
+        stage.addActor(button);
 
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
         defaultSprite = new Sprite(defaultRegion);
 
-        playButton = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
-        playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
-        playButton.setPosition(Gdx.graphics.getWidth() / 2 - 200, 200);
-        playButton.setWidth(400);
-        playButton.setHeight(80);
-        playButton.addListener(new InputListener() {
+        button = new AnimatedTextButton("Help", textButtonStyle, defaultSprite);
+        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        button.setPosition(Gdx.graphics.getWidth() / 2 - 200, 300);
+        button.setWidth(400);
+        button.setHeight(80);
+        button.addListener(new InputListener() {
+
+
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new HelpScreen(game));
+                return true;
+            }
+        });
+        stage.addActor(button);
+
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        defaultSprite = new Sprite(defaultRegion);
+
+        button = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
+        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        button.setPosition(Gdx.graphics.getWidth() / 2 - 200, 200);
+        button.setWidth(400);
+        button.setHeight(80);
+        button.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 System.exit(0);
                 return true;
             }
         });
-        stage.addActor(playButton);
+        stage.addActor(button);
     }
 
     @Override
