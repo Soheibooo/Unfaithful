@@ -45,6 +45,12 @@ public class SplashScreen implements Screen {
                 splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
                 break;
             case 2:
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_1));
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_2));
+                break;
+            case 3:
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_1));
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
                 break;
             default:
                 break;

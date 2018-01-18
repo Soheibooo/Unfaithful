@@ -76,8 +76,25 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		this.batch = new SpriteBatch ();
-		this.backgroundAtlas = Assets.getInstance ().manager
+                switch (level) {
+                    case 1:
+                        this.backgroundAtlas = Assets.getInstance ().manager
 			  .get (Assets.ATLAS_BACKGROUND_LV1);
+                        break;
+                    case 2:
+                        //TODO chante
+                        this.backgroundAtlas = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_BACKGROUND_LV2);
+                        break;
+                    case 3:
+                        this.backgroundAtlas = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_BACKGROUND_LV1);
+                        break;
+                    default:
+                        this.backgroundAtlas = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_BACKGROUND_LV1);
+                        break;
+                }
 
 		Animation<TextureRegion> animation = new Animation<> (1f / 2f,
 		                                                      backgroundAtlas
