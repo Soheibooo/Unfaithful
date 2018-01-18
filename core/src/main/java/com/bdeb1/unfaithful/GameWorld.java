@@ -254,7 +254,7 @@ public class GameWorld {
         return entity;
     }
 
-    public boolean isHacked(int difficultyID) {
+    public boolean isHacked() {
         HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
         return hackerC.hacking_gauge >= (50 + level * level * 10); //1=60; 2=90; 3=140;
     }

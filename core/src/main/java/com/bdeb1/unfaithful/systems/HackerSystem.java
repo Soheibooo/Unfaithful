@@ -28,7 +28,6 @@ import com.bdeb1.unfaithful.components.TransformComponent;
  * @author Samuel
  */
 public class HackerSystem extends IteratingSystem {
-<<<<<<< HEAD
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<TransformComponent> transformM;
