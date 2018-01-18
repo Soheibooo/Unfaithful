@@ -1,0 +1,90 @@
+
+Game_over.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Background_GameOver0000
+  rotate: false
+  xy: 2, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0001
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0002
+  rotate: false
+  xy: 324, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0003
+  rotate: false
+  xy: 324, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0004
+  rotate: false
+  xy: 646, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0005
+  rotate: false
+  xy: 646, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0006
+  rotate: false
+  xy: 968, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0007
+  rotate: false
+  xy: 968, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0008
+  rotate: false
+  xy: 1290, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0009
+  rotate: false
+  xy: 1290, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0010
+  rotate: false
+  xy: 1612, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_GameOver0011
+  rotate: false
+  xy: 1612, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1

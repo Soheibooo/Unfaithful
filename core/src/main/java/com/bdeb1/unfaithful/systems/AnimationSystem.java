@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
+import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 
 /**

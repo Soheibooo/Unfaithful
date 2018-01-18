@@ -78,7 +78,17 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
             "atlas/tuto.atlas", TextureAtlas.class);
 
-    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_GAME_OVER
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/Game_over.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_GAME_WIN
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/Game_win.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
 
        public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(

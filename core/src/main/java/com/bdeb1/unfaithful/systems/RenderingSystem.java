@@ -95,7 +95,7 @@ public class RenderingSystem extends IteratingSystem {
 			} else if (entity.getComponent (TargetComponent.class) != null) {
 				ActionComponent actionC = ComponentMapper
 					  .getFor (ActionComponent.class).get (entity);
-				if (actionC.action == TargetComponent.ACTION_WALK_LEFT) {
+				if (actionC.action == TargetComponent.ACTION_WALK_RIGHT) {
 					width = width * - 1;
 				}
 				batch.draw (tex.region, t.position.x, t.position.y,
