@@ -22,6 +22,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bdeb1.unfaithful.components.MenuComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
@@ -71,9 +72,15 @@ public class RenderingSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float f) {
         TextureComponent tex = textureM.get(entity);
         TransformComponent t = transformM.get(entity);
-        
+
+        if (entity.getComponent(MenuComponent.class) != null) {
+            System.out.println(t.position.x + "");
+        }
+
         if (!(tex.region == null || t.isHidden)) {
-            float width = tex.region.getRegionWidth();
+
+
+                float width = tex.region.getRegionWidth();
             float height = tex.region.getRegionHeight();
 
             float originX = width / 2f;
@@ -91,9 +98,10 @@ public class RenderingSystem extends IteratingSystem {
                     PixelsToMeters(t.scale.y),
                     t.rotation);
             batch.end();
-            
         } else if (entity.getComponent(TargetComponent.class) == null) {
             System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
+        } if (entity.getComponent(MenuComponent.class) != null) {
+            System.out.println("Ton menu boi");
         }
     }
 

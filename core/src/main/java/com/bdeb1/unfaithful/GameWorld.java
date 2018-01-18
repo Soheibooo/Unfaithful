@@ -25,6 +25,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.*;
+import com.bdeb1.unfaithful.screens.GUI;
 
 import java.util.HashMap;
 
@@ -36,7 +37,7 @@ public class GameWorld {
     private int idLevel = 1;
     
     private PooledEngine engine;
-    private Entity hacker, target, suspiciousGauge, hackingGauge;
+    private Entity hacker, target, suspiciousGauge, hackingGauge, menu;
 
     private final int DISTANCE_BETWEEB_BARS = 10;
     
@@ -59,6 +60,59 @@ public class GameWorld {
         target = createTarget(difficulty);
         hacker = createHacker(difficulty);
         suspiciousGauge = createSuspiciousGauge();
+        menu = registerGUI();
+    }
+
+    public Entity registerGUI() {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        MenuComponent menuC =
+                engine.createComponent(MenuComponent.class);
+        StateComponent stateC =
+                engine.createComponent(StateComponent.class);
+        ActionComponent actionC =
+                engine.createComponent(ActionComponent.class);
+        TransformComponent transformC =
+                engine.createComponent(TransformComponent.class);
+        TextureComponent textureC =
+                engine.createComponent(TextureComponent.class);
+
+        transformC.position.set(10, 10, 0);
+        actionC.action = 0;
+
+        stateC.set(MenuComponent.STATE_INACTIVE);
+        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_MENU);
+
+        TextureAtlas.AtlasRegion menuImage = texAtlas.findRegion("menu_bar0000");
+
+        Array<TextureAtlas.AtlasRegion> menuRegion = new Array<TextureAtlas.AtlasRegion>();
+        menuRegion.add(menuImage);
+
+        Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
+        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.findRegions("menu_bar_select"), Animation.PlayMode.LOOP);
+
+
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+
+        animeList.put(0, menuStill);
+        animeList2.put(0, MenuAnim);
+
+        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList2);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
+
+        entity.add(textureC);
+        entity.add(menuC);
+        entity.add(stateC);
+        entity.add(transformC);
+        entity.add(actionC);
+        entity.add(animC);
+
+        engine.addEntity(entity);
+
+        return entity;
     }
 
     private Entity createSuspiciousGauge() {

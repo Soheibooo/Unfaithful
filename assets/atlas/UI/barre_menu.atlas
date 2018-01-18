@@ -11,28 +11,28 @@ menu_bar0000
   orig: 83, 13
   offset: 0, 0
   index: -1
-menu_bar_select0000
+menu_bar_select
   rotate: false
   xy: 2, 2
   size: 83, 14
   orig: 83, 14
   offset: 0, 0
   index: -1
-menu_bar_select0001
+menu_bar_select
   rotate: false
   xy: 87, 2
   size: 83, 14
   orig: 83, 14
   offset: 0, 0
   index: -1
-menu_bar_select0002
+menu_bar_select
   rotate: false
   xy: 172, 2
   size: 83, 14
   orig: 83, 14
   offset: 0, 0
   index: -1
-menu_bar_select0003
+menu_bar_select
   rotate: false
   xy: 257, 2
   size: 83, 14
