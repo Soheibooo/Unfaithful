@@ -52,20 +52,20 @@ public class Assets {
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/hacking_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
         
         public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
     
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/Background_lvl_1.atlas", TextureAtlas.class);
+                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -165,17 +165,13 @@ public class Assets {
         manager.load(ATLAS_BAR_SUSPICION);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
-<<<<<<< HEAD
         manager.load(WOMAN_WALKING);
         manager.load(WOMAN_ROTATING);
         manager.load(WOMAN_WALKING_SUSPICIOUSLY);
         manager.load(WOMAN_ROTATING_SUSPICIOUSLY);
         
-=======
-        
         manager.load(ATLAS_HACKING_LAPSCREEN);
         manager.load(ATLAS_NOTHACKING_LAPSCREEN);
->>>>>>> 17275a54a9dfc85470d4789bc225821fbab45cc2
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load (TEXTURE_NAME);

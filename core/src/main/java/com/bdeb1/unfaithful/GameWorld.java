@@ -112,8 +112,8 @@ public class GameWorld {
 
         engine.addEntity(entity);
 
-        return entity;
         laptopScreen(hacker);
+        return entity;
 		//suspiciousGauge = createSuspiciousGauge();
     }
 
@@ -167,11 +167,15 @@ public class GameWorld {
 
     }
 
-    /*private Entity createSuspiciousGauge() {
+    private Entity createSuspiciousGauge() {
         Entity entity = engine.createEntity();
 
         AnimationComponent animC
                 = engine.createComponent(AnimationComponent.class);
+        TextureComponent textureC
+                = engine.createComponent(TextureComponent.class);
+        ActionComponent actionC
+                = engine.createComponent(ActionComponent.class);
         TransformComponent positionC
                 = engine.createComponent(TransformComponent.class);
         StateComponent stateC
@@ -279,7 +283,7 @@ public class GameWorld {
         actionC.set(HackerComponent.ACTION_NOT_HACKING);
         
         TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
-        TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
+        TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets .ATLAS_NOTHACKING);
         
         HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
         
