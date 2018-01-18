@@ -92,6 +92,14 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_rotation_soupcon.atlas",TextureAtlas.class);
         
         
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_bureau_lvl1.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
+
 
     //------------------------SPRITES
         
@@ -157,11 +165,17 @@ public class Assets {
         manager.load(ATLAS_BAR_SUSPICION);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
+<<<<<<< HEAD
         manager.load(WOMAN_WALKING);
         manager.load(WOMAN_ROTATING);
         manager.load(WOMAN_WALKING_SUSPICIOUSLY);
         manager.load(WOMAN_ROTATING_SUSPICIOUSLY);
         
+=======
+        
+        manager.load(ATLAS_HACKING_LAPSCREEN);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN);
+>>>>>>> 17275a54a9dfc85470d4789bc225821fbab45cc2
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load (TEXTURE_NAME);
