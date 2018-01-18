@@ -26,5 +26,5 @@ import java.util.HashMap;
 public class AnimationComponent implements Component {
 
     public HashMap<Integer, HashMap<Integer, Animation>> animations
-            = new HashMap<Integer, HashMap<Integer, Animation>>();
+            = new HashMap<>();
 }

@@ -18,10 +18,9 @@ public class DesktopLauncher {
     private static LwjglApplicationConfiguration getDefaultConfiguration() {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.title = "Unfaithful";
-        configuration.width = 320;
-        configuration.height = 180;
-        configuration.resizable = true;
-        //configuration.fullscreen = true;
+        configuration.width = 1600;
+        configuration.height = 900;
+        configuration.resizable = false;
 
         for (int size : new int[] { 128, 64, 32, 16 }) {
             configuration.addIcon("libgdx" + size + ".png", FileType.Internal);

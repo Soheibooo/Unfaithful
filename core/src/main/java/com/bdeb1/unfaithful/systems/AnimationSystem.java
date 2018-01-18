@@ -60,14 +60,12 @@ public class AnimationSystem extends IteratingSystem {
         ActionComponent actionC = actionM.get(entity);
         AnimationComponent animationC = animationM.get(entity);
         
-        
-        
 
-//        for (int i : animationC.animations.keySet()) {
-//            System.out.println("CLE: " + i);
-//            System.out.println("VALUE: " + animationC.animations.get(i).toString());
-//            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
-//        }
+        for (int i : animationC.animations.keySet()) {
+            System.out.println("CLE: " + i);
+            System.out.println("VALUE: " + animationC.animations.get(i).toString());
+            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
+        }
         if (animationC.animations.containsKey(stateC.get())) {
             
             TextureComponent tex = textureM.get(entity);
@@ -75,7 +73,5 @@ public class AnimationSystem extends IteratingSystem {
                     animationC.animations.get(stateC.get()).get(actionC.get());
             tex.region = (TextureRegion) animation.getKeyFrame(stateC.time);
         }
-
-        //stateC.time += deltaTime;
     }
 }
