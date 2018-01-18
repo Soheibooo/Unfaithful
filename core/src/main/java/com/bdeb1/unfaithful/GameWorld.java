@@ -58,7 +58,7 @@ public class GameWorld {
         target = createTarget(difficulty);
         hacker = createHacker(difficulty);
         laptopScreen(hacker);
-		suspiciousGauge = createSuspiciousGauge();
+		//suspiciousGauge = createSuspiciousGauge();
     }
     
     
@@ -104,13 +104,14 @@ public class GameWorld {
         entity.add(animC);
         entity.add(positionC);
         entity.add(actionC);
+        entity.add(laptopC);
         
         engine.addEntity(entity);
         return entity;
         
     }
 
-    private Entity createSuspiciousGauge() {
+    /*private Entity createSuspiciousGauge() {
         Entity entity = engine.createEntity();
 
         AnimationComponent animC
@@ -154,7 +155,7 @@ public class GameWorld {
 
         return entity;
         
-    }
+    }*/
 
 
     private Entity createTarget(float difficultyKey) {
