@@ -114,8 +114,6 @@ public class GameScreen implements Screen {
 			}
 		});
 
-
-		addMenuButtons();
 		addProgressBar();
 		stage.addActor (btnPause);
 	}
@@ -189,66 +187,38 @@ public class GameScreen implements Screen {
         pixmap.dispose();
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
         progressBarStyle.background = drawable;
+        progressBarStyle.disabledKnob = drawable;
+        progressBarStyle.knobBefore = drawable;
+        progressBarStyle.knobAfter = drawable;
+        progressBarStyle.knob = drawable;
 
         AnimatedProgressBar suspiciousBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle);
         suspiciousBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsBackground, 0.1f);
         suspiciousBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsForeground, 0.1f);
         suspiciousBar.setPosition(220, Gdx.graphics.getHeight() - 35);
         suspiciousBar.size(200, 30);
-        //suspiciousBar.freeze();
-        suspiciousBar.setValue(100);
+        suspiciousBar.freeze();
+        suspiciousBar.setValue(10);
         stage.addActor(suspiciousBar);
 
-        Pixmap pixmap2 = new Pixmap(200, 20, Pixmap.Format.RGBA8888);
+        Pixmap pixmap2 = new Pixmap(0, 0, Pixmap.Format.RGBA8888);
         TextureRegionDrawable drawable2 = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap2)));
         pixmap2.dispose();
         ProgressBar.ProgressBarStyle progressBarStyle2 = new ProgressBar.ProgressBarStyle();
         progressBarStyle2.background = drawable2;
+        progressBarStyle2.disabledKnob = drawable2;
+        progressBarStyle2.knobBefore = drawable2;
+        progressBarStyle2.knobAfter = drawable2;
+        progressBarStyle2.knob = drawable2;
 
         AnimatedProgressBar hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
         hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsBackground, 0.1f);
         hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsForeground, 0.1f);
         hackingBar.setPosition(10, Gdx.graphics.getHeight() - 30);
         hackingBar.size(200, 20);
-        hackingBar.setValue(0);
+        hackingBar.setValue(5);
         stage.addActor(hackingBar);
     }
-
-    private void addMenuButtons() {
-		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-		textButtonStyle.font = new BitmapFont();
-		TextureAtlas.AtlasRegion defaultRegion = Assets.getInstance().manager.get(Assets.ATLAS_MENU).findRegion("menu_bar0000");
-		Sprite defaultSprite = new Sprite(defaultRegion);
-		String[] regions = new String[]{"menu_bar_select0000", "menu_bar_select0001", "menu_bar_select0002", "menu_bar_select0003"};
-
-		AnimatedTextButton playButton = new AnimatedTextButton("Play", textButtonStyle, defaultSprite);
-		playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
-		playButton.setPosition(20, 50);
-		playButton.setWidth(160);
-		playButton.setHeight(32);
-		playButton.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				System.out.println("Button click");
-				return true;
-			}
-		});
-		stage.addActor(playButton);
-
-		playButton = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
-		playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
-		playButton.setPosition(20, 5);
-		playButton.setWidth(160);
-		playButton.setHeight(32);
-		playButton.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				System.out.println("Button click");
-				return true;
-			}
-		});
-		stage.addActor(playButton);
-	}
 
 	private void pauseAction () {
 		if (isPaused) {
@@ -267,9 +237,6 @@ public class GameScreen implements Screen {
 		update (delta);
 		draw (delta);
 		engine.update (delta);
-
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
 	}
 
 	private void update (float delta) {

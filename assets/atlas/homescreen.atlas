@@ -1,0 +1,188 @@
+
+homescreen.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Background_Menu0001
+  rotate: false
+  xy: 2, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0000
+  rotate: false
+  xy: 2, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0002
+  rotate: false
+  xy: 2, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0004
+  rotate: false
+  xy: 324, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0003
+  rotate: false
+  xy: 324, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0005
+  rotate: false
+  xy: 324, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0006
+  rotate: false
+  xy: 324, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0007
+  rotate: false
+  xy: 324, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0008
+  rotate: false
+  xy: 324, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0009
+  rotate: false
+  xy: 646, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0010
+  rotate: false
+  xy: 646, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0011
+  rotate: false
+  xy: 646, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0012
+  rotate: false
+  xy: 968, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0013
+  rotate: false
+  xy: 968, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0014
+  rotate: false
+  xy: 968, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0015
+  rotate: false
+  xy: 968, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0016
+  rotate: false
+  xy: 968, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0017
+  rotate: false
+  xy: 968, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0018
+  rotate: false
+  xy: 1290, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0019
+  rotate: false
+  xy: 1290, 184
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0020
+  rotate: false
+  xy: 1290, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0025
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0021
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0022
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0023
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Menu0024
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
