@@ -32,8 +32,6 @@ public class Unfaithful extends Game {
     public ShapeRenderer sp;
     public OrthographicCamera cam;
     
-    private PooledEngine engine;
-
     @Override
     public void create() {
         sb = new SpriteBatch();

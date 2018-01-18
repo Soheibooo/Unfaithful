@@ -18,13 +18,6 @@ package com.bdeb1.unfaithful.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.Unfaithful;
 
@@ -51,8 +44,9 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Assets.getInstance().manager.update()) {
-            //Show ready
-            game.setScreen(new GameScreen(game));
+            //Level 1
+            //game.setScreen(new GameScreen(game, 1));
+            game.setScreen(new SplashScreen(game, 1));
         } else {
             //Show % loading
             //(int) (Assets.getInstance().manager.getProgress() * 100);
