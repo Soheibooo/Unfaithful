@@ -55,6 +55,8 @@ public class GameScreen implements Screen {
 	private Scene        background;
 	private SpriteBatch  batch;
 	private TextureAtlas backgroundAtlas;
+	private AnimatedProgressBar hackingBar;
+	private AnimatedProgressBar suspicionBar;
 	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
 	//            .font(new BitmapFont())
 	//            .build();
@@ -130,6 +132,10 @@ public class GameScreen implements Screen {
                 "suspicion_bar0003",
                 "suspicion_bar0004",
                 "suspicion_bar0005",
+                "suspicion_bar0015",
+                "suspicion_bar0016",
+                "suspicion_bar0017",
+                "suspicion_bar0018",
                 "suspicion_bar0006",
                 "suspicion_bar0007",
                 "suspicion_bar0008",
@@ -138,70 +144,49 @@ public class GameScreen implements Screen {
                 "suspicion_bar0011",
                 "suspicion_bar0012",
                 "suspicion_bar0013",
-                "suspicion_bar0014",
-                "suspicion_bar0015",
-                "suspicion_bar0016",
-                "suspicion_bar0017",
-                "suspicion_bar0018"};
+                "suspicion_bar0014"};
 
-        String[] suspiciousRegionsForeground = new String[]{"suspicion_bar_progress0000",
-                "suspicion_bar_progress0001",
-                "suspicion_bar_progress0002",
-                "suspicion_bar_progress0009",
-                "suspicion_bar_progress0010",
-                "suspicion_bar_progress0011",
-                "suspicion_bar_progress0003",
-                "suspicion_bar_progress0004",
-                "suspicion_bar_progress0005",
-                "suspicion_bar_progress0006",
+        String[] suspiciousRegionsForeground = new String[]{"suspicion_bar_progress0006",
                 "suspicion_bar_progress0007",
                 "suspicion_bar_progress0008",
                 "suspicion_bar_progress0015",
                 "suspicion_bar_progress0016",
                 "suspicion_bar_progress0017",
                 "suspicion_bar_progress0018",
+                "suspicion_bar_progress0009",
+                "suspicion_bar_progress0000",
+                "suspicion_bar_progress0001",
+                "suspicion_bar_progress0002",
+                "suspicion_bar_progress0010",
+                "suspicion_bar_progress0011",
                 "suspicion_bar_progress0012",
+                "suspicion_bar_progress0003",
+                "suspicion_bar_progress0004",
+                "suspicion_bar_progress0005",
                 "suspicion_bar_progress0013",
                 "suspicion_bar_progress0014"};
 
-        String[] hackingRegionsBackground = new String[]{"hacking_bar_blink0000",
-                "hacking_bar_blink0001",
-                "hacking_bar_blink0002",
-                "hacking_bar_blink0003",
-                "hacking_bar_blink0004",
-                "hacking_bar_blink0005",
-                "hacking_bar_blink0006",
-                "hacking_bar_blink0007",
-                "hacking_bar_blink0008",
-                "hacking_bar_blink0009",
-                "hacking_bar_blink0010",
-                "hacking_bar_blink0011",
-                "hacking_bar_blink0012",
-                "hacking_bar_blink0013",
-                "hacking_bar_blink0014",
-                "hacking_bar_blink0015",
-                "hacking_bar_blink0016",
-                "hacking_bar_blink0017"};
+        String[] hackingRegionsBackground = new String[]{"hacking_bar0000",
+                "hacking_bar0001",
+                "hacking_bar0002",
+                "hacking_bar0003",
+                "hacking_bar0004",
+                "hacking_bar0005",
+                "hacking_bar0006",
+                "hacking_bar0007",
+                "hacking_bar0008",
+                "hacking_bar0009"};
 
         String[] hackingRegionsForeground = new String[]{"hacking_bar_progress0000",
                 "hacking_bar_progress0001",
                 "hacking_bar_progress0002",
-                "hacking_bar_progress0009",
-                "hacking_bar_progress0010",
-                "hacking_bar_progress0011",
                 "hacking_bar_progress0003",
                 "hacking_bar_progress0004",
                 "hacking_bar_progress0005",
                 "hacking_bar_progress0006",
                 "hacking_bar_progress0007",
                 "hacking_bar_progress0008",
-                "hacking_bar_progress0015",
-                "hacking_bar_progress0016",
-                "hacking_bar_progress0017",
-                "hacking_bar_progress0018",
-                "hacking_bar_progress0012",
-                "hacking_bar_progress0013",
-                "hacking_bar_progress0014"};
+                "hacking_bar_progress0009"};
 
 
         Pixmap pixmap = new Pixmap(0, 0, Pixmap.Format.RGBA8888);
@@ -211,25 +196,26 @@ public class GameScreen implements Screen {
         progressBarStyle.background = drawable;
 
         AnimatedProgressBar suspiciousBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle);
-        suspiciousBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICION), suspiciousRegionsBackground, 0.1f);
-        suspiciousBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICION), suspiciousRegionsForeground, 0.1f);
-        suspiciousBar.setPosition(315, Gdx.graphics.getHeight() - 80);
-        suspiciousBar.size(300, 70);
-        suspiciousBar.setValue(20);
+        suspiciousBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsBackground, 0.1f);
+        suspiciousBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsForeground, 0.1f);
+        suspiciousBar.setPosition(220, Gdx.graphics.getHeight() - 35);
+        suspiciousBar.size(200, 30);
+        //suspiciousBar.freeze();
+        suspiciousBar.setValue(100);
         stage.addActor(suspiciousBar);
 
-        Pixmap pixmap2 = new Pixmap(0, 0, Pixmap.Format.RGBA8888);
+        Pixmap pixmap2 = new Pixmap(200, 20, Pixmap.Format.RGBA8888);
         TextureRegionDrawable drawable2 = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap2)));
         pixmap2.dispose();
         ProgressBar.ProgressBarStyle progressBarStyle2 = new ProgressBar.ProgressBarStyle();
         progressBarStyle2.background = drawable2;
 
-        AnimatedProgressBar hackingBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle2);
-        hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_HACKING), hackingRegionsBackground, 0.1f);
-        hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_HACKING), hackingRegionsForeground, 0.1f);
-        hackingBar.setPosition(5, Gdx.graphics.getHeight() - 80);
-        hackingBar.size(300, 70);
-        hackingBar.setValue(20);
+        AnimatedProgressBar hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
+        hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsBackground, 0.1f);
+        hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsForeground, 0.1f);
+        hackingBar.setPosition(10, Gdx.graphics.getHeight() - 30);
+        hackingBar.size(200, 20);
+        hackingBar.setValue(0);
         stage.addActor(hackingBar);
     }
 

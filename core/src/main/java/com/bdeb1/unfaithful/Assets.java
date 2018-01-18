@@ -64,13 +64,9 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICIOUS_HACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/progression_bar_hacking.atlas", TextureAtlas.class);
-
-    public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICION
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/UI/progression_bar_suspicion.atlas", TextureAtlas.class);
+                    "atlas/UI/barre_suspicion_hacking_simplifie.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_MENU
             = new AssetDescriptor<TextureAtlas>(
@@ -165,8 +161,7 @@ public class Assets {
         manager.load(ATLAS_NOTHACKING);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);
-        manager.load(ATLAS_BAR_HACKING);
-        manager.load(ATLAS_BAR_SUSPICION);
+        manager.load(ATLAS_BAR_SUSPICIOUS_HACKING);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
         manager.load(WOMAN_WALKING);

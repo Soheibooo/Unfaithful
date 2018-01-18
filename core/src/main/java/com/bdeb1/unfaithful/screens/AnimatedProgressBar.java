@@ -19,6 +19,8 @@ public class AnimatedProgressBar extends ProgressBar {
     private float animationForegroundSpeed;
     private int animationForegroundIndex;
 
+    public boolean freezeAnimation = false;
+
     public AnimatedProgressBar(float min, float max, float stepSize, boolean vertical, ProgressBarStyle progressBarStyle) {
          super(min, max, stepSize, vertical, progressBarStyle);
 
@@ -32,17 +34,19 @@ public class AnimatedProgressBar extends ProgressBar {
     }
 
     private void update(float delta) {
-        this.animationBackgroundTimer += delta;
-        if (animationBackgroundTimer > animationBackgroundSpeed) {
-            animationBackgroundTimer -= animationBackgroundSpeed;
-            animationBackgroundIndex++;
-            if (animationBackgroundIndex >= regionsBackground.length) {
-                animationBackgroundIndex = 0;
+        if (!freezeAnimation) {
+            this.animationBackgroundTimer += delta;
+            if (animationBackgroundTimer > animationBackgroundSpeed) {
+                animationBackgroundTimer -= animationBackgroundSpeed;
+                animationBackgroundIndex++;
+                if (animationBackgroundIndex >= regionsBackground.length) {
+                    animationBackgroundIndex = 0;
+                }
+                TextureAtlas.AtlasRegion textureBackground = this.atlasBackground.findRegion(regionsBackground[animationBackgroundIndex]);
+                Sprite spriteBackground = new Sprite(textureBackground);
+                spriteBackground.setSize(getWidth(), getHeight());
+                getStyle().background = new SpriteDrawable(spriteBackground);
             }
-            TextureAtlas.AtlasRegion textureBackground = this.atlasBackground.findRegion(regionsBackground[animationBackgroundIndex]);
-            Sprite spriteBackground = new Sprite(textureBackground);
-            spriteBackground.setSize(getWidth(), getHeight());
-            getStyle().background = new SpriteDrawable(spriteBackground);
         }
 
         this.animationForegroundTimer += delta;
@@ -54,10 +58,9 @@ public class AnimatedProgressBar extends ProgressBar {
             }
             TextureAtlas.AtlasRegion textureForeground = this.atlasForeground.findRegion(regionsForeground[animationForegroundIndex]);
             Sprite spriteForeground = new Sprite(textureForeground);
-            spriteForeground.setSize(getWidth(), getHeight() / 2);
+            spriteForeground.setSize(getWidth(), getHeight());
             getStyle().knobBefore = new SpriteDrawable(spriteForeground);
         }
-
     }
 
     public void setAnimationBackground(TextureAtlas atlasBackground, String[] regionsBackground, float speedBackground) {
@@ -74,5 +77,13 @@ public class AnimatedProgressBar extends ProgressBar {
 
     public void size(int x, int y) {
         this.setSize(x, y);
+    }
+
+    public void freeze() {
+        freezeAnimation = true;
+        TextureAtlas.AtlasRegion textureBackground = this.atlasBackground.findRegion(regionsBackground[0]);
+        Sprite spriteBackground = new Sprite(textureBackground);
+        spriteBackground.setSize(getWidth(), getHeight());
+        getStyle().background = new SpriteDrawable(spriteBackground);
     }
 }
