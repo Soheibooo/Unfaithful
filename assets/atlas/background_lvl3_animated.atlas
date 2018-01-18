@@ -1,0 +1,307 @@
+
+background_lvl3_animated.png
+size: 2048,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_lvl3_animated
+  rotate: false
+  xy: 2, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 40
+background_lvl3_animated
+  rotate: false
+  xy: 2, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 41
+background_lvl3_animated
+  rotate: false
+  xy: 2, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 42
+background_lvl3_animated
+  rotate: false
+  xy: 2, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 39
+background_lvl3_animated
+  rotate: false
+  xy: 2, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 22
+background_lvl3_animated
+  rotate: false
+  xy: 2, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 21
+background_lvl3_animated
+  rotate: false
+  xy: 2, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 23
+background_lvl3_animated
+  rotate: false
+  xy: 644, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 0
+background_lvl3_animated
+  rotate: false
+  xy: 644, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 2
+background_lvl3_animated
+  rotate: false
+  xy: 644, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 1
+background_lvl3_animated
+  rotate: false
+  xy: 2, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 27
+background_lvl3_animated
+  rotate: false
+  xy: 2, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 28
+background_lvl3_animated
+  rotate: false
+  xy: 2, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 29
+background_lvl3_animated
+  rotate: false
+  xy: 644, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 3
+background_lvl3_animated
+  rotate: false
+  xy: 644, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 5
+background_lvl3_animated
+  rotate: false
+  xy: 644, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 4
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 7
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 6
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 730
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 8
+background_lvl3_animated
+  rotate: false
+  xy: 2, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 9
+background_lvl3_animated
+  rotate: false
+  xy: 2, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 11
+background_lvl3_animated
+  rotate: false
+  xy: 2, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 10
+background_lvl3_animated
+  rotate: false
+  xy: 644, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 35
+background_lvl3_animated
+  rotate: false
+  xy: 644, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 34
+background_lvl3_animated
+  rotate: false
+  xy: 644, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 33
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 32
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 31
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 548
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 30
+background_lvl3_animated
+  rotate: false
+  xy: 2, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 37
+background_lvl3_animated
+  rotate: false
+  xy: 2, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 36
+background_lvl3_animated
+  rotate: false
+  xy: 2, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 38
+background_lvl3_animated
+  rotate: false
+  xy: 644, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 25
+background_lvl3_animated
+  rotate: false
+  xy: 644, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 24
+background_lvl3_animated
+  rotate: false
+  xy: 644, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 26
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 16
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 15
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 366
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 17
+background_lvl3_animated
+  rotate: false
+  xy: 644, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 12
+background_lvl3_animated
+  rotate: false
+  xy: 644, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 14
+background_lvl3_animated
+  rotate: false
+  xy: 644, 2
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 13
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 19
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 18
+background_lvl3_animated
+  rotate: false
+  xy: 1286, 184
+  size: 640, 180
+  orig: 640, 180
+  offset: 0, 0
+  index: 20

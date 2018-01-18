@@ -19,6 +19,7 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -67,13 +68,24 @@ public class GameScreen implements Screen {
 	private TextureAtlas backgroundAtlas;
 	private AnimatedProgressBar hackingBar;
 	private AnimatedProgressBar suspicionBar;
+        
+        private Music music;
 
 	public GameScreen (Unfaithful game, int level) {
 		super ();
 		this.game = game;
 		this.stage = new Stage ();
 		this.level = level;
-		Gdx.input.setInputProcessor(stage);
+                this.music = Assets.getInstance ().manager
+			  .get (Assets.MUSIC_PETITE_MELODIE);
+                
+                music.setLooping(true);
+                music.setVolume(0.8f);
+                music.play();
+                
+		Gdx.input.setInputProcessor (stage);
+
+		stage.act ();
 
 		this.batch = new SpriteBatch ();
                 switch (level) {
@@ -88,7 +100,7 @@ public class GameScreen implements Screen {
                         break;
                     case 3:
                         this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV1);
+			  .get (Assets.ATLAS_BACKGROUND_LV3);
                         break;
                     default:
                         this.backgroundAtlas = Assets.getInstance ().manager
