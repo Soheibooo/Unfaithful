@@ -15,7 +15,6 @@
  */
 package com.bdeb1.unfaithful.screens;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -43,6 +42,7 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
+import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
 import com.bdeb1.unfaithful.util.TextureLayer;
@@ -52,144 +52,156 @@ import com.bdeb1.unfaithful.util.TextureLayer;
  */
 public class GameScreen implements Screen {
 
-    private GameWorld gWorld;
-    private PooledEngine engine;
-    private Unfaithful game;
-    private boolean isPaused;
-    private Stage stage;
-    private int level;
+	private GameWorld    gWorld;
+	private PooledEngine engine;
+	private Unfaithful   game;
+	private boolean      isPaused;
+	private Stage        stage;
+	private int          level;
 
-    private Scene background;
-    private SpriteBatch batch;
-    private TextureAtlas backgroundAtlas;
-//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
-//            .font(new BitmapFont())
-//            .build();
-//    private Toast toast;
+	private Scene        background;
+	private SpriteBatch  batch;
+	private TextureAtlas backgroundAtlas;
+	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
+	//            .font(new BitmapFont())
+	//            .build();
+	//    private Toast toast;
 
-    public GameScreen(Unfaithful game, int level) {
-        super();
-        this.game = game;
-        this.stage = new Stage();
-        this.level = level;
-        Gdx.input.setInputProcessor(stage);
+	public GameScreen (Unfaithful game, int level) {
+		super ();
+		this.game = game;
+		this.stage = new Stage ();
+		this.level = level;
+		Gdx.input.setInputProcessor (stage);
 
-        stage.act();
+		stage.act ();
 
-        this.batch = new SpriteBatch();
-        this.backgroundAtlas =
-                Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_LV1);
+		this.batch = new SpriteBatch ();
+		this.backgroundAtlas = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_BACKGROUND_LV1);
 
-        Animation<TextureRegion> animation =
-                new Animation<>(1f / 2f, backgroundAtlas.getRegions());
-        Dimension visibleDimension = new Dimension(Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight());
-        this.background = new Scene(visibleDimension, animation);
-        background.addLayer (new TextureLayer (
-			  Assets.getInstance ().manager.get (Assets.COMPTOIR)));
+		Animation<TextureRegion> animation = new Animation<> (1f / 2f,
+		                                                      backgroundAtlas
+			                                                        .getRegions ());
+		Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
+		                                            Gdx.graphics.getHeight ());
+		this.background = new Scene (visibleDimension, animation);
 
-        this.engine = new PooledEngine();
-        this.engine.addSystem(new RenderingSystem(game.sb));
-        this.engine.addSystem(new AnimationSystem());
-        this.engine.addSystem(new StateSystem());
-        this.engine.addSystem(new ActionSystem());
-        this.engine.addSystem(new MovementSystem());
-        this.engine.addSystem(new TargetSystem());
-        this.engine.addSystem(new HackerSystem());
-        this.engine.addSystem(new LaptopSystem());
-        this.gWorld = new GameWorld(engine, level);
+		TextureLayer comptoir = new TextureLayer (
+			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
+		comptoir.setDrawingBounds (0, 0, Constants.World.SCENE_DIMENSION.width,
+		                           Constants.World.SCENE_DIMENSION.height);
+		background.addLayer (comptoir);
 
-        isPaused = false;
+		this.engine = new PooledEngine ();
+		this.engine.addSystem (new RenderingSystem (game.sb));
+		this.engine.addSystem (new AnimationSystem ());
+		this.engine.addSystem (new StateSystem ());
+		this.engine.addSystem (new ActionSystem ());
+		this.engine.addSystem (new MovementSystem ());
+		this.engine.addSystem (new TargetSystem ());
+		this.engine.addSystem (new HackerSystem ());
+		this.engine.addSystem (new LaptopSystem ());
+		this.gWorld = new GameWorld (engine, level);
 
-        Gdx.input.setInputProcessor(stage);
-        GUI gui = GUI.getInstance();
+		isPaused = false;
 
-        Texture textureBtnPause = Assets.getInstance().manager.get(Assets.BTN_PAUSE);
-        Texture textureBtnPauseHover = Assets.getInstance().manager.get(Assets.TEXTURE_NAME);
+		Gdx.input.setInputProcessor (stage);
+		GUI gui = GUI.getInstance ();
 
-        int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
-        int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;
-        Button btnPause = gui.addButton(btnX, btnY, textureBtnPause, textureBtnPauseHover);
-        btnPause.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                pauseAction();
-            }
-        });
+		Texture textureBtnPause = Assets.getInstance ().manager
+			  .get (Assets.BTN_PAUSE);
+		Texture textureBtnPauseHover = Assets.getInstance ().manager
+			  .get (Assets.TEXTURE_NAME);
 
-        Pixmap pixmapPBHB = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-        Pixmap pixmapPBHF = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
+		int btnX = Gdx.graphics.getWidth () - textureBtnPause.getWidth () - 5;
+		int btnY = Gdx.graphics.getHeight () - textureBtnPause.getHeight ()
+		           - 5;
+		Button btnPause = gui
+			  .addButton (btnX, btnY, textureBtnPause, textureBtnPauseHover);
+		btnPause.addListener (new ClickListener () {
+			@Override
+			public void clicked (InputEvent event, float x, float y) {
+				pauseAction ();
+			}
+		});
 
-//        Texture textureProgressBarHackBackground = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-//        Texture textureProgressBarHackFill = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
-        Pixmap pbhb = new Pixmap(10, 10, pixmapPBHB.getFormat());
-        pbhb.drawPixmap(pixmapPBHB, 0, 0, pixmapPBHB.getWidth(), pixmapPBHB
-                .getHeight(), 0, 0, pbhb.getWidth(), pbhb.getHeight());
+		Pixmap pixmapPBHB = Assets.getInstance ().manager
+			  .get (Assets.SPRITE_NAME);
+		Pixmap pixmapPBHF = Assets.getInstance ().manager
+			  .get (Assets.SPRITE_NAME);
 
-        Pixmap pbhf = new Pixmap(10, 10, pixmapPBHF.getFormat());
-        pbhf.drawPixmap(pixmapPBHF, 0, 0, pixmapPBHF.getWidth(),
-                pixmapPBHF.getHeight(), 0, 0, pbhf.getWidth(),
-                pbhf.getHeight());
+		//        Texture textureProgressBarHackBackground = Assets
+		// .getInstance().manager.get(Assets.SPRITE_NAME);
+		//        Texture textureProgressBarHackFill = Assets.getInstance()
+		// .manager.get(Assets.SPRITE_NAME);
+		Pixmap pbhb = new Pixmap (10, 10, pixmapPBHB.getFormat ());
+		pbhb.drawPixmap (pixmapPBHB, 0, 0, pixmapPBHB.getWidth (),
+		                 pixmapPBHB.getHeight (), 0, 0, pbhb.getWidth (),
+		                 pbhb.getHeight ());
 
-        Texture textureProgressBarHackBackground = new Texture(pbhb);
-        Texture textureProgressBarHackFill = new Texture(pbhf);
+		Pixmap pbhf = new Pixmap (10, 10, pixmapPBHF.getFormat ());
+		pbhf.drawPixmap (pixmapPBHF, 0, 0, pixmapPBHF.getWidth (),
+		                 pixmapPBHF.getHeight (), 0, 0, pbhf.getWidth (),
+		                 pbhf.getHeight ());
 
-        int progressBarHackX = 5;
-        int progressBarHackY = Gdx.graphics.getHeight() - textureProgressBarHackBackground.getHeight() - 5;
-        ProgressBar progressBarHack = gui.addProgressBar(progressBarHackX, progressBarHackY, textureProgressBarHackBackground, textureProgressBarHackFill);
+		Texture textureProgressBarHackBackground = new Texture (pbhb);
+		Texture textureProgressBarHackFill       = new Texture (pbhf);
 
-        //Texture textureProgressBarSuspiciousBackground = Assets.getInstance()
-        // .manager.get(Assets.ATLAS_BAR_SUSPICION);
-        //Texture textureProgressBarSuspiciousFill = Assets.getInstance()
-        //.manager.get(Assets.);
-        //int progressBarSuspicousX = Gdx.graphics.getWidth() / 2 - textureProgressBarHackBackground.getWidth() / 2;
-        //int progressBarSuspicousY = Gdx.graphics.getHeight() - textureProgressBarSuspiciousBackground.getHeight() - 5;
-        //ProgressBar progressBarSuspicious = gui.addProgressBar(progressBarSuspicousX, progressBarSuspicousY, textureProgressBarSuspiciousBackground, textureProgressBarSuspiciousFill);
-        stage.addActor(btnPause);
-        //stage.addActor(progressBarHack);
-        //stage.addActor(progressBarSuspicious);
+		int progressBarHackX = 5;
+		int progressBarHackY = Gdx.graphics.getHeight () -
+		                       textureProgressBarHackBackground.getHeight () -
+		                       5;
+		ProgressBar progressBarHack = gui
+			  .addProgressBar (progressBarHackX, progressBarHackY,
+			                   textureProgressBarHackBackground,
+			                   textureProgressBarHackFill);
 
-    }
+		//Texture textureProgressBarSuspiciousBackground = Assets.getInstance()
+		// .manager.get(Assets.ATLAS_BAR_SUSPICION);
+		//Texture textureProgressBarSuspiciousFill = Assets.getInstance()
+		//.manager.get(Assets.);
+		//int progressBarSuspicousX = Gdx.graphics.getWidth() / 2 -
+		// textureProgressBarHackBackground.getWidth() / 2;
+		//int progressBarSuspicousY = Gdx.graphics.getHeight() -
+		// textureProgressBarSuspiciousBackground.getHeight() - 5;
+		//ProgressBar progressBarSuspicious = gui.addProgressBar
+		// (progressBarSuspicousX, progressBarSuspicousY,
+		// textureProgressBarSuspiciousBackground,
+		// textureProgressBarSuspiciousFill);
+		stage.addActor (btnPause);
+		//stage.addActor(progressBarHack);
+		//stage.addActor(progressBarSuspicious);
 
-    @Override
-    public void show() {
-    }
-
-    @Override
-    public void render(float delta) {
-        update(delta);
-        draw(delta);
-//        toast.render(Gdx.graphics.getDeltaTime());
-        engine.update(delta);
-    }
-
-    private void update(float delta) {
-        background.update(delta);
-
-        updateInput();
-
-        if (gWorld.isHacked()) {
-            game.setScreen(new SplashScreen(game, level+1));
-        }
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
-    public void dispose() {
-        background.dispose();
-        backgroundAtlas.dispose();
-        batch.dispose();
-        engine.clearPools();
-    }
+	}
 
 	private void pauseAction () {
 		if (isPaused) {
 			resume ();
 		} else {
 			pause ();
+		}
+	}
+
+	@Override
+	public void show () {
+	}
+
+	@Override
+	public void render (float delta) {
+		update (delta);
+		draw (delta);
+		//        toast.render(Gdx.graphics.getDeltaTime());
+		engine.update (delta);
+	}
+
+	private void update (float delta) {
+		background.update (delta);
+
+		updateInput ();
+
+		if (gWorld.isHacked ()) {
+			game.setScreen (new SplashScreen (game, level + 1));
 		}
 	}
 
@@ -213,11 +225,11 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
 		game.sb.setProjectionMatrix (background.camera.combined);
 		//        toast = toastFactory.create("All started when i saw my
-        // girlfriend flirting with some guy at the gym. \n"
+		// girlfriend flirting with some guy at the gym. \n"
 		//                + "I got mad and as an apprentice hacker I decided
-        // to test my skill on her and finally \n"
+		// to test my skill on her and finally \n"
 		//                + "get my revenge. I then decided to start with her
-        // facebook account.", Toast.Length.LONG);
+		// facebook account.", Toast.Length.LONG);
 
 		game.sb.begin ();
 		background.draw (game.sb);
@@ -255,3 +267,16 @@ public class GameScreen implements Screen {
 		engine.getSystem (TargetSystem.class).setProcessing (true);
 		isPaused = false;
 	}
+
+	@Override
+	public void hide () {
+	}
+
+	@Override
+	public void dispose () {
+		background.dispose ();
+		backgroundAtlas.dispose ();
+		batch.dispose ();
+		engine.clearPools ();
+	}
+}

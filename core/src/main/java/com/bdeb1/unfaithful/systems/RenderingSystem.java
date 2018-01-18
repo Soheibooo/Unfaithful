@@ -27,6 +27,7 @@ import com.bdeb1.unfaithful.components.MenuComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
+import com.bdeb1.unfaithful.util.Constants;
 
 /**
  * @author Soheib El-Harrache
@@ -37,11 +38,11 @@ public class RenderingSystem extends IteratingSystem {
 	static final        float PPM              = 16.0f;
 	public static final float PIXELS_TO_METRES = 1.0f / PPM;
 	static final        float FRUSTUM_WIDTH    = Gdx.graphics.getWidth () /
-                                                 PPM;
-		  //37.5f;
+	                                             PPM;
+	//37.5f;
 	static final        float FRUSTUM_HEIGHT   = Gdx.graphics.getHeight () /
 	                                             PPM;//.0f;
-	private SpriteBatch batch;
+	private SpriteBatch        batch;
 	private OrthographicCamera cam;
 
 	private ComponentMapper<TextureComponent>   textureM;
@@ -85,8 +86,9 @@ public class RenderingSystem extends IteratingSystem {
 
 			if (entity.getComponent (HackerComponent.class) != null) {
 				System.out.println (width + ", " + height + ", " + t.position);
-				batch.draw (tex.region, t.position.x, t.position.y, width,
-				            height);
+				batch.draw (tex.region, t.position.x, t.position.y,
+				            width * Constants.World.SCALE,
+				            height * Constants.World.SCALE);
 			} else {
 
 				batch.draw (tex.region, t.position.x - originX,
@@ -96,10 +98,10 @@ public class RenderingSystem extends IteratingSystem {
 			}
 
 			batch.end ();
-
 		} else if (entity.getComponent (TargetComponent.class) == null) {
 			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
-		} if (entity.getComponent (MenuComponent.class) != null) {
+		}
+		if (entity.getComponent (MenuComponent.class) != null) {
 			System.out.println ("Ton menu boi");
 		}
 	}
