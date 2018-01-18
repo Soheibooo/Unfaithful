@@ -27,11 +27,13 @@ public class TargetComponent implements Component {
     public static final int STATE_FRENZY = 3;
     public static final int STATE_DONE = 4;
     
-    public static final int ACTION_TALKING = 10;
-    public static final int ACTION_WALKING_LEFT = 11;
-    public static final int ACTION_WALKING_RIGHT = 12;
-    public static final int ACTION_LEFT_SCREEN = 13;
-    public static final int ACTION_RIGHT_SCREEN = 14;
+    
+    public static final int ACTION_IS_REACHING_AREA = 10;
+    public static final int ACTION_IS_GETTING_OUT = 11;
+    public static final int ACTION_LEFT_SCREEN = 12;
+    public static final int ACTION_RIGHT_SCREEN = 13;
+    public static final int ACTION_WATCHING = 14;
+
     
     public static final int TRIGGER_POINT_SUSPICIOUS = 30;
     public static final int TRIGGER_POINT_FRENZY = 70;

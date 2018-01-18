@@ -65,15 +65,15 @@ public class GameWorld {
     private Entity laptopScreen(Entity hacker) {
         Entity entity = engine.createEntity();
         
+        
         TransformComponent positionC
                 = engine.createComponent(TransformComponent.class);
         AnimationComponent animC
                 = engine.createComponent(AnimationComponent.class);
-				TextureComponent textureC
+	TextureComponent textureC
                 = engine.createComponent(TextureComponent.class);
         ActionComponent actionC
                 = engine.createComponent(ActionComponent.class);
-
         StateComponent stateC
                 = engine.createComponent(StateComponent.class);
         LaptopComponent laptopC
@@ -86,8 +86,8 @@ public class GameWorld {
         TextureAtlas atTextureLaptopHack = Assets.getInstance().manager.get(Assets.ATLAS_HACKING_LAPSCREEN);
         TextureAtlas atTextureLaptop = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING_LAPSCREEN);
         
-        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(1/12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(1/12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(1/12f, atTextureLaptopHack.getRegions());
+        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(1/12f, atTextureLaptop.getRegions());
         
         HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
         anime.put(1, laptopHack);
@@ -98,8 +98,9 @@ public class GameWorld {
         TransformComponent positionRel = hacker.getComponent(TransformComponent.class);
         
         
-        positionC.position.set(positionRel.position.x + 5, positionRel.position.y + 5, 0);
-        
+        positionC.position.set(5, 5, 0);
+        //positionC.position.add(5, 5, 0);
+        entity.add(stateC);
         entity.add(textureC);
         entity.add(animC);
         entity.add(positionC);
@@ -173,7 +174,8 @@ public class GameWorld {
                 = engine.createComponent(TargetComponent.class);
         ActionComponent actionC
                 = engine.createComponent(ActionComponent.class);
-
+        MovementComponent movementC
+                = engine.createComponent(MovementComponent.class);
 //        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
@@ -190,7 +192,7 @@ public class GameWorld {
         entity.add(targetC);
         entity.add(positionC);
         entity.add(stateC);
-
+        entity.add(movementC);
         
 
         engine.addEntity(entity);

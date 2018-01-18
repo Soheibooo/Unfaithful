@@ -22,6 +22,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bdeb1.unfaithful.components.LaptopComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
@@ -47,7 +48,8 @@ public class RenderingSystem extends IteratingSystem {
     public RenderingSystem(SpriteBatch batch) {
         super(Family.all(
                 TransformComponent.class,
-                TextureComponent.class
+                TextureComponent.class,
+                LaptopComponent.class
         ).get());
         this.batch = batch;
 
@@ -72,7 +74,9 @@ public class RenderingSystem extends IteratingSystem {
         TextureComponent tex = textureM.get(entity);
         TransformComponent t = transformM.get(entity);
         
-        if (!(tex.region == null || t.isHidden)) {
+        if (entity.getComponent(TargetComponent.class) != null) {
+            
+        } else if (!(tex.region == null || t.isHidden)) {
             float width = tex.region.getRegionWidth();
             float height = tex.region.getRegionHeight();
 
@@ -93,7 +97,7 @@ public class RenderingSystem extends IteratingSystem {
             batch.end();
             
         } else if (entity.getComponent(TargetComponent.class) == null) {
-            System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
+            System.out.println("NOT RENDERING THIS (NOT TARGET THO)" + entity.getComponent(LaptopComponent.class));
         }
     }
 

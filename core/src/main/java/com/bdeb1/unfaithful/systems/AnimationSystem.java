@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.IntMap;
 import com.badlogic.gdx.utils.IntMap.Entries;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
+import com.bdeb1.unfaithful.components.LaptopComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 
@@ -43,7 +44,8 @@ public class AnimationSystem extends IteratingSystem {
         super(Family.all(
                 TextureComponent.class,
                 AnimationComponent.class,
-                StateComponent.class
+                StateComponent.class,
+                LaptopComponent.class
         ).get());
 
         textureM = ComponentMapper.getFor(TextureComponent.class);

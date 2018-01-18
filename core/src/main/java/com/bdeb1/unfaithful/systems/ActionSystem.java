@@ -38,6 +38,6 @@ public class ActionSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        actionC.get(entity).time += deltaTime;
+        actionC.get(entity).time += deltaTime; 
     }
 }
