@@ -70,6 +70,7 @@ public class GameScreen implements Screen {
 	private AnimatedProgressBar suspicionBar;
         
         private Music music;
+        private Music typing;
 
 	public GameScreen (Unfaithful game, int level) {
 		super ();
@@ -78,10 +79,16 @@ public class GameScreen implements Screen {
 		this.level = level;
                 this.music = Assets.getInstance ().manager
 			  .get (Assets.MUSIC_PETITE_MELODIE);
+                this.typing = Assets.getInstance ().manager
+			  .get (Assets.MUSIC_TYPING);
                 
                 music.setLooping(true);
                 music.setVolume(0.8f);
                 music.play();
+                
+                typing.setLooping(true);
+                typing.setVolume(0.8f);
+                typing.play();
                 
 		Gdx.input.setInputProcessor (stage);
 
@@ -275,6 +282,7 @@ public class GameScreen implements Screen {
 			pauseAction ();
 		}
 		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
+                        typing.play();
 			engine.getSystem (HackerSystem.class).setIsHacking (true);
 			engine.getSystem (LaptopSystem.class).setIsHacking (true);
 		} else if (Gdx.input.isKeyPressed (Keys.LEFT)) {
@@ -285,6 +293,7 @@ public class GameScreen implements Screen {
 			engine.getSystem (HackerSystem.class).setIsHacking (false);
 			engine.getSystem (LaptopSystem.class).setIsHacking (false);
 		} else {
+                        typing.pause();
 			engine.getSystem (HackerSystem.class).setIsHacking (false);
 			engine.getSystem (LaptopSystem.class).setIsHacking (false);
 		}

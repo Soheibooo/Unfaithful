@@ -228,6 +228,9 @@ public class Assets {
     
     public static final AssetDescriptor<Music> MUSIC_PETITE_MELODIE
             = new AssetDescriptor<Music>("music/petite_melody.mp3", Music.class);
+    
+    public static final AssetDescriptor<Music> MUSIC_TYPING
+            = new AssetDescriptor<Music>("music/typing.mp3", Music.class);
 
     //------------------------TEXTS
     public static final ArrayList<String> HACKING_PROGRESS_LV1
@@ -291,6 +294,7 @@ public class Assets {
         //Musics
         manager.load(MUSIC_NAME);
         manager.load(MUSIC_PETITE_MELODIE);
+        manager.load(MUSIC_TYPING);
 
         //Texts
         HACKING_PROGRESS_LV1.add("Found IP address of a suspicious account");
