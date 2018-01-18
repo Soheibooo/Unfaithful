@@ -23,6 +23,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.LaptopComponent;
 import com.bdeb1.unfaithful.components.MenuComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
@@ -84,12 +85,19 @@ public class RenderingSystem extends IteratingSystem {
 
 			batch.begin ();
 
+
 			if (entity.getComponent (HackerComponent.class) != null) {
 				batch.draw (tex.region, t.position.x, t.position.y,
 				            width * Constants.World.SCALE,
 				            height * Constants.World.SCALE);
-			} else {
+			} else if (entity.getComponent (LaptopComponent.class) != null) {
+				batch.draw (tex.region, t.position.x, t.position.y,
+				            width * Constants.World.SCALE,
+				            height * Constants.World.SCALE);
 
+				System.out.println (width + ", " + height + " - " + t
+					  .position);
+			} else {
 				batch.draw (tex.region, t.position.x - originX,
 				            t.position.y - originY, originX, originY, width,
 				            height, PixelsToMeters (t.scale.x),
@@ -98,10 +106,11 @@ public class RenderingSystem extends IteratingSystem {
 
 			batch.end ();
 		} else if (entity.getComponent (TargetComponent.class) == null) {
-//			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
+			//			System.out.println ("NOT RENDERING THIS (NOT TARGET
+			// THO)");
 		}
 		if (entity.getComponent (MenuComponent.class) != null) {
-//			System.out.println ("Ton menu boi");
+			//			System.out.println ("Ton menu boi");
 		}
 	}
 

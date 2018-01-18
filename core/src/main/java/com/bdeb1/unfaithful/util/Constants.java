@@ -23,12 +23,14 @@ public final class Constants {
 		public static final float     CAMERA_PAN_EASE         = 0.05f;
 		public static final Vector3   HACKER_INITIAL_POSITION = new Vector3 (
 			  SCENE_ANCHOR.x - SCENE_ORIGIN.x, 0f, 0f);
+		public static final Vector3   D_HACKER_SCREEN         = new Vector3 (
+			  82, 55, 0);
 		public static final Rectangle TOUCHABLE_LEFT          = new Rectangle (
 			  0, 0, VIEW_DIMENSION.width / 5, VIEW_DIMENSION.height);
-		public static final Rectangle TOUCHABLE_RIGHT = new Rectangle
-			  (TOUCHABLE_LEFT.width * 4, 0, TOUCHABLE_LEFT.width,
-			   TOUCHABLE_LEFT.height);
+		public static final Rectangle TOUCHABLE_RIGHT         = new Rectangle (
+			  TOUCHABLE_LEFT.width * 4, 0, TOUCHABLE_LEFT.width,
+			  TOUCHABLE_LEFT.height);
 
-		public static       boolean   PAUSE                   = false;
+		public static boolean PAUSE = false;
 	}
 }
