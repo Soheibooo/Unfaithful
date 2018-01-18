@@ -1,0 +1,97 @@
+
+militaire_normal.png
+size: 64,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ennemi_militaire_normal0000
+  rotate: false
+  xy: 2, 68
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0001
+  rotate: false
+  xy: 2, 68
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0002
+  rotate: false
+  xy: 2, 2
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0004
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0003
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0005
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0006
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0007
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0008
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0009
+  rotate: false
+  xy: 2, 200
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0010
+  rotate: false
+  xy: 2, 134
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0011
+  rotate: false
+  xy: 2, 134
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1
+ennemi_militaire_normal0012
+  rotate: false
+  xy: 2, 134
+  size: 34, 64
+  orig: 34, 64
+  offset: 0, 0
+  index: -1

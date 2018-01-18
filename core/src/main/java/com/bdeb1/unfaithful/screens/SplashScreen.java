@@ -45,6 +45,12 @@ public class SplashScreen implements Screen {
                 splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
                 break;
             case 2:
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_1));
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_2));
+                break;
+            case 3:
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_1));
+                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
                 break;
             default:
                 break;
@@ -100,7 +106,7 @@ public class SplashScreen implements Screen {
 
     private void updateInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)
-                || Gdx.input.isTouched()) {
+                || Gdx.input.justTouched()) {
             nextStep();
         }
     }

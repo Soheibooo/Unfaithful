@@ -39,235 +39,313 @@ import java.util.HashMap;
  */
 public class GameWorld {
 
-	private PooledEngine engine;
-	private Entity       hacker, laptop, comptoir, target;
-	private int level;
+    private PooledEngine engine;
+    private Entity hacker, laptop, comptoir, target;
+    private int level;
 
-	public GameWorld (PooledEngine engine, int level) {
-		this.engine = engine;
-		this.level = level;
-		generateLevel ();
-	}
+    public GameWorld(PooledEngine engine, int level) {
+        this.engine = engine;
+        this.level = level;
+        generateLevel();
+    }
 
-	public void generateLevel () {
-		engine.clearPools ();
-		engine.removeAllEntities ();
+    public void generateLevel() {
+        engine.clearPools();
+        engine.removeAllEntities();
 
-		target = createTarget ();
-		comptoir = createDumbYouRE ();
-		laptop = createLaptopScreen ();
-		hacker = createHacker ();
-	}
+        target = createTarget();
+        comptoir = createDumbYouRE();
+        laptop = createLaptopScreen();
+        hacker = createHacker();
+    }
 
-	private Entity createLaptopScreen () {
-		Entity entity = engine.createEntity ();
+    private Entity createLaptopScreen() {
+        Entity entity = engine.createEntity();
 
-		TransformComponent positionC = engine
-			  .createComponent (TransformComponent.class);
-		AnimationComponent animC = engine
-			  .createComponent (AnimationComponent.class);
-		TextureComponent textureC = engine
-			  .createComponent (TextureComponent.class);
-		ActionComponent actionC = engine
-			  .createComponent (ActionComponent.class);
+        TransformComponent positionC = engine
+                .createComponent(TransformComponent.class);
+        AnimationComponent animC = engine
+                .createComponent(AnimationComponent.class);
+        TextureComponent textureC = engine
+                .createComponent(TextureComponent.class);
+        ActionComponent actionC = engine
+                .createComponent(ActionComponent.class);
 
-		StateComponent stateC = engine.createComponent (StateComponent.class);
-		LaptopComponent laptopC = engine
-			  .createComponent (LaptopComponent.class);
+        StateComponent stateC = engine.createComponent(StateComponent.class);
+        LaptopComponent laptopC = engine
+                .createComponent(LaptopComponent.class);
 
-		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION.x +
-		                        Constants.World.D_HACKER_SCREEN.x *
-		                        Constants.World.SCALE,
-		                        Constants.World.HACKER_INITIAL_POSITION.y +
-		                        Constants.World.D_HACKER_SCREEN.y *
-		                        Constants.World.SCALE, 0);
+        positionC.position.set(Constants.World.HACKER_INITIAL_POSITION.x
+                + Constants.World.D_HACKER_SCREEN.x
+                * Constants.World.SCALE,
+                Constants.World.HACKER_INITIAL_POSITION.y
+                + Constants.World.D_HACKER_SCREEN.y
+                * Constants.World.SCALE, 0);
 
-		stateC.set (0);
-		actionC.set (LaptopComponent.ACTION_NOT_HACKING);
+        stateC.set(0);
+        actionC.set(LaptopComponent.ACTION_NOT_HACKING);
 
-		TextureAtlas atTextureLaptopHack = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_HACKING_LAPSCREEN);
-		TextureAtlas atTextureLaptop = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_NOTHACKING_LAPSCREEN);
+        TextureAtlas atTextureLaptopHack;
+        TextureAtlas atTextureLaptop;
 
-		Animation<TextureRegion> laptopHack = new Animation<TextureRegion> (
-			  1 / 12f, atTextureLaptopHack.getRegions (), PlayMode.LOOP);
-		Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion> (
-			  1 / 12f, atTextureLaptop.getRegions (), PlayMode.LOOP);
+        atTextureLaptopHack = Assets.getInstance().manager
+                .get(Assets.ATLAS_HACKING_LAPSCREEN_LV1);
+        atTextureLaptop = Assets.getInstance().manager
+                .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV1);
 
-		HashMap<Integer, Animation> anime = new HashMap<Integer, Animation> ();
-		anime.put (1, laptopHack);
-		anime.put (2, laptopNotHack);
+        switch (level) {
+            case 1:
+                atTextureLaptopHack = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING_LAPSCREEN_LV1);
+                atTextureLaptop = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV1);
+                break;
+            case 2:
+                atTextureLaptopHack = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING_LAPSCREEN_LV2);
+                atTextureLaptop = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV2);
+                break;
+            case 3:
+                atTextureLaptopHack = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING_LAPSCREEN_LV3);
+                atTextureLaptop = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV3);
+                break;
+            default:
+                break;
+        }
 
-		animC.animations.put (0, anime);
+        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(
+                1 / 12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(
+                1 / 12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
 
-		entity.add (textureC);
-		entity.add (animC);
-		entity.add (positionC);
-		entity.add (actionC);
-		entity.add (laptopC);
-		entity.add (stateC);
+        HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
+        anime.put(1, laptopHack);
+        anime.put(2, laptopNotHack);
 
-		engine.addEntity (entity);
-		return entity;
-	}
+        animC.animations.put(0, anime);
 
-	private Entity createDumbYouRE () {
-		Entity entity = engine.createEntity ();
+        entity.add(textureC);
+        entity.add(animC);
+        entity.add(positionC);
+        entity.add(actionC);
+        entity.add(laptopC);
+        entity.add(stateC);
 
-		TransformComponent positionC = engine
-			  .createComponent (TransformComponent.class);
-		TextureComponent textureC = engine
-			  .createComponent (TextureComponent.class);
-		ComptoirComponent compC = engine
-			  .createComponent (ComptoirComponent.class);
+        engine.addEntity(entity);
+        return entity;
+    }
 
-		textureC.region = new TextureRegion (
-			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
+    private Entity createDumbYouRE() {
+        Entity entity = engine.createEntity();
 
+        TransformComponent positionC = engine
+                .createComponent(TransformComponent.class);
+        TextureComponent textureC = engine
+                .createComponent(TextureComponent.class);
+        ComptoirComponent compC = engine
+                .createComponent(ComptoirComponent.class);
 
-		positionC.position.set (0, 0, 0);
+        switch (level) {
+            case 1:
+                textureC.region = new TextureRegion(
+                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV1));
+                break;
+            case 2:
+                textureC.region = new TextureRegion(
+                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV2));
+                break;
+            case 3:
+                textureC.region = new TextureRegion(
+                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV3));
+                break;
+            default:
+                textureC.region = new TextureRegion(
+                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV1));
+                break;
+        }
 
-		entity.add (positionC);
-		entity.add (textureC);
-		entity.add (compC);
+        positionC.position.set(0, 0, 0);
 
-		engine.addEntity (entity);
-		return entity;
-	}
+        entity.add(positionC);
+        entity.add(textureC);
+        entity.add(compC);
 
-	private Entity createTarget () {
-		Entity entity = engine.createEntity ();
+        engine.addEntity(entity);
+        return entity;
+    }
 
-		AnimationComponent animC = engine
-			  .createComponent (AnimationComponent.class);
-		TransformComponent positionC = engine
-			  .createComponent (TransformComponent.class);
-		StateComponent stateC = engine.createComponent (StateComponent.class);
-		TextureComponent textureC = engine
-			  .createComponent (TextureComponent.class);
-		TargetComponent targetC = engine
-			  .createComponent (TargetComponent.class);
-		ActionComponent actionC = engine
-			  .createComponent (ActionComponent.class);
-                MovementComponent movementC
-                        = engine.createComponent (MovementComponent.class);
-                
-		positionC.position.set (3200, 130, 0.0f);
-                
-                movementC.speed = -5;
-		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
-		targetC.difficultyAddition = - level * 5;
+    private Entity createTarget() {
+        Entity entity = engine.createEntity();
 
-		TextureAtlas atTextureMarche = Assets.getInstance ().manager
-			  .get (Assets.WOMAN_WALKING);
-		TextureAtlas atTextureMarcheSus = Assets.getInstance ().manager
-			  .get (Assets.WOMAN_WALKING_SUSPICIOUSLY);
-		TextureAtlas atTextureRotate = Assets.getInstance ().manager
-			  .get (Assets.WOMAN_ROTATING);
-		TextureAtlas atTextureRotateSus = Assets.getInstance ().manager
-			  .get (Assets.WOMAN_ROTATING_SUSPICIOUSLY);
+        AnimationComponent animC = engine
+                .createComponent(AnimationComponent.class);
+        TransformComponent positionC = engine
+                .createComponent(TransformComponent.class);
+        StateComponent stateC = engine.createComponent(StateComponent.class);
+        TextureComponent textureC = engine
+                .createComponent(TextureComponent.class);
+        TargetComponent targetC = engine
+                .createComponent(TargetComponent.class);
+        ActionComponent actionC = engine
+                .createComponent(ActionComponent.class);
+        positionC.position.set(5.0f, 1.0f, 0.0f);
+        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
+        targetC.difficultyAddition = -level * 5;
 
-		Animation<TextureRegion> womanWalk = new Animation<TextureRegion> (
-			  1 / 12f, atTextureMarche.getRegions (), PlayMode.LOOP);
-		Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion> (
-			  1 / 12f, atTextureMarcheSus.getRegions (), PlayMode.LOOP);
-		Animation<TextureRegion> womanRotate = new Animation<TextureRegion> (
-			  1 / 12f, atTextureRotate.getRegions (), PlayMode.LOOP);
-		Animation<TextureRegion> womanRotateSus = new
-			  Animation<TextureRegion> (
-			  1 / 12f, atTextureRotateSus.getRegions (), PlayMode.LOOP);
+        TextureAtlas atTextureMarche = Assets.getInstance().manager
+                .get(Assets.WOMAN_WALKING);
+        TextureAtlas atTextureMarcheSus = Assets.getInstance().manager
+                .get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
+        TextureAtlas atTextureRotate = Assets.getInstance().manager
+                .get(Assets.WOMAN_ROTATING);
+        TextureAtlas atTextureRotateSus = Assets.getInstance().manager
+                .get(Assets.WOMAN_ROTATING_SUSPICIOUSLY);
 
-		HashMap<Integer, Animation> animeActionWalk   = new HashMap<> ();
-		HashMap<Integer, Animation> animeActionRotate = new HashMap<> ();
+        switch (level) {
+            case 1:
+                atTextureMarche = Assets.getInstance().manager
+                        .get(Assets.WOMAN_WALKING);
+                atTextureMarcheSus = Assets.getInstance().manager
+                        .get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
+                atTextureRotate = Assets.getInstance().manager
+                        .get(Assets.WOMAN_ROTATING);
+                atTextureRotateSus = Assets.getInstance().manager
+                        .get(Assets.WOMAN_ROTATING_SUSPICIOUSLY);
+                break;
+            case 2:
+                atTextureMarche = Assets.getInstance().manager
+                        .get(Assets.WOMAN_WALKING);
+                atTextureMarcheSus = Assets.getInstance().manager
+                        .get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
+                break;
+            case 3:
 
+                break;
+            default:
+                break;
+        }
 
-		animeActionWalk.put (TargetComponent.ACTION_WALK_LEFT, womanWalk);
-		animeActionWalk.put (TargetComponent.ACTION_WALK_RIGHT, womanWalk);
-		animeActionWalk.put (1, womanWalkSus);
-		animeActionWalk.put (1, womanWalkSus);
+        Animation<TextureRegion> womanWalk = new Animation<TextureRegion>(
+                1 / 12f, atTextureMarche.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion>(
+                1 / 12f, atTextureMarcheSus.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotate = new Animation<TextureRegion>(
+                1 / 12f, atTextureRotate.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotateSus = new Animation<TextureRegion>(
+                1 / 12f, atTextureRotateSus.getRegions(), PlayMode.LOOP);
 
-		animeActionRotate.put (0, womanRotate);
-		animeActionRotate.put (1, womanRotateSus);
+        HashMap<Integer, Animation> animeActionWalk = new HashMap<>();
+        HashMap<Integer, Animation> animeActionRotate = new HashMap<>();
 
-		animC.animations.put (1, animeActionWalk);
+        animeActionWalk.put(TargetComponent.ACTION_WALK_LEFT, womanWalk);
+        animeActionWalk.put(TargetComponent.ACTION_WALK_RIGHT, womanWalk);
+        animeActionWalk.put(1, womanWalkSus);
+        animeActionWalk.put(1, womanWalkSus);
 
-		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
-		actionC.set (TargetComponent.ACTION_WALK_LEFT);
+        animeActionRotate.put(0, womanRotate);
+        animeActionRotate.put(1, womanRotateSus);
 
-		entity.add (textureC);
-		entity.add (animC);
-		entity.add (targetC);
-		entity.add (positionC);
-		entity.add (stateC);
-		entity.add (actionC);
-                entity.add(movementC);
+        animC.animations.put(1, animeActionWalk);
 
-		engine.addEntity (entity);
+        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
+        actionC.set(TargetComponent.ACTION_WALK_RIGHT);
 
-		return entity;
-	}
+        entity.add(textureC);
+        entity.add(animC);
+        entity.add(targetC);
+        entity.add(positionC);
+        entity.add(stateC);
+        entity.add(actionC);
 
-	private Entity createHacker () {
-		Entity entity = engine.createEntity ();
+        engine.addEntity(entity);
 
-		AnimationComponent animC = engine
-			  .createComponent (AnimationComponent.class);
-		TransformComponent positionC = engine
-			  .createComponent (TransformComponent.class);
-		StateComponent stateC = engine.createComponent (StateComponent.class);
-		TextureComponent textureC = engine
-			  .createComponent (TextureComponent.class);
-		HackerComponent hackerC = engine
-			  .createComponent (HackerComponent.class);
-		ActionComponent actionC = engine
-			  .createComponent (ActionComponent.class);
+        return entity;
+    }
 
-		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION);
+    private Entity createHacker() {
+        Entity entity = engine.createEntity();
 
-		//PAS DE STATE POUR LE HACKER
-		stateC.set (0);
-		actionC.set (HackerComponent.ACTION_NOT_HACKING);
+        AnimationComponent animC = engine
+                .createComponent(AnimationComponent.class);
+        TransformComponent positionC = engine
+                .createComponent(TransformComponent.class);
+        StateComponent stateC = engine.createComponent(StateComponent.class);
+        TextureComponent textureC = engine
+                .createComponent(TextureComponent.class);
+        HackerComponent hackerC = engine
+                .createComponent(HackerComponent.class);
+        ActionComponent actionC = engine
+                .createComponent(ActionComponent.class);
 
-		TextureAtlas texAtHacking = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_HACKING);
-		TextureAtlas texAtNOTHacking = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_NOTHACKING);
+        positionC.position.set(Constants.World.HACKER_INITIAL_POSITION);
 
-		HashMap<Integer, Animation> animeList
-			  = new HashMap<Integer, Animation> ();
+        //PAS DE STATE POUR LE HACKER
+        stateC.set(0);
+        actionC.set(HackerComponent.ACTION_NOT_HACKING);
 
+        TextureAtlas texAtHacking = Assets.getInstance().manager
+                .get(Assets.ATLAS_HACKING);
+        TextureAtlas texAtNOTHacking = Assets.getInstance().manager
+                .get(Assets.ATLAS_NOTHACKING);
 
-		Animation<TextureRegion> animeHacking = new Animation<TextureRegion> (
-			  1 / 12f, texAtHacking.getRegions (), PlayMode.LOOP);
-		Animation<TextureRegion> animeNotHacking
-			  = new Animation<TextureRegion> (1 / 12f,
-			                                  texAtNOTHacking.getRegions (),
-			                                  PlayMode.LOOP);
+        switch (level) {
+            case 1:
+                texAtHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING);
+                texAtNOTHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING);
+                break;
+            case 2:
+                texAtHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING);
+                texAtNOTHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING);
+                break;
+            case 3:
+                texAtHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING);
+                texAtNOTHacking = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING);
+                break;
+            default:
+                break;
+        }
 
+        HashMap<Integer, Animation> animeList
+                = new HashMap<Integer, Animation>();
 
-		animeList.put (1, animeHacking);
-		animeList.put (2, animeNotHacking);
+        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(
+                1 / 12f, texAtHacking.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> animeNotHacking
+                = new Animation<TextureRegion>(1 / 12f,
+                        texAtNOTHacking.getRegions(),
+                        PlayMode.LOOP);
 
-		//DEFAULT
-		animC.animations.put (0, animeList);
+        animeList.put(1, animeHacking);
+        animeList.put(2, animeNotHacking);
 
-		entity.add (textureC);
-		entity.add (animC);
+        //DEFAULT
+        animC.animations.put(0, animeList);
 
-		entity.add (hackerC);
-		entity.add (positionC);
-		entity.add (stateC);
-		entity.add (actionC);
+        entity.add(textureC);
+        entity.add(animC);
 
-		engine.addEntity (entity);
+        entity.add(hackerC);
+        entity.add(positionC);
+        entity.add(stateC);
+        entity.add(actionC);
 
-		return entity;
-	}
+        engine.addEntity(entity);
 
-	public boolean isHacked () {
-		HackerComponent hackerC = hacker.getComponent (HackerComponent.class);
-		return hackerC.hacking_gauge >=
-		       (50 + level * level * 10); //1=60; 2=90; 3=140;
-	}
+        return entity;
+    }
+
+    public boolean isHacked() {
+        HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
+        return hackerC.hacking_gauge
+                >= (50 + level * level * 10); //1=60; 2=90; 3=140;
+    }
 }

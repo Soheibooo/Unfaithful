@@ -50,6 +50,14 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HOMESCREEN
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/homescreen.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_TUTO
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/tuto.atlas", TextureAtlas.class);
+
     public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
@@ -61,6 +69,14 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV1
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/background_animated_lvl2.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/background_lvl3_animated.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICIOUS_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -83,13 +99,29 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_rotation_soupcon.atlas",TextureAtlas.class);
         
         
-        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN_LV1
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_bureau_lvl1.atlas", TextureAtlas.class);
         
-        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN
+        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN_LV1
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/ecran_pas_hacking_lvl1.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/ecran_fbi_hacking_fail.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/ecran_fbi_pas_hacking.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/nasa_Hacking_fail.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/ecran_fbi_pas_hacking.atlas", TextureAtlas.class);
 
 
     //------------------------SPRITES
@@ -126,7 +158,7 @@ public class Assets {
             = new AssetDescriptor<Texture>("image/background.png", Texture.class);
 
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_2
-            = new AssetDescriptor<Texture>("image/background.png", Texture.class);
+            = new AssetDescriptor<Texture>("image/background_lvl2.png", Texture.class);
 
     public static final AssetDescriptor<Texture> IMAGE_BACKGROUND_3
             = new AssetDescriptor<Texture>("image/background.png", Texture.class);
@@ -136,8 +168,21 @@ public class Assets {
     
     public static final AssetDescriptor<Texture> SPLASH_LV1_2
             = new AssetDescriptor<Texture>("image/splash_debut_2.png", Texture.class);
-   public static final AssetDescriptor<Texture> COMPTOIR = new
+    
+    public static final AssetDescriptor<Texture> SPLASH_LV2_1
+            = new AssetDescriptor<Texture>("image/splash_win_lvl1_1.png", Texture.class);
+    
+    public static final AssetDescriptor<Texture> SPLASH_LV2_2
+            = new AssetDescriptor<Texture>("image/splash_win_lvl1_2.png", Texture.class);
+    
+   public static final AssetDescriptor<Texture> FOREGROUND_LV1 = new
 	      AssetDescriptor<Texture> ("image/comptoir.png", Texture.class);
+   
+   public static final AssetDescriptor<Texture> FOREGROUND_LV2 = new
+	      AssetDescriptor<Texture> ("image/foreground_lvl2.png", Texture.class);
+   
+   public static final AssetDescriptor<Texture> FOREGROUND_LV3 = new
+	      AssetDescriptor<Texture> ("image/background_lvl3_foreground.png", Texture.class);
 
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
@@ -146,6 +191,9 @@ public class Assets {
     //------------------------MUSICS
     public static final AssetDescriptor<Music> MUSIC_NAME
             = new AssetDescriptor<Music>("music/exemple_music.ogg", Music.class);
+    
+    public static final AssetDescriptor<Music> MUSIC_PETITE_MELODIE
+            = new AssetDescriptor<Music>("music/petite_melody.mp3", Music.class);
 
     //------------------------TEXTS
     public static final ArrayList<String> HACKING_PROGRESS_LV1
@@ -157,8 +205,12 @@ public class Assets {
     public void load() {
         //Atlas
         manager.load(ATLAS_NOTHACKING);
+        manager.load(ATLAS_TUTO);
+        manager.load(ATLAS_HOMESCREEN);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);
+        manager.load(ATLAS_BACKGROUND_LV2);
+        manager.load(ATLAS_BACKGROUND_LV3);
         manager.load(ATLAS_BAR_SUSPICIOUS_HACKING);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
@@ -167,8 +219,13 @@ public class Assets {
         manager.load(WOMAN_WALKING_SUSPICIOUSLY);
         manager.load(WOMAN_ROTATING_SUSPICIOUSLY);
         
-        manager.load(ATLAS_HACKING_LAPSCREEN);
-        manager.load(ATLAS_NOTHACKING_LAPSCREEN);
+        manager.load(ATLAS_HACKING_LAPSCREEN_LV1);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV1);       
+        manager.load(ATLAS_HACKING_LAPSCREEN_LV2);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV2);
+        manager.load(ATLAS_HACKING_LAPSCREEN_LV3);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV3);
+        
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load(TEXTURE_NAME);
@@ -181,13 +238,18 @@ public class Assets {
         manager.load(IMAGE_BACKGROUND_3);
         manager.load(SPLASH_LV1_1);
         manager.load(SPLASH_LV1_2);
-        manager.load (COMPTOIR);
+        manager.load(SPLASH_LV2_1);
+        manager.load(SPLASH_LV2_2);
+        manager.load (FOREGROUND_LV1);
+        manager.load (FOREGROUND_LV2);
+        manager.load(FOREGROUND_LV3);
 
         //Sounds
         manager.load(SOUND_NAME);
 
         //Musics
         manager.load(MUSIC_NAME);
+        manager.load(MUSIC_PETITE_MELODIE);
 
         //Texts
         HACKING_PROGRESS_LV1.add("Found IP address of a suspicious account");
