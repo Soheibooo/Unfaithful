@@ -22,7 +22,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -34,11 +39,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
-import com.bdeb1.unfaithful.systems.*;
-import com.bdeb1.unfaithful.util.Constants;
+import com.bdeb1.unfaithful.systems.ActionSystem;
+import com.bdeb1.unfaithful.systems.AnimationSystem;
+import com.bdeb1.unfaithful.systems.HackerSystem;
+import com.bdeb1.unfaithful.systems.LaptopSystem;
+import com.bdeb1.unfaithful.systems.MovementSystem;
+import com.bdeb1.unfaithful.systems.RenderingSystem;
+import com.bdeb1.unfaithful.systems.StateSystem;
+import com.bdeb1.unfaithful.systems.TargetSystem;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
-import com.bdeb1.unfaithful.util.TextureLayer;
 
 /**
  * @author Soheib El-Harrache
@@ -57,10 +67,6 @@ public class GameScreen implements Screen {
 	private TextureAtlas backgroundAtlas;
 	private AnimatedProgressBar hackingBar;
 	private AnimatedProgressBar suspicionBar;
-	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
-	//            .font(new BitmapFont())
-	//            .build();
-	//    private Toast toast;
 
 	public GameScreen (Unfaithful game, int level) {
 		super ();
@@ -82,7 +88,7 @@ public class GameScreen implements Screen {
 		                                            Gdx.graphics.getHeight ());
 		this.background = new Scene (visibleDimension, animation);
 
-		
+
 		this.engine = new PooledEngine ();
 		this.engine.addSystem (new RenderingSystem (game.sb));
 		this.engine.addSystem (new AnimationSystem ());
@@ -241,7 +247,7 @@ public class GameScreen implements Screen {
 
 	private void update (float delta) {
 		background.update (delta);
-                
+
 		updateInput ();
 
 		if (gWorld.isHacked ()) {
@@ -257,9 +263,17 @@ public class GameScreen implements Screen {
 		}
 		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
 			engine.getSystem (HackerSystem.class).setIsHacking (true);
-		} else {
-
+			engine.getSystem (LaptopSystem.class).setIsHacking (true);
+		} else if (Gdx.input.isKeyPressed (Keys.LEFT)) {
 			engine.getSystem (HackerSystem.class).setIsHacking (false);
+			engine.getSystem (LaptopSystem.class).setIsHacking (false);
+
+		} else if (Gdx.input.isKeyPressed (Keys.RIGHT)) {
+			engine.getSystem (HackerSystem.class).setIsHacking (false);
+			engine.getSystem (LaptopSystem.class).setIsHacking (false);
+		} else {
+			engine.getSystem (HackerSystem.class).setIsHacking (false);
+			engine.getSystem (LaptopSystem.class).setIsHacking (false);
 		}
 	}
 

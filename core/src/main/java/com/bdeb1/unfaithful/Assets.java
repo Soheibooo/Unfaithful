@@ -30,8 +30,6 @@ import java.util.ArrayList;
  */
 public class Assets {
 
-    public static String ATLAS_BACKGROUND_1;
-
     public AssetManager manager;
 
     private static Assets instance = null;
@@ -96,7 +94,7 @@ public class Assets {
         
         public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/ecran_pas_hacking_lvl1.atlas", TextureAtlas.class);
 
 
     //------------------------SPRITES

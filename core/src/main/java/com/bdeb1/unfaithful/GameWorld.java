@@ -21,287 +21,246 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import com.bdeb1.unfaithful.components.*;
+import com.bdeb1.unfaithful.components.ActionComponent;
+import com.bdeb1.unfaithful.components.AnimationComponent;
+import com.bdeb1.unfaithful.components.ComptoirComponent;
+import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.LaptopComponent;
+import com.bdeb1.unfaithful.components.StateComponent;
+import com.bdeb1.unfaithful.components.TargetComponent;
+import com.bdeb1.unfaithful.components.TextureComponent;
+import com.bdeb1.unfaithful.components.TransformComponent;
 import com.bdeb1.unfaithful.util.Constants;
-
 import java.util.HashMap;
 
 /**
- *
  * @author Soheib El-Harrache
  */
 public class GameWorld {
 
-    private PooledEngine engine;
+	private PooledEngine engine;
+	private Entity       hacker, laptop, comptoir, target;
+	private int level;
 
-    private Entity hacker, target, suspiciousGauge, hackingGauge, menu, comptoir;
-    private int level;
+	public GameWorld (PooledEngine engine, int level) {
+		this.engine = engine;
+		this.level = level;
+		generateLevel ();
+	}
 
-    private final int DISTANCE_BETWEEB_BARS = 10;
+	public void generateLevel () {
+		engine.clearPools ();
+		engine.removeAllEntities ();
 
-    public GameWorld(PooledEngine engine, int level) {
-        this.engine = engine;
-        this.level = level;
-        generateLevel();
+		target = createTarget ();
+		comptoir = createDumbYouRE ();
+		laptop = createLaptopScreen ();
+		hacker = createHacker ();
+	}
 
-    }
+	private Entity createLaptopScreen () {
+		Entity entity = engine.createEntity ();
 
-    public void generateLevel() {
-        engine.clearPools();
-        engine.removeAllEntities();
-        
-        
-        target = createTarget();
-        comptoir = createDumbYouRE();
-        hacker = createHacker();
-    }
+		TransformComponent positionC = engine
+			  .createComponent (TransformComponent.class);
+		AnimationComponent animC = engine
+			  .createComponent (AnimationComponent.class);
+		TextureComponent textureC = engine
+			  .createComponent (TextureComponent.class);
+		ActionComponent actionC = engine
+			  .createComponent (ActionComponent.class);
 
-    public Entity registerGUI() {
-        Entity entity = engine.createEntity();
+		StateComponent stateC = engine.createComponent (StateComponent.class);
+		LaptopComponent laptopC = engine
+			  .createComponent (LaptopComponent.class);
 
-        AnimationComponent animC
-                = engine.createComponent(AnimationComponent.class);
-        MenuComponent menuC =
-                engine.createComponent(MenuComponent.class);
-        StateComponent stateC =
-                engine.createComponent(StateComponent.class);
-        ActionComponent actionC =
-                engine.createComponent(ActionComponent.class);
-        TransformComponent transformC =
-                engine.createComponent(TransformComponent.class);
-        TextureComponent textureC =
-                engine.createComponent(TextureComponent.class);
+		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION.x +
+		                        Constants.World.D_HACKER_SCREEN.x *
+		                        Constants.World.SCALE,
+		                        Constants.World.HACKER_INITIAL_POSITION.y +
+		                        Constants.World.D_HACKER_SCREEN.y *
+		                        Constants.World.SCALE, 0);
 
-        transformC.position.set(10, 10, 0);
-        actionC.action = 0;
+		stateC.set (0);
+		actionC.set (LaptopComponent.ACTION_NOT_HACKING);
 
-        stateC.set(MenuComponent.STATE_INACTIVE);
-        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_MENU);
+		TextureAtlas atTextureLaptopHack = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_HACKING_LAPSCREEN);
+		TextureAtlas atTextureLaptop = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_NOTHACKING_LAPSCREEN);
 
-        TextureAtlas.AtlasRegion menuImage = texAtlas.findRegion("menu_bar0000");
+		Animation<TextureRegion> laptopHack = new Animation<TextureRegion> (
+			  1 / 12f, atTextureLaptopHack.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion> (
+			  1 / 12f, atTextureLaptop.getRegions (), PlayMode.LOOP);
 
-        Array<TextureAtlas.AtlasRegion> menuRegion = new Array<TextureAtlas.AtlasRegion>();
-        menuRegion.add(menuImage);
+		HashMap<Integer, Animation> anime = new HashMap<Integer, Animation> ();
+		anime.put (1, laptopHack);
+		anime.put (2, laptopNotHack);
 
-        Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
-        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.findRegions("menu_bar_select"), Animation.PlayMode.LOOP);
+		animC.animations.put (0, anime);
 
+		entity.add (textureC);
+		entity.add (animC);
+		entity.add (positionC);
+		entity.add (actionC);
+		entity.add (laptopC);
+		entity.add (stateC);
 
-        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
-        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+		engine.addEntity (entity);
+		return entity;
+	}
 
-        animeList.put(0, menuStill);
-        animeList2.put(0, MenuAnim);
+	private Entity createDumbYouRE () {
+		Entity entity = engine.createEntity ();
 
-        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList2);
-        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
+		TransformComponent positionC = engine
+			  .createComponent (TransformComponent.class);
+		TextureComponent textureC = engine
+			  .createComponent (TextureComponent.class);
+		ComptoirComponent compC = engine
+			  .createComponent (ComptoirComponent.class);
 
-        entity.add(textureC);
-        entity.add(menuC);
-        entity.add(stateC);
-        entity.add(transformC);
-        entity.add(actionC);
-        entity.add(animC);
-
-        engine.addEntity(entity);
-
-        laptopScreen(hacker);
-        return entity;
-		//suspiciousGauge = createSuspiciousGauge();
-    }
-    
-    private Entity createDumbYouRE() {
-        Entity entity = engine.createEntity();
-        
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        TextureComponent textureC
-                = engine.createComponent(TextureComponent.class);
-        
-        
-        textureC.region = new TextureRegion(Assets.getInstance().manager.get(Assets.COMPTOIR));
+		textureC.region = new TextureRegion (
+			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
 
 
+		positionC.position.set (0, 0, 0);
 
-        positionC.position.set(0, 0, 0);
-        
-        entity.add(positionC);
-        entity.add(textureC);
+		entity.add (positionC);
+		entity.add (textureC);
+		entity.add (compC);
 
-        engine.addEntity(entity);
-        return entity;
-    }
+		engine.addEntity (entity);
+		return entity;
+	}
 
-    private Entity laptopScreen(Entity hacker) {
-        Entity entity = engine.createEntity();
+	private Entity createTarget () {
+		Entity entity = engine.createEntity ();
 
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        AnimationComponent animC
-                = engine.createComponent(AnimationComponent.class);
-				TextureComponent textureC
-                = engine.createComponent(TextureComponent.class);
-        ActionComponent actionC
-                = engine.createComponent(ActionComponent.class);
+		AnimationComponent animC = engine
+			  .createComponent (AnimationComponent.class);
+		TransformComponent positionC = engine
+			  .createComponent (TransformComponent.class);
+		StateComponent stateC = engine.createComponent (StateComponent.class);
+		TextureComponent textureC = engine
+			  .createComponent (TextureComponent.class);
+		TargetComponent targetC = engine
+			  .createComponent (TargetComponent.class);
+		ActionComponent actionC = engine
+			  .createComponent (ActionComponent.class);
+		positionC.position.set (5.0f, 1.0f, 0.0f);
+		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
+		targetC.difficultyAddition = - level * 5;
 
-        StateComponent stateC
-                = engine.createComponent(StateComponent.class);
-        LaptopComponent laptopC
-                = engine.createComponent(LaptopComponent.class);
+		TextureAtlas atTextureMarche = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_WALKING);
+		TextureAtlas atTextureMarcheSus = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_WALKING_SUSPICIOUSLY);
+		TextureAtlas atTextureRotate = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_ROTATING);
+		TextureAtlas atTextureRotateSus = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_ROTATING_SUSPICIOUSLY);
 
+		Animation<TextureRegion> womanWalk = new Animation<TextureRegion> (
+			  1 / 12f, atTextureMarche.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion> (
+			  1 / 12f, atTextureMarcheSus.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanRotate = new Animation<TextureRegion> (
+			  1 / 12f, atTextureRotate.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanRotateSus = new
+			  Animation<TextureRegion> (
+			  1 / 12f, atTextureRotateSus.getRegions (), PlayMode.LOOP);
 
-        stateC.set(0);
-        actionC.set(LaptopComponent.ACTION_NOT_HACKING);
-
-        TextureAtlas atTextureLaptopHack = Assets.getInstance().manager.get(Assets.ATLAS_HACKING_LAPSCREEN);
-        TextureAtlas atTextureLaptop = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING_LAPSCREEN);
-
-        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(1/12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(1/12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
-
-        HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
-        anime.put(1, laptopHack);
-        anime.put(2, laptopNotHack);
-
-        animC.animations.put(0, anime);
-
-        TransformComponent positionRel = hacker.getComponent(TransformComponent.class);
-
-
-        positionC.position.set(positionRel.position.x + 5, positionRel.position.y + 5, 0);
-
-        entity.add(textureC);
-        entity.add(animC);
-        entity.add(positionC);
-        entity.add(actionC);
-        entity.add(laptopC);
-
-        engine.addEntity(entity);
-        return entity;
-
-    }
-
-    private Entity createTarget() {
-        Entity entity = engine.createEntity();
-
-        AnimationComponent animC
-                = engine.createComponent(AnimationComponent.class);
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        StateComponent stateC
-                = engine.createComponent(StateComponent.class);
-        TextureComponent textureC
-                = engine.createComponent(TextureComponent.class);
-        TargetComponent targetC
-                = engine.createComponent(TargetComponent.class);
-        ActionComponent actionC
-                = engine.createComponent(ActionComponent.class);
-
-//        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
-//        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
-//        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
-        positionC.position.set(5.0f, 1.0f, 0.0f);
-        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
-        targetC.difficultyAddition = -level * 5;
-        
-        TextureAtlas atTextureMarche = Assets.getInstance().manager.get(Assets.WOMAN_WALKING);
-        TextureAtlas atTextureMarcheSus = Assets.getInstance().manager.get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
-        TextureAtlas atTextureRotate = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING);
-        TextureAtlas atTextureRotateSus = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING_SUSPICIOUSLY);
-        
-        Animation<TextureRegion> womanWalk = new Animation<TextureRegion>(1/12f, atTextureMarche.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion>(1/12f, atTextureMarcheSus.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanRotate = new Animation<TextureRegion>(1/12f, atTextureRotate.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanRotateSus = new Animation<TextureRegion>(1/12f, atTextureRotateSus.getRegions(), PlayMode.LOOP);
-        
-        HashMap<Integer, Animation> animeActionWalk = new HashMap<>();
-        HashMap<Integer, Animation> animeActionRotate = new HashMap<>();
-        
-        
-        
-        animeActionWalk.put(TargetComponent.ACTION_WALK_LEFT, womanWalk);
-        animeActionWalk.put(TargetComponent.ACTION_WALK_RIGHT, womanWalk);
-        animeActionWalk.put(1, womanWalkSus);
-        animeActionWalk.put(1, womanWalkSus);
-        
-        animeActionRotate.put(0, womanRotate);
-        animeActionRotate.put(1, womanRotateSus);
-        
-        animC.animations.put(1, animeActionWalk);
-        //animC.animations.put(2, animeActionRotate);
-        
-        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
-        actionC.set(TargetComponent.ACTION_WALK_RIGHT);
-
-        entity.add(textureC);
-        entity.add(animC);
-        entity.add(targetC);
-        entity.add(positionC);
-        entity.add(stateC);
-        entity.add(actionC);
-        
-        engine.addEntity(entity);
-
-        return entity;
-    }
-
-    private Entity createHacker() {
-        Entity entity = engine.createEntity();
-
-        AnimationComponent animC
-                = engine.createComponent(AnimationComponent.class);
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        StateComponent stateC
-                = engine.createComponent(StateComponent.class);
-        TextureComponent textureC
-                = engine.createComponent(TextureComponent.class);
-        HackerComponent hackerC
-                = engine.createComponent(HackerComponent.class);
-        ActionComponent actionC
-                = engine.createComponent(ActionComponent.class);
-
-//        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
-//        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
-//        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
-        positionC.position.set(Constants.World.HACKER_INITIAL_POSITION);
-
-        //PAS DE STATE POUR LE HACKER
-        stateC.set(0);
-        actionC.set(HackerComponent.ACTION_NOT_HACKING);
-
-        TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
-        TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
-
-        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+		HashMap<Integer, Animation> animeActionWalk   = new HashMap<> ();
+		HashMap<Integer, Animation> animeActionRotate = new HashMap<> ();
 
 
-        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1/12f, texAtHacking.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1/12f, texAtNOTHacking.getRegions(), PlayMode.LOOP);
+		animeActionWalk.put (TargetComponent.ACTION_WALK_LEFT, womanWalk);
+		animeActionWalk.put (TargetComponent.ACTION_WALK_RIGHT, womanWalk);
+		animeActionWalk.put (1, womanWalkSus);
+		animeActionWalk.put (1, womanWalkSus);
+
+		animeActionRotate.put (0, womanRotate);
+		animeActionRotate.put (1, womanRotateSus);
+
+		animC.animations.put (1, animeActionWalk);
+
+		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
+		actionC.set (TargetComponent.ACTION_WALK_RIGHT);
+
+		entity.add (textureC);
+		entity.add (animC);
+		entity.add (targetC);
+		entity.add (positionC);
+		entity.add (stateC);
+		entity.add (actionC);
+
+		engine.addEntity (entity);
+
+		return entity;
+	}
+
+	private Entity createHacker () {
+		Entity entity = engine.createEntity ();
+
+		AnimationComponent animC = engine
+			  .createComponent (AnimationComponent.class);
+		TransformComponent positionC = engine
+			  .createComponent (TransformComponent.class);
+		StateComponent stateC = engine.createComponent (StateComponent.class);
+		TextureComponent textureC = engine
+			  .createComponent (TextureComponent.class);
+		HackerComponent hackerC = engine
+			  .createComponent (HackerComponent.class);
+		ActionComponent actionC = engine
+			  .createComponent (ActionComponent.class);
+
+		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION);
+
+		//PAS DE STATE POUR LE HACKER
+		stateC.set (0);
+		actionC.set (HackerComponent.ACTION_NOT_HACKING);
+
+		TextureAtlas texAtHacking = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_HACKING);
+		TextureAtlas texAtNOTHacking = Assets.getInstance ().manager
+			  .get (Assets.ATLAS_NOTHACKING);
+
+		HashMap<Integer, Animation> animeList
+			  = new HashMap<Integer, Animation> ();
 
 
-        animeList.put(1, animeHacking);
-        animeList.put(2, animeNotHacking);
+		Animation<TextureRegion> animeHacking = new Animation<TextureRegion> (
+			  1 / 12f, texAtHacking.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> animeNotHacking
+			  = new Animation<TextureRegion> (1 / 12f,
+			                                  texAtNOTHacking.getRegions (),
+			                                  PlayMode.LOOP);
 
-        //DEFAULT
-        animC.animations.put(0 ,animeList);
 
-        entity.add(textureC);
-        entity.add(animC);
+		animeList.put (1, animeHacking);
+		animeList.put (2, animeNotHacking);
 
-        entity.add(hackerC);
-        entity.add(positionC);
-        entity.add(stateC);
-        entity.add(actionC);
+		//DEFAULT
+		animC.animations.put (0, animeList);
 
-        engine.addEntity(entity);
+		entity.add (textureC);
+		entity.add (animC);
 
-        return entity;
-    }
+		entity.add (hackerC);
+		entity.add (positionC);
+		entity.add (stateC);
+		entity.add (actionC);
 
-    public boolean isHacked() {
-        HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
-        return hackerC.hacking_gauge >= (50 + level * level * 10); //1=60; 2=90; 3=140;
-    }
+		engine.addEntity (entity);
+
+		return entity;
+	}
+
+	public boolean isHacked () {
+		HackerComponent hackerC = hacker.getComponent (HackerComponent.class);
+		return hackerC.hacking_gauge >=
+		       (50 + level * level * 10); //1=60; 2=90; 3=140;
+	}
 }

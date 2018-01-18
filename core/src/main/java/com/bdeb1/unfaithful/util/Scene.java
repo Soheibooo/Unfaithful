@@ -16,7 +16,7 @@ public class Scene {
 	public final Vector3            CAMERA_ORIGIN;
 	public       OrthographicCamera camera;
 	private      Rectangle          bounds;
-	private      Direction          directionCamera;
+	//private      Direction          directionCamera;
 	private      Array<Layer>       layers;
 
 
@@ -42,7 +42,7 @@ public class Scene {
 
 		layers = new Array<> ();
 
-		directionCamera = Direction.Center;
+		Constants.World.CAMERA_DIRECTION = Direction.Center;
 	}
 
 
@@ -60,9 +60,9 @@ public class Scene {
 			  ()) {
 			camera.translate (- dc, 0);
 			// move back automagically
-		} else if (directionCamera == Direction.Right) {
+		} else if (Constants.World.CAMERA_DIRECTION == Direction.Right) {
 			camera.translate (- dc, 0);
-		} else if (directionCamera == Direction.Left) {
+		} else if (Constants.World.CAMERA_DIRECTION == Direction.Left) {
 			camera.translate (dc, 0);
 		}
 
@@ -78,11 +78,11 @@ public class Scene {
 
 		// update camera direction (state)
 		if (camera.position.x < Constants.World.SCENE_ANCHOR.x - 0.5f) {
-			directionCamera = Direction.Left;
+			Constants.World.CAMERA_DIRECTION = Direction.Left;
 		} else if (camera.position.x > Constants.World.SCENE_ANCHOR.x + 0.5f) {
-			directionCamera = Direction.Right;
+			Constants.World.CAMERA_DIRECTION = Direction.Right;
 		} else {
-			directionCamera = Direction.Center;
+			Constants.World.CAMERA_DIRECTION = Direction.Center;
 		}
 		camera.update ();
 	}
