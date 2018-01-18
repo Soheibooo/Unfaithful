@@ -22,6 +22,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.MenuComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
@@ -34,79 +35,85 @@ import com.bdeb1.unfaithful.util.Constants;
  */
 public class RenderingSystem extends IteratingSystem {
 
-	//A REVOIR
-	static final        float PPM              = 16.0f;
-	public static final float PIXELS_TO_METRES = 1.0f / PPM;
-	static final        float FRUSTUM_WIDTH    = Gdx.graphics.getWidth () /
-	                                             PPM;
-	//37.5f;
-	static final        float FRUSTUM_HEIGHT   = Gdx.graphics.getHeight () /
-	                                             PPM;//.0f;
-	private SpriteBatch        batch;
-	private OrthographicCamera cam;
+    //A REVOIR
+    static final float PPM = 16.0f;
+    public static final float PIXELS_TO_METRES = 1.0f / PPM;
+    static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth()
+            / PPM;
+    //37.5f;
+    static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight()
+            / PPM;//.0f;
+    private SpriteBatch batch;
+    private OrthographicCamera cam;
 
-	private ComponentMapper<TextureComponent>   textureM;
-	private ComponentMapper<TransformComponent> transformM;
+    private ComponentMapper<TextureComponent> textureM;
+    private ComponentMapper<TransformComponent> transformM;
 
-	public RenderingSystem (SpriteBatch batch) {
-		super (Family.all (TransformComponent.class, TextureComponent.class)
-		             .get ());
-		this.batch = batch;
+    public RenderingSystem(SpriteBatch batch) {
+        super(Family.all(TransformComponent.class, TextureComponent.class)
+                .get());
+        this.batch = batch;
 
-		textureM = ComponentMapper.getFor (TextureComponent.class);
-		transformM = ComponentMapper.getFor (TransformComponent.class);
+        textureM = ComponentMapper.getFor(TextureComponent.class);
+        transformM = ComponentMapper.getFor(TransformComponent.class);
 
-		cam = new OrthographicCamera (FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		cam.position.set (FRUSTUM_WIDTH / 2f, FRUSTUM_HEIGHT / 2f, 0);
-	}
+        cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        cam.position.set(FRUSTUM_WIDTH / 2f, FRUSTUM_HEIGHT / 2f, 0);
+    }
 
-	@Override
-	public void update (float deltaTime) {
-		super.update (deltaTime);
-		cam.update ();
-		batch.setProjectionMatrix (cam.combined);
-		batch.enableBlending ();
-	}
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
+        batch.enableBlending();
+    }
 
+    @Override
+    protected void processEntity(Entity entity, float f) {
+        TextureComponent tex = textureM.get(entity);
+        TransformComponent t = transformM.get(entity);
 
-	@Override
-	protected void processEntity (Entity entity, float f) {
-		TextureComponent   tex = textureM.get (entity);
-		TransformComponent t   = transformM.get (entity);
+        if (!(tex.region == null || t.isHidden)) {
 
-		if (! (tex.region == null || t.isHidden)) {
+            float width = tex.region.getRegionWidth();
+            float height = tex.region.getRegionHeight();
 
-			float width  = tex.region.getRegionWidth ();
-			float height = tex.region.getRegionHeight ();
+            float originX = width / 2f;
+            float originY = height / 2f;
 
-			float originX = width / 2f;
-			float originY = height / 2f;
+            batch.begin();
 
-			batch.begin ();
+            if (entity.getComponent(HackerComponent.class) != null) {
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        height * Constants.World.SCALE);
+            } else if (entity.getComponent(TargetComponent.class) != null) {
+                ActionComponent actionC = ComponentMapper.getFor(ActionComponent.class).get(entity);
+                if (actionC.action == TargetComponent.ACTION_WALK_LEFT) {
+                    width = width * -1;
+                }
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        height * Constants.World.SCALE);
+            } else {
+                batch.draw(tex.region, t.position.x - originX,
+                        t.position.y - originY, originX, originY, width,
+                        height, PixelsToMeters(t.scale.x),
+                        PixelsToMeters(t.scale.y), t.rotation);
+            }
 
-			if (entity.getComponent (HackerComponent.class) != null) {
-				//System.out.println (width + ", " + height + ", " + t.position);
-				batch.draw (tex.region, t.position.x, t.position.y,
-				            width * Constants.World.SCALE,
-				            height * Constants.World.SCALE);
-			} else {
-
-				batch.draw (tex.region, t.position.x - originX,
-				            t.position.y - originY, originX, originY, width,
-				            height, PixelsToMeters (t.scale.x),
-				            PixelsToMeters (t.scale.y), t.rotation);
-			}
-
-			batch.end ();
-		} else if (entity.getComponent (TargetComponent.class) == null) {
+            batch.end();
+        } else if (entity.getComponent(TargetComponent.class) == null) {
 //			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
-		}
-		if (entity.getComponent (MenuComponent.class) != null) {
+        }
+        if (entity.getComponent(MenuComponent.class) != null) {
 //			System.out.println ("Ton menu boi");
-		}
-	}
+        }
+    }
 
-	public static float PixelsToMeters (float pixelValue) {
-		return pixelValue * PIXELS_TO_METRES;
-	}
+    public static float PixelsToMeters(float pixelValue) {
+        return pixelValue * PIXELS_TO_METRES;
+    }
+
 }

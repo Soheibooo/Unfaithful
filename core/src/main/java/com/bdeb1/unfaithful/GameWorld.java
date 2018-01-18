@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.*;
 import com.bdeb1.unfaithful.util.Constants;
 
@@ -34,7 +35,7 @@ public class GameWorld {
 
     private PooledEngine engine;
 
-    private Entity hacker, target;
+    private Entity hacker, target, suspiciousGauge, hackingGauge, menu, comptoir;
     private int level;
 
     private final int DISTANCE_BETWEEB_BARS = 10;
@@ -49,9 +50,87 @@ public class GameWorld {
     public void generateLevel() {
         engine.clearPools();
         engine.removeAllEntities();
-
+        
+        
         target = createTarget();
+        comptoir = createDumbYouRE();
         hacker = createHacker();
+    }
+
+    public Entity registerGUI() {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        MenuComponent menuC =
+                engine.createComponent(MenuComponent.class);
+        StateComponent stateC =
+                engine.createComponent(StateComponent.class);
+        ActionComponent actionC =
+                engine.createComponent(ActionComponent.class);
+        TransformComponent transformC =
+                engine.createComponent(TransformComponent.class);
+        TextureComponent textureC =
+                engine.createComponent(TextureComponent.class);
+
+        transformC.position.set(10, 10, 0);
+        actionC.action = 0;
+
+        stateC.set(MenuComponent.STATE_INACTIVE);
+        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_MENU);
+
+        TextureAtlas.AtlasRegion menuImage = texAtlas.findRegion("menu_bar0000");
+
+        Array<TextureAtlas.AtlasRegion> menuRegion = new Array<TextureAtlas.AtlasRegion>();
+        menuRegion.add(menuImage);
+
+        Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
+        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.findRegions("menu_bar_select"), Animation.PlayMode.LOOP);
+
+
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+
+        animeList.put(0, menuStill);
+        animeList2.put(0, MenuAnim);
+
+        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList2);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
+
+        entity.add(textureC);
+        entity.add(menuC);
+        entity.add(stateC);
+        entity.add(transformC);
+        entity.add(actionC);
+        entity.add(animC);
+
+        engine.addEntity(entity);
+
+        laptopScreen(hacker);
+        return entity;
+		//suspiciousGauge = createSuspiciousGauge();
+    }
+    
+    private Entity createDumbYouRE() {
+        Entity entity = engine.createEntity();
+        
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        TextureComponent textureC
+                = engine.createComponent(TextureComponent.class);
+        
+        
+        textureC.region = new TextureRegion(Assets.getInstance().manager.get(Assets.COMPTOIR));
+
+
+
+        positionC.position.set(0, 0, 0);
+        
+        entity.add(positionC);
+        entity.add(textureC);
+
+        engine.addEntity(entity);
+        return entity;
     }
 
     private Entity laptopScreen(Entity hacker) {
@@ -125,16 +204,43 @@ public class GameWorld {
         positionC.position.set(5.0f, 1.0f, 0.0f);
         stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
         targetC.difficultyAddition = -level * 5;
-
-        stateC.set(0);
-        actionC.set(TargetComponent.ACTION_TALKING);
+        
+        TextureAtlas atTextureMarche = Assets.getInstance().manager.get(Assets.WOMAN_WALKING);
+        TextureAtlas atTextureMarcheSus = Assets.getInstance().manager.get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
+        TextureAtlas atTextureRotate = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING);
+        TextureAtlas atTextureRotateSus = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING_SUSPICIOUSLY);
+        
+        Animation<TextureRegion> womanWalk = new Animation<TextureRegion>(1/12f, atTextureMarche.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion>(1/12f, atTextureMarcheSus.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotate = new Animation<TextureRegion>(1/12f, atTextureRotate.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotateSus = new Animation<TextureRegion>(1/12f, atTextureRotateSus.getRegions(), PlayMode.LOOP);
+        
+        HashMap<Integer, Animation> animeActionWalk = new HashMap<>();
+        HashMap<Integer, Animation> animeActionRotate = new HashMap<>();
+        
+        
+        
+        animeActionWalk.put(TargetComponent.ACTION_WALK_LEFT, womanWalk);
+        animeActionWalk.put(TargetComponent.ACTION_WALK_RIGHT, womanWalk);
+        animeActionWalk.put(1, womanWalkSus);
+        animeActionWalk.put(1, womanWalkSus);
+        
+        animeActionRotate.put(0, womanRotate);
+        animeActionRotate.put(1, womanRotateSus);
+        
+        animC.animations.put(1, animeActionWalk);
+        //animC.animations.put(2, animeActionRotate);
+        
+        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
+        actionC.set(TargetComponent.ACTION_WALK_RIGHT);
 
         entity.add(textureC);
         entity.add(animC);
         entity.add(targetC);
         entity.add(positionC);
         entity.add(stateC);
-
+        entity.add(actionC);
+        
         engine.addEntity(entity);
 
         return entity;
