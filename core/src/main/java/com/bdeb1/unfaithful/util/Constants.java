@@ -25,6 +25,10 @@ public final class Constants {
 			  SCENE_ANCHOR.x - SCENE_ORIGIN.x, 0f, 0f);
 		public static final Vector3   D_HACKER_SCREEN         = new Vector3 (
 			  82, 55, 0);
+                public static final Vector3   D_HACKER_SCREEN_2         = new Vector3 (
+			  120, 50, 0);
+                public static final Vector3   D_HACKER_SCREEN_3         = new Vector3 (
+			  95, 45, 0);
 		public static final Rectangle TOUCHABLE_LEFT          = new Rectangle (
 			  0, 0, VIEW_DIMENSION.width / 5, VIEW_DIMENSION.height);
 		public static final Rectangle TOUCHABLE_RIGHT         = new Rectangle (

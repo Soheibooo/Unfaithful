@@ -230,7 +230,7 @@ public class Assets {
             = new AssetDescriptor<Music>("music/petite_melody.mp3", Music.class);
     
     public static final AssetDescriptor<Music> MUSIC_TYPING
-            = new AssetDescriptor<Music>("music/typing.mp3", Music.class);
+            = new AssetDescriptor<Music>("sound/typing.mp3", Music.class);
 
     //------------------------TEXTS
     public static final ArrayList<String> HACKING_PROGRESS_LV1

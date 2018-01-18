@@ -32,14 +32,12 @@ import com.bdeb1.unfaithful.components.TransformComponent;
  */
 public class TargetSystem extends IntervalIteratingSystem {
 
-    
     private static final float TIME_STEP = 1 / 45f;
 
     private static final int WIDTH_SCREEN_TOT = 3200;
     private static final int WIDTH_ZONE_SAFE = 640;
     private static final int WIDTH_ZONE_SUSPICION = 700;
 
-    
     private int randWaitingTime = RandomComponent.rand.nextInt(5);
     private int randPositionTar = 0;
     private int randTimeStay = 0;
@@ -66,7 +64,7 @@ public class TargetSystem extends IntervalIteratingSystem {
     }
 
     @Override
-     protected void processEntity(Entity entity) {
+    protected void processEntity(Entity entity) {
         ActionComponent actionC = actionM.get(entity);
         StateComponent stateC = stateM.get(entity);
         TargetComponent targetC = targetM.get(entity);
@@ -75,7 +73,7 @@ public class TargetSystem extends IntervalIteratingSystem {
 
         //Time between changing action
         RandomComponent randomC = randomM.get(entity);
-        
+
         //Out of screen
         //ZONE SAFE
         if (transformC.position.x < WIDTH_ZONE_SAFE || transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - 50) {
@@ -101,7 +99,7 @@ public class TargetSystem extends IntervalIteratingSystem {
                 targetC.suspicion_gauge += 0.1f;
             }
         } else { //Zone de Danger tres radioactive
-            targetC.suspicion_gauge += 100f;
+            targetC.suspicion_gauge = 100f;
         }
 
         if (targetC.suspicion_gauge < TargetComponent.TRIGGER_POINT_SUSPICIOUS) {
@@ -117,24 +115,21 @@ public class TargetSystem extends IntervalIteratingSystem {
             stateC.state = TargetComponent.STATE_DONE;
         }
 
-        
-        
         //System.out.println(actionC.time);
-        
         if (actionC.time > randWaitingTime
                 && (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
                 || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN)) {
 
             //TO ADJUST DIFFICULTY
             randWaitingTime = RandomComponent.rand.nextInt(2
-                    /*(int) (50 + targetC.difficultyAddition)
+            /*(int) (50 + targetC.difficultyAddition)
                     - Math.max(15, (int) (targetC.suspicion_gauge+1) / 5 + 2)*/
             );
 
             randPositionTar = RandomComponent.rand.nextInt(WIDTH_SCREEN_TOT - 2 * WIDTH_ZONE_SAFE - 2 * WIDTH_ZONE_SUSPICION) + WIDTH_ZONE_SAFE + WIDTH_ZONE_SUSPICION;
             randTimeStay = RandomComponent.rand.nextInt(8);
             randDir = RandomComponent.rand.nextInt(2);
-            
+
             System.out.println("Wait: " + randWaitingTime);
             System.out.println("STAY: " + randTimeStay);
             System.out.println("Dir: " + randDir);
@@ -151,7 +146,6 @@ public class TargetSystem extends IntervalIteratingSystem {
             actionC.time = 0;
 
         } else {
-
             if ((transformC.position.x >= randPositionTar && movementC.speed > 0) || (transformC.position.x <= randPositionTar && movementC.speed < 0)) {
                 movementC.speed = 0;
                 if (actionC.action != TargetComponent.ACTION_WATCHING) {
@@ -166,19 +160,19 @@ public class TargetSystem extends IntervalIteratingSystem {
                     }
                 }
 
-                
             }
             if (transformC.position.x > WIDTH_SCREEN_TOT) {
-                if (actionC.action != TargetComponent.ACTION_RIGHT_SCREEN)
-                        actionC.action = TargetComponent.ACTION_RIGHT_SCREEN;
-                    movementC.speed = 0;
-                } else if (transformC.position.x < -50) {
-                    if (actionC.action != TargetComponent.ACTION_LEFT_SCREEN)
-                        actionC.action = TargetComponent.ACTION_LEFT_SCREEN;
-                    movementC.speed = 0;
+                if (actionC.action != TargetComponent.ACTION_RIGHT_SCREEN) {
+                    actionC.action = TargetComponent.ACTION_RIGHT_SCREEN;
                 }
+                movementC.speed = 0;
+            } else if (transformC.position.x < -50) {
+                if (actionC.action != TargetComponent.ACTION_LEFT_SCREEN) {
+                    actionC.action = TargetComponent.ACTION_LEFT_SCREEN;
+                }
+                movementC.speed = 0;
+            }
         }
     }
 
-    }
-
+}

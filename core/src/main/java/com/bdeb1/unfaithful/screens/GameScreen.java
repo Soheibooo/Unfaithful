@@ -67,7 +67,7 @@ public class GameScreen implements Screen {
 	private SpriteBatch  batch;
 	private TextureAtlas backgroundAtlas;
 	private AnimatedProgressBar hackingBar;
-	private AnimatedProgressBar suspicionBar;
+	private AnimatedProgressBar suspiciousBar;
         
         private Music music;
         private Music typing;
@@ -214,7 +214,7 @@ public class GameScreen implements Screen {
         progressBarStyle.knobAfter = drawable;
         progressBarStyle.knob = drawable;
 
-        AnimatedProgressBar suspiciousBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle);
+        suspiciousBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle);
         suspiciousBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsBackground, 0.1f);
         suspiciousBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsForeground, 0.1f);
         suspiciousBar.setPosition(220, Gdx.graphics.getHeight() - 35);
@@ -233,7 +233,7 @@ public class GameScreen implements Screen {
         progressBarStyle2.knobAfter = drawable2;
         progressBarStyle2.knob = drawable2;
 
-        AnimatedProgressBar hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
+        hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
         hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsBackground, 0.1f);
         hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsForeground, 0.1f);
         hackingBar.setPosition(10, Gdx.graphics.getHeight() - 30);
@@ -267,7 +267,7 @@ public class GameScreen implements Screen {
 
 	private void update (float delta) {
 		background.update (delta);
-
+                hackingBar.setValue(gWorld.getHackBarProgress());
 		updateInput ();
 
 		if (gWorld.isHacked ()) {

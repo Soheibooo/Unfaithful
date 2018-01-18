@@ -21,6 +21,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.ComptoirComponent;
@@ -32,6 +33,9 @@ import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
 import com.bdeb1.unfaithful.util.Constants;
+import static com.bdeb1.unfaithful.util.Constants.World.D_HACKER_SCREEN;
+import static com.bdeb1.unfaithful.util.Constants.World.D_HACKER_SCREEN_2;
+import static com.bdeb1.unfaithful.util.Constants.World.D_HACKER_SCREEN_3;
 import java.util.HashMap;
 
 /**
@@ -53,7 +57,7 @@ public class GameWorld {
         engine.clearPools();
         engine.removeAllEntities();
 
-        target = createTarget();
+        //target = createTarget();
         comptoir = createDumbYouRE();
         laptop = createLaptopScreen();
         hacker = createHacker();
@@ -75,11 +79,26 @@ public class GameWorld {
         LaptopComponent laptopC = engine
                 .createComponent(LaptopComponent.class);
 
+        Vector3 v3 = new Vector3();
+        switch (level) {
+            case 1:
+                v3 = D_HACKER_SCREEN;
+                break;
+            case 2:
+                v3 = D_HACKER_SCREEN_2;
+                break;
+            case 3:
+                v3 = D_HACKER_SCREEN_3;
+                break;
+            default:
+                v3 = D_HACKER_SCREEN;
+                break;
+        }
         positionC.position.set(Constants.World.HACKER_INITIAL_POSITION.x
-                + Constants.World.D_HACKER_SCREEN.x
+                + v3.x
                 * Constants.World.SCALE,
                 Constants.World.HACKER_INITIAL_POSITION.y
-                + Constants.World.D_HACKER_SCREEN.y
+                + v3.y
                 * Constants.World.SCALE, 0);
 
         stateC.set(0);
@@ -347,5 +366,9 @@ public class GameWorld {
         HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
         return hackerC.hacking_gauge
                 >= (50 + level * level * 10); //1=60; 2=90; 3=140;
+    }
+
+    public float getHackBarProgress() {
+        return hacker.getComponent(HackerComponent.class).hacking_gauge;
     }
 }

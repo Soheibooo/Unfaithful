@@ -62,7 +62,7 @@ public class HackerSystem extends IteratingSystem {
 
             //Add constant later for difficult: HACK_MAX_GAUGE
             
-            hackerC.hacking_gauge += deltaTime;
+            hackerC.hacking_gauge += deltaTime * 7;
         }
         else{
             actionC.set(HackerComponent.ACTION_NOT_HACKING);
