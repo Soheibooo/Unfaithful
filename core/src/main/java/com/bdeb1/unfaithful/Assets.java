@@ -52,20 +52,20 @@ public class Assets {
     //------------------------ATLAS
     public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/UI/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/UI/hacking_joe_lvl1.atlas", TextureAtlas.class);
         
         public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
+                    "atlas/UI/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
     
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND
             = new AssetDescriptor<TextureAtlas>(
-                    "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+                    "atlas/UI/Background_lvl_1.atlas", TextureAtlas.class);
 
         public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -78,8 +78,23 @@ public class Assets {
         public static final AssetDescriptor<TextureAtlas> ATLAS_MENU
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/UI/barre_menu.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor <TextureAtlas> WOMAN_WALKING
+            = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_marche.atlas",TextureAtlas.class);
+        
+        public static final AssetDescriptor <TextureAtlas> WOMAN_WALKING_SUSPICIOUSLY
+            = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_marche_soupcon.atlas",TextureAtlas.class);
+        
+        public static final AssetDescriptor <TextureAtlas> WOMAN_ROTATING
+            = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_rotation.atlas",TextureAtlas.class);
+        
+        public static final AssetDescriptor <TextureAtlas> WOMAN_ROTATING_SUSPICIOUSLY
+            = new AssetDescriptor<TextureAtlas>("atlas/Madame/madame_rotation_soupcon.atlas",TextureAtlas.class);
+        
+        
 
     //------------------------SPRITES
+        
     public static final AssetDescriptor<Texture> TEXTURE_NAME
             = new AssetDescriptor<Texture> ("sprite/exemple_sprite_nhk.png", Texture.class);
 
@@ -91,6 +106,21 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> BTN_PAUSE_HOVER
             = new AssetDescriptor<Texture> ("sprite/bouton_pause_hover.png", Texture.class);
+    
+//    public static final AssetDescriptor <Texture> SPRITE_WOMAN_WALKING
+//            = new AssetDescriptor<Texture>("atlas/Madame/madame_marche.png",Texture.class);
+//    
+//    public static final AssetDescriptor <Texture> SPRITE_WOMAN_WALKING_sOUPCON
+//            = new AssetDescriptor<Texture>("atlas/Madame/madame_marche_soupcon.png",Texture.class);
+//    
+//    public static final AssetDescriptor <Texture> SPRITE_WOMAN_ROTATING
+//            = new AssetDescriptor<Texture> ("atlas/Madame/madame_rotation.png",Texture.class);
+//    
+//     public static final AssetDescriptor <Texture> SPRITE_WOMAN_ROTATING_SUSPICIOUSLY
+//            = new AssetDescriptor<Texture> ("atlas/Madame/madame_rotation_soupcon.png",Texture.class);
+     
+    //public static final AssetDescriptor <Texture> SPRITE_WOMAN_ROTATING
+            //= new AssetDescriptor<Texture> ("atlas/Madame/madame_rotation.png",Texture.class);
 
 
     //------------------------IMAGES
@@ -126,8 +156,12 @@ public class Assets {
         manager.load(ATLAS_BAR_HACKING);
         manager.load(ATLAS_BAR_SUSPICION);
         manager.load(ATLAS_MENU);
-
         manager.load(ATLAS_RIGHT_TO_LEFT);
+        manager.load(WOMAN_WALKING);
+        manager.load(WOMAN_ROTATING);
+        manager.load(WOMAN_WALKING_SUSPICIOUSLY);
+        manager.load(WOMAN_ROTATING_SUSPICIOUSLY);
+        
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load (TEXTURE_NAME);
