@@ -1,0 +1,20 @@
+
+tuto.png
+size: 1024,256
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Background_Tuto0000
+  rotate: false
+  xy: 2, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1
+Background_Tuto0012
+  rotate: false
+  xy: 324, 2
+  size: 320, 180
+  orig: 320, 180
+  offset: 0, 0
+  index: -1

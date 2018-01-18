@@ -100,7 +100,7 @@ public class SplashScreen implements Screen {
 
     private void updateInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)
-                || Gdx.input.isTouched()) {
+                || Gdx.input.justTouched()) {
             nextStep();
         }
     }

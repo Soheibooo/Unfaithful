@@ -73,9 +73,7 @@ public class GameScreen implements Screen {
 		this.game = game;
 		this.stage = new Stage ();
 		this.level = level;
-		Gdx.input.setInputProcessor (stage);
-
-		stage.act ();
+		Gdx.input.setInputProcessor(stage);
 
 		this.batch = new SpriteBatch ();
 		this.backgroundAtlas = Assets.getInstance ().manager
@@ -103,25 +101,7 @@ public class GameScreen implements Screen {
 		isPaused = false;
 
 		Gdx.input.setInputProcessor (stage);
-		GUI gui = GUI.getInstance ();
-
-		Texture textureBtnPause = Assets.getInstance ().manager.get (Assets.BTN_PAUSE);
-		Texture textureBtnPauseHover = Assets.getInstance ().manager.get (Assets.TEXTURE_NAME);
-
-		int btnX = Gdx.graphics.getWidth () - textureBtnPause.getWidth () - 5;
-		int btnY = Gdx.graphics.getHeight () - textureBtnPause.getHeight ()
-		           - 5;
-		Button btnPause = gui
-			  .addButton (btnX, btnY, textureBtnPause, textureBtnPauseHover);
-		btnPause.addListener (new ClickListener () {
-			@Override
-			public void clicked (InputEvent event, float x, float y) {
-				pauseAction ();
-			}
-		});
-
 		addProgressBar();
-		stage.addActor (btnPause);
 	}
 
     private void addProgressBar() {
@@ -242,6 +222,10 @@ public class GameScreen implements Screen {
 	public void render (float delta) {
 		update (delta);
 		draw (delta);
+
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
+
 		engine.update (delta);
 	}
 
