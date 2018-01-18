@@ -57,7 +57,6 @@ public class GameScreen implements Screen {
 	private Stage        stage;
 
 	private Scene        background;
-	private SpriteBatch  batch;
 	private TextureAtlas backgroundAtlas;
 	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
 	//            .font(new BitmapFont())
@@ -72,7 +71,6 @@ public class GameScreen implements Screen {
 
 		stage.act ();
 
-		this.batch = game.sb;
 		this.backgroundAtlas = Assets.getInstance ().manager
 			  .get (Assets.ATLAS_BACKGROUND);
 
@@ -225,7 +223,7 @@ public class GameScreen implements Screen {
 		//UI
 		Gdx.gl.glClearColor (0, 0, 0, 1);
 		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix (background.camera.combined);
+		game.sb.setProjectionMatrix (background.camera.combined);
 		//        toast = toastFactory.create("All started when i saw my
         // girlfriend flirting with some guy at the gym. \n"
 		//                + "I got mad and as an apprentice hacker I decided
@@ -233,9 +231,9 @@ public class GameScreen implements Screen {
 		//                + "get my revenge. I then decided to start with her
         // facebook account.", Toast.Length.LONG);
 
-		batch.begin ();
-		background.draw (batch);
-		batch.end ();
+		game.sb.begin ();
+		background.draw (game.sb);
+		game.sb.end ();
 
 		stage.draw ();
 	}
@@ -278,6 +276,5 @@ public class GameScreen implements Screen {
 	public void dispose () {
 		background.dispose ();
 		backgroundAtlas.dispose ();
-		batch.dispose ();
 	}
 }
