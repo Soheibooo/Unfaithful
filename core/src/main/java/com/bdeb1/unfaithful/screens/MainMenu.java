@@ -72,7 +72,7 @@ public class MainMenu implements Screen {
             stage.draw();
 
             if (!mainMenuActive) {
-                game.setScreen(new SplashScreen(game, 1));
+                game.setScreen(new SplashScreen(game, 2));
             }
         }
     }

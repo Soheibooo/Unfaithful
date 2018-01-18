@@ -193,6 +193,9 @@ public class Assets {
         
         manager.load(ATLAS_HACKING_LAPSCREEN_LV1);
         manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV1);
+        
+        manager.load(ATLAS_HACKING_LAPSCREEN_LV2);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV2);
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load(TEXTURE_NAME);
@@ -205,7 +208,10 @@ public class Assets {
         manager.load(IMAGE_BACKGROUND_3);
         manager.load(SPLASH_LV1_1);
         manager.load(SPLASH_LV1_2);
+        manager.load(SPLASH_LV2_1);
+        manager.load(SPLASH_LV2_2);
         manager.load (FOREGROUND_LV1);
+        manager.load (FOREGROUND_LV2);
 
         //Sounds
         manager.load(SOUND_NAME);
