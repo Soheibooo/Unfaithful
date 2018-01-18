@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
                     case 2:
                         //TODO chante
                         this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV1);
+			  .get (Assets.ATLAS_BACKGROUND_LV2);
                         break;
                     case 3:
                         this.backgroundAtlas = Assets.getInstance ().manager

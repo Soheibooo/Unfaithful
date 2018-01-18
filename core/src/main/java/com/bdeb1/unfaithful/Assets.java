@@ -66,6 +66,10 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV1
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/Background_lvl_1.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/background_animated_lvl2.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICIOUS_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -183,6 +187,7 @@ public class Assets {
         manager.load(ATLAS_HOMESCREEN);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);
+        manager.load(ATLAS_BACKGROUND_LV2);
         manager.load(ATLAS_BAR_SUSPICIOUS_HACKING);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
