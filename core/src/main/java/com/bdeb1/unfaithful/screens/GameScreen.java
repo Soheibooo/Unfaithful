@@ -45,9 +45,9 @@ import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
+import com.bdeb1.unfaithful.util.TextureLayer;
 
 /**
- *
  * @author Soheib El-Harrache
  */
 public class GameScreen implements Screen {
@@ -77,14 +77,16 @@ public class GameScreen implements Screen {
         stage.act();
 
         this.batch = new SpriteBatch();
-        this.backgroundAtlas = 
+        this.backgroundAtlas =
                 Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_LV1);
 
-        Animation<TextureRegion> animation = 
+        Animation<TextureRegion> animation =
                 new Animation<>(1f / 2f, backgroundAtlas.getRegions());
         Dimension visibleDimension = new Dimension(Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight());
         this.background = new Scene(visibleDimension, animation);
+        background.addLayer (new TextureLayer (
+			  Assets.getInstance ().manager.get (Assets.COMPTOIR)));
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -171,75 +173,6 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void updateInput() {
-        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-            pauseAction();
-        }
-        if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isTouched()) {
-
-            engine.getSystem(HackerSystem.class).setIsHacking(true);
-        } else {
-
-            engine.getSystem(HackerSystem.class).setIsHacking(false);
-        }
-
-    }
-
-    private void pauseAction() {
-        if (isPaused) {
-            resume();
-        } else {
-            pause();
-        }
-    }
-
-    private void draw(float delta) {
-        //UI
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.setProjectionMatrix(background.camera.combined);
-//        toast = toastFactory.create("All started when i saw my girlfriend flirting with some guy at the gym. \n"
-//                + "I got mad and as an apprentice hacker I decided to test my skill on her and finally \n"
-//                + "get my revenge. I then decided to start with her facebook account.", Toast.Length.LONG);
-
-        batch.begin();
-        background.draw(batch);
-        batch.end();
-
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-
-        engine.getSystem(ActionSystem.class).setProcessing(false);
-        engine.getSystem(AnimationSystem.class).setProcessing(false);
-        engine.getSystem(HackerSystem.class).setProcessing(false);
-        engine.getSystem(MovementSystem.class).setProcessing(false);
-        //engine.getSystem(RenderingSystem.class).setProcessing(false);
-        engine.getSystem(StateSystem.class).setProcessing(false);
-        engine.getSystem(TargetSystem.class).setProcessing(false);
-        isPaused = true;
-
-    }
-
-    @Override
-    public void resume() {
-
-        engine.getSystem(ActionSystem.class).setProcessing(true);
-        engine.getSystem(AnimationSystem.class).setProcessing(true);
-        engine.getSystem(HackerSystem.class).setProcessing(true);
-        engine.getSystem(MovementSystem.class).setProcessing(true);
-        //engine.getSystem(RenderingSystem.class).setProcessing(true);
-        engine.getSystem(StateSystem.class).setProcessing(true);
-        engine.getSystem(TargetSystem.class).setProcessing(true);
-        isPaused = false;
-    }
-
     @Override
     public void hide() {
     }
@@ -251,4 +184,74 @@ public class GameScreen implements Screen {
         batch.dispose();
         engine.clearPools();
     }
-}
+
+	private void pauseAction () {
+		if (isPaused) {
+			resume ();
+		} else {
+			pause ();
+		}
+	}
+
+	private void updateInput () {
+		if (Gdx.input
+			  .isKeyJustPressed (Keys.ESCAPE))
+		{ //TODO add buttonpause on screen
+			pauseAction ();
+		}
+		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
+			engine.getSystem (HackerSystem.class).setIsHacking (true);
+		} else {
+
+			engine.getSystem (HackerSystem.class).setIsHacking (false);
+		}
+	}
+
+	private void draw (float delta) {
+		//UI
+		Gdx.gl.glClearColor (0, 0, 0, 1);
+		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
+		game.sb.setProjectionMatrix (background.camera.combined);
+		//        toast = toastFactory.create("All started when i saw my
+        // girlfriend flirting with some guy at the gym. \n"
+		//                + "I got mad and as an apprentice hacker I decided
+        // to test my skill on her and finally \n"
+		//                + "get my revenge. I then decided to start with her
+        // facebook account.", Toast.Length.LONG);
+
+		game.sb.begin ();
+		background.draw (game.sb);
+		game.sb.end ();
+
+		stage.draw ();
+	}
+
+	@Override
+	public void resize (int width, int height) {
+	}
+
+	@Override
+	public void pause () {
+
+		engine.getSystem (ActionSystem.class).setProcessing (false);
+		engine.getSystem (AnimationSystem.class).setProcessing (false);
+		engine.getSystem (HackerSystem.class).setProcessing (false);
+		engine.getSystem (MovementSystem.class).setProcessing (false);
+		engine.getSystem (RenderingSystem.class).setProcessing (false);
+		engine.getSystem (StateSystem.class).setProcessing (false);
+		engine.getSystem (TargetSystem.class).setProcessing (false);
+		isPaused = true;
+	}
+
+	@Override
+	public void resume () {
+
+		engine.getSystem (ActionSystem.class).setProcessing (true);
+		engine.getSystem (AnimationSystem.class).setProcessing (true);
+		engine.getSystem (HackerSystem.class).setProcessing (true);
+		engine.getSystem (MovementSystem.class).setProcessing (true);
+		engine.getSystem (RenderingSystem.class).setProcessing (true);
+		engine.getSystem (StateSystem.class).setProcessing (true);
+		engine.getSystem (TargetSystem.class).setProcessing (true);
+		isPaused = false;
+	}

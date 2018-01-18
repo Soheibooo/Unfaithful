@@ -56,7 +56,7 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
+       public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/right_left__transition_joe_lvl1.atlas", TextureAtlas.class);
 
@@ -142,6 +142,8 @@ public class Assets {
     
     public static final AssetDescriptor<Texture> SPLASH_LV1_2
             = new AssetDescriptor<Texture>("image/splash_debut_2.png", Texture.class);
+   public static final AssetDescriptor<Texture> COMPTOIR = new
+	      AssetDescriptor<Texture> ("image/comptoir.png", Texture.class);
 
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
@@ -186,6 +188,7 @@ public class Assets {
         manager.load(IMAGE_BACKGROUND_3);
         manager.load(SPLASH_LV1_1);
         manager.load(SPLASH_LV1_2);
+        manager.load (COMPTOIR);
 
         //Sounds
         manager.load(SOUND_NAME);
