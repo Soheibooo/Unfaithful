@@ -15,7 +15,6 @@
  */
 package com.bdeb1.unfaithful.screens;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -47,6 +46,7 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
+import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
 import com.bdeb1.unfaithful.util.TextureLayer;
@@ -56,27 +56,27 @@ import com.bdeb1.unfaithful.util.TextureLayer;
  */
 public class GameScreen implements Screen {
 
-    private GameWorld gWorld;
-    private PooledEngine engine;
-    private Unfaithful game;
-    private boolean isPaused;
-    private Stage stage;
-    private int level;
+	private GameWorld    gWorld;
+	private PooledEngine engine;
+	private Unfaithful   game;
+	private boolean      isPaused;
+	private Stage        stage;
+	private int          level;
 
-    private Scene background;
-    private SpriteBatch batch;
-    private TextureAtlas backgroundAtlas;
-//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
-//            .font(new BitmapFont())
-//            .build();
-//    private Toast toast;
+	private Scene        background;
+	private SpriteBatch  batch;
+	private TextureAtlas backgroundAtlas;
+	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
+	//            .font(new BitmapFont())
+	//            .build();
+	//    private Toast toast;
 
-    public GameScreen(Unfaithful game, int level) {
-        super();
-        this.game = game;
-        this.stage = new Stage();
-        this.level = level;
-        Gdx.input.setInputProcessor(stage);
+	public GameScreen (Unfaithful game, int level) {
+		super ();
+		this.game = game;
+		this.stage = new Stage ();
+		this.level = level;
+		Gdx.input.setInputProcessor (stage);
 
         this.batch = new SpriteBatch();
         this.backgroundAtlas =
@@ -90,34 +90,38 @@ public class GameScreen implements Screen {
         background.addLayer(new TextureLayer(
                 Assets.getInstance().manager.get(Assets.COMPTOIR)));
 
-        this.engine = new PooledEngine();
-        this.engine.addSystem(new RenderingSystem(game.sb));
-        this.engine.addSystem(new AnimationSystem());
-        this.engine.addSystem(new StateSystem());
-        this.engine.addSystem(new ActionSystem());
-        this.engine.addSystem(new MovementSystem());
-        this.engine.addSystem(new TargetSystem());
-        this.engine.addSystem(new HackerSystem());
-        this.engine.addSystem(new LaptopSystem());
-        this.gWorld = new GameWorld(engine, level);
+		this.engine = new PooledEngine ();
+		this.engine.addSystem (new RenderingSystem (game.sb));
+		this.engine.addSystem (new AnimationSystem ());
+		this.engine.addSystem (new StateSystem ());
+		this.engine.addSystem (new ActionSystem ());
+		this.engine.addSystem (new MovementSystem ());
+		this.engine.addSystem (new TargetSystem ());
+		this.engine.addSystem (new HackerSystem ());
+		this.engine.addSystem (new LaptopSystem ());
+		this.gWorld = new GameWorld (engine, level);
 
-        isPaused = false;
+		isPaused = false;
 
-        Gdx.input.setInputProcessor(stage);
-        GUI gui = GUI.getInstance();
+		Gdx.input.setInputProcessor (stage);
+		GUI gui = GUI.getInstance ();
 
-        Texture textureBtnPause = Assets.getInstance().manager.get(Assets.BTN_PAUSE);
-        Texture textureBtnPauseHover = Assets.getInstance().manager.get(Assets.TEXTURE_NAME);
+		Texture textureBtnPause = Assets.getInstance ().manager
+			  .get (Assets.BTN_PAUSE);
+		Texture textureBtnPauseHover = Assets.getInstance ().manager
+			  .get (Assets.TEXTURE_NAME);
 
-        int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
-        int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;
-        Button btnPause = gui.addButton(btnX, btnY, textureBtnPause, textureBtnPauseHover);
-        btnPause.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                pauseAction();
-            }
-        });
+		int btnX = Gdx.graphics.getWidth () - textureBtnPause.getWidth () - 5;
+		int btnY = Gdx.graphics.getHeight () - textureBtnPause.getHeight ()
+		           - 5;
+		Button btnPause = gui
+			  .addButton (btnX, btnY, textureBtnPause, textureBtnPauseHover);
+		btnPause.addListener (new ClickListener () {
+			@Override
+			public void clicked (InputEvent event, float x, float y) {
+				pauseAction ();
+			}
+		});
 
         addMenuButtons();
 
@@ -161,9 +165,17 @@ public class GameScreen implements Screen {
         stage.addActor(playButton);
     }
 
-    @Override
-    public void show() {
-    }
+	private void pauseAction () {
+		if (isPaused) {
+			resume ();
+		} else {
+			pause ();
+		}
+	}
+
+	@Override
+	public void show () {
+	}
 
     @Override
     public void render(float delta) {
@@ -176,11 +188,15 @@ public class GameScreen implements Screen {
         stage.draw();
     }
 
-    private void update(float delta) {
-        background.update(delta);
+	private void update (float delta) {
+		background.update (delta);
 
-        updateInput();
+		updateInput ();
 
+		if (gWorld.isHacked ()) {
+			game.setScreen (new SplashScreen (game, level + 1));
+		}
+	}
         if (gWorld.isHacked()) {
             game.setScreen(new SplashScreen(game, level + 1));
         }
@@ -214,11 +230,31 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
             engine.getSystem(HackerSystem.class).setIsHacking(true);
         } else {
+	private void updateInput () {
+		if (Gdx.input
+			  .isKeyJustPressed (Keys.ESCAPE))
+		{ //TODO add buttonpause on screen
+			pauseAction ();
+		}
+		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
+			engine.getSystem (HackerSystem.class).setIsHacking (true);
+		} else {
 
             engine.getSystem(HackerSystem.class).setIsHacking(false);
         }
     }
 
+	private void draw (float delta) {
+		//UI
+		Gdx.gl.glClearColor (0, 0, 0, 1);
+		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
+		game.sb.setProjectionMatrix (background.camera.combined);
+		//        toast = toastFactory.create("All started when i saw my
+		// girlfriend flirting with some guy at the gym. \n"
+		//                + "I got mad and as an apprentice hacker I decided
+		// to test my skill on her and finally \n"
+		//                + "get my revenge. I then decided to start with her
+		// facebook account.", Toast.Length.LONG);
     private void draw(float delta) {
         //UI
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -266,4 +302,17 @@ public class GameScreen implements Screen {
         engine.getSystem(TargetSystem.class).setProcessing(true);
         isPaused = false;
     }
+}
+
+	@Override
+	public void hide () {
+	}
+
+	@Override
+	public void dispose () {
+		background.dispose ();
+		backgroundAtlas.dispose ();
+		batch.dispose ();
+		engine.clearPools ();
+	}
 }
