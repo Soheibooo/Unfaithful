@@ -22,14 +22,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
@@ -109,10 +108,8 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor (stage);
 		GUI gui = GUI.getInstance ();
 
-		Texture textureBtnPause = Assets.getInstance ().manager
-			  .get (Assets.BTN_PAUSE);
-		Texture textureBtnPauseHover = Assets.getInstance ().manager
-			  .get (Assets.TEXTURE_NAME);
+		Texture textureBtnPause = Assets.getInstance ().manager.get (Assets.BTN_PAUSE);
+		Texture textureBtnPauseHover = Assets.getInstance ().manager.get (Assets.TEXTURE_NAME);
 
 		int btnX = Gdx.graphics.getWidth () - textureBtnPause.getWidth () - 5;
 		int btnY = Gdx.graphics.getHeight () - textureBtnPause.getHeight ()
@@ -126,53 +123,45 @@ public class GameScreen implements Screen {
 			}
 		});
 
-		Pixmap pixmapPBHB = Assets.getInstance ().manager
-			  .get (Assets.SPRITE_NAME);
-		Pixmap pixmapPBHF = Assets.getInstance ().manager
-			  .get (Assets.SPRITE_NAME);
 
-		//        Texture textureProgressBarHackBackground = Assets
-		// .getInstance().manager.get(Assets.SPRITE_NAME);
-		//        Texture textureProgressBarHackFill = Assets.getInstance()
-		// .manager.get(Assets.SPRITE_NAME);
-		Pixmap pbhb = new Pixmap (10, 10, pixmapPBHB.getFormat ());
-		pbhb.drawPixmap (pixmapPBHB, 0, 0, pixmapPBHB.getWidth (),
-		                 pixmapPBHB.getHeight (), 0, 0, pbhb.getWidth (),
-		                 pbhb.getHeight ());
-
-		Pixmap pbhf = new Pixmap (10, 10, pixmapPBHF.getFormat ());
-		pbhf.drawPixmap (pixmapPBHF, 0, 0, pixmapPBHF.getWidth (),
-		                 pixmapPBHF.getHeight (), 0, 0, pbhf.getWidth (),
-		                 pbhf.getHeight ());
-
-		Texture textureProgressBarHackBackground = new Texture (pbhb);
-		Texture textureProgressBarHackFill       = new Texture (pbhf);
-
-		int progressBarHackX = 5;
-		int progressBarHackY = Gdx.graphics.getHeight () -
-		                       textureProgressBarHackBackground.getHeight () -
-		                       5;
-		ProgressBar progressBarHack = gui
-			  .addProgressBar (progressBarHackX, progressBarHackY,
-			                   textureProgressBarHackBackground,
-			                   textureProgressBarHackFill);
-
-		//Texture textureProgressBarSuspiciousBackground = Assets.getInstance()
-		// .manager.get(Assets.ATLAS_BAR_SUSPICION);
-		//Texture textureProgressBarSuspiciousFill = Assets.getInstance()
-		//.manager.get(Assets.);
-		//int progressBarSuspicousX = Gdx.graphics.getWidth() / 2 -
-		// textureProgressBarHackBackground.getWidth() / 2;
-		//int progressBarSuspicousY = Gdx.graphics.getHeight() -
-		// textureProgressBarSuspiciousBackground.getHeight() - 5;
-		//ProgressBar progressBarSuspicious = gui.addProgressBar
-		// (progressBarSuspicousX, progressBarSuspicousY,
-		// textureProgressBarSuspiciousBackground,
-		// textureProgressBarSuspiciousFill);
+		addMenuButtons();
 		stage.addActor (btnPause);
-		//stage.addActor(progressBarHack);
-		//stage.addActor(progressBarSuspicious);
+	}
 
+	private void addMenuButtons() {
+		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+		textButtonStyle.font = new BitmapFont();
+		TextureAtlas.AtlasRegion defaultRegion = Assets.getInstance().manager.get(Assets.ATLAS_MENU).findRegion("menu_bar0000");
+		Sprite defaultSprite = new Sprite(defaultRegion);
+		String[] regions = new String[]{"menu_bar_select0000", "menu_bar_select0001", "menu_bar_select0002", "menu_bar_select0003"};
+
+		AnimatedTextButton playButton = new AnimatedTextButton("Play", textButtonStyle, defaultSprite);
+		playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+		playButton.setPosition(20, 50);
+		playButton.setWidth(160);
+		playButton.setHeight(32);
+		playButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				System.out.println("Button click");
+				return true;
+			}
+		});
+		stage.addActor(playButton);
+
+		playButton = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
+		playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+		playButton.setPosition(20, 5);
+		playButton.setWidth(160);
+		playButton.setHeight(32);
+		playButton.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				System.out.println("Button click");
+				return true;
+			}
+		});
+		stage.addActor(playButton);
 	}
 
 	private void pauseAction () {
@@ -193,6 +182,9 @@ public class GameScreen implements Screen {
 		draw (delta);
 		//        toast.render(Gdx.graphics.getDeltaTime());
 		engine.update (delta);
+
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	private void update (float delta) {
@@ -234,8 +226,6 @@ public class GameScreen implements Screen {
 		game.sb.begin ();
 		background.draw (game.sb);
 		game.sb.end ();
-
-		stage.draw ();
 	}
 
 	@Override
