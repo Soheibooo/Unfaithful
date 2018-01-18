@@ -16,7 +16,6 @@
 package com.bdeb1.unfaithful.screens;
 
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -24,7 +23,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -35,7 +33,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
-import com.bdeb1.unfaithful.Toast;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
@@ -44,7 +41,6 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
-import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
 
@@ -56,9 +52,10 @@ public class GameScreen implements Screen {
 
     private GameWorld gWorld;
     private PooledEngine engine;
-    private Game game;
+    private Unfaithful game;
     private boolean isPaused;
     private Stage stage;
+    private int level;
 
     private Scene background;
     private SpriteBatch batch;
@@ -68,18 +65,21 @@ public class GameScreen implements Screen {
 //            .build();
 //    private Toast toast;
 
-    public GameScreen(Unfaithful game) {
+    public GameScreen(Unfaithful game, int level) {
         super();
         this.game = game;
         this.stage = new Stage();
+        this.level = level;
         Gdx.input.setInputProcessor(stage);
 
         stage.act();
 
         this.batch = new SpriteBatch();
-        this.backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
+        this.backgroundAtlas = 
+                Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_LV1);
 
-        Animation<TextureRegion> animation = new Animation<TextureRegion>(1f / 2f, backgroundAtlas.getRegions());
+        Animation<TextureRegion> animation = 
+                new Animation<>(1f / 2f, backgroundAtlas.getRegions());
         Dimension visibleDimension = new Dimension(Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight());
         this.background = new Scene(visibleDimension, animation);
@@ -92,7 +92,7 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new MovementSystem());
         this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
-        this.gWorld = new GameWorld(engine);
+        this.gWorld = new GameWorld(engine, level);
 
         isPaused = false;
 
@@ -163,22 +163,16 @@ public class GameScreen implements Screen {
 
         updateInput();
 
-        if (gWorld.isHacked(gWorld.getIDLevel())) {
-            if (gWorld.getIDLevel() < 3) {
-                //add transitions
-                gWorld.generateLevel(gWorld.getIDLevel() + 1);
-            } else {
-                //Insert Code for End screen
-                //Later
-            }
+        if (gWorld.isHacked()) {
+            game.setScreen(new SplashScreen(game, level+1));
         }
     }
 
     private void updateInput() {
-        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
+        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
             pauseAction();
         }
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+        if (Gdx.input.isKeyPressed(Keys.SPACE) || Gdx.input.isTouched()) {
 
             engine.getSystem(HackerSystem.class).setIsHacking(true);
         } else {
@@ -223,7 +217,7 @@ public class GameScreen implements Screen {
         engine.getSystem(AnimationSystem.class).setProcessing(false);
         engine.getSystem(HackerSystem.class).setProcessing(false);
         engine.getSystem(MovementSystem.class).setProcessing(false);
-        engine.getSystem(RenderingSystem.class).setProcessing(false);
+        //engine.getSystem(RenderingSystem.class).setProcessing(false);
         engine.getSystem(StateSystem.class).setProcessing(false);
         engine.getSystem(TargetSystem.class).setProcessing(false);
         isPaused = true;
@@ -237,7 +231,7 @@ public class GameScreen implements Screen {
         engine.getSystem(AnimationSystem.class).setProcessing(true);
         engine.getSystem(HackerSystem.class).setProcessing(true);
         engine.getSystem(MovementSystem.class).setProcessing(true);
-        engine.getSystem(RenderingSystem.class).setProcessing(true);
+        //engine.getSystem(RenderingSystem.class).setProcessing(true);
         engine.getSystem(StateSystem.class).setProcessing(true);
         engine.getSystem(TargetSystem.class).setProcessing(true);
         isPaused = false;
@@ -252,5 +246,6 @@ public class GameScreen implements Screen {
         background.dispose();
         backgroundAtlas.dispose();
         batch.dispose();
+        engine.clearPools();
     }
 }
