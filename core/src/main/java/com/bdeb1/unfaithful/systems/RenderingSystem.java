@@ -73,10 +73,6 @@ public class RenderingSystem extends IteratingSystem {
         TextureComponent tex = textureM.get(entity);
         TransformComponent t = transformM.get(entity);
 
-        if (entity.getComponent(MenuComponent.class) != null) {
-            System.out.println(t.position.x + "");
-        }
-
         if (!(tex.region == null || t.isHidden)) {
 
 
@@ -99,9 +95,9 @@ public class RenderingSystem extends IteratingSystem {
                     t.rotation);
             batch.end();
         } else if (entity.getComponent(TargetComponent.class) == null) {
-            System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
+            //System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
         } if (entity.getComponent(MenuComponent.class) != null) {
-            System.out.println("Ton menu boi");
+            //System.out.println("Ton menu boi");
         }
     }
 

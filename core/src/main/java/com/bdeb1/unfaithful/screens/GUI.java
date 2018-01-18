@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.EventAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -51,7 +48,7 @@ public class GUI {
         return button;
     }
 
-   /* public Entity registerGUI(PooledEngine engine) {
+    public Entity registerGUI(PooledEngine engine, SpriteBatch batch) {
         Entity entity = engine.createEntity();
 
         AnimationComponent animC
@@ -64,8 +61,11 @@ public class GUI {
                 engine.createComponent(ActionComponent.class);
         TransformComponent transformC =
                 engine.createComponent(TransformComponent.class);
+        TextureComponent textureC =
+                engine.createComponent(TextureComponent.class);
 
-        transformC.position.set(5f, 10f, 0);
+        transformC.position.set(10, 10, 0);
+
         actionC.action = 0;
 
         stateC.set(MenuComponent.STATE_INACTIVE);
@@ -77,18 +77,18 @@ public class GUI {
         menuRegion.add(menuImage);
 
         Animation<TextureRegion> menuStill = new Animation<TextureRegion>(1/12f, menuRegion);
-        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.getRegions(), Animation.PlayMode.LOOP);
+        Animation<TextureRegion> MenuAnim = new Animation<TextureRegion>(1/12f, texAtlas.findRegions("menu_bar_select"), Animation.PlayMode.LOOP);
 
-
+        HashMap<Integer, Animation> stillList = new HashMap<Integer, Animation>();
         HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
-        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
 
-        animeList.put(0, menuStill);
-        animeList2.put(0, MenuAnim);
+        stillList.put(0, menuStill);
+        animeList.put(0, MenuAnim);
 
-        animC.animations.put(MenuComponent.STATE_INACTIVE, animeList);
-        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList2);
+        animC.animations.put(MenuComponent.STATE_INACTIVE, stillList);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
 
+        entity.add(textureC);
         entity.add(menuC);
         entity.add(stateC);
         entity.add(transformC);
@@ -98,7 +98,7 @@ public class GUI {
         engine.addEntity(entity);
 
         return entity;
-    }*/
+    }
 
     public ProgressBar addProgressBar(int x, int y, Texture textureBackground, Texture textureFill) {
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
@@ -109,5 +109,56 @@ public class GUI {
         progressBar.setBounds(x, y, textureBackground.getWidth(), textureBackground.getHeight());
         progressBar.setValue(25);
         return progressBar;
+    }
+
+    public Entity createHackingBar(PooledEngine engine) {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        StateComponent stateC =
+                engine.createComponent(StateComponent.class);
+        ActionComponent actionC =
+                engine.createComponent(ActionComponent.class);
+        TransformComponent transformC =
+                engine.createComponent(TransformComponent.class);
+        TextureComponent textureC =
+                engine.createComponent(TextureComponent.class);
+        MenuComponent menuC =
+                engine.createComponent(MenuComponent.class);
+
+        transformC.position.set(2, 5, 0);
+
+        actionC.action = 0;
+
+        stateC.set(MenuComponent.STATE_INACTIVE);
+        TextureAtlas texAtlas =  Assets.getInstance().manager.get(Assets.ATLAS_BAR_HACKING);
+
+        TextureAtlas.AtlasRegion barBackground = texAtlas.findRegion("hacking_bar");
+        Array<TextureAtlas.AtlasRegion> barBackgroundRegion = new Array<TextureAtlas.AtlasRegion>();
+        barBackgroundRegion.add(barBackground);
+        Animation<TextureRegion> barBackgroundAnimation = new Animation<TextureRegion>(1/12f, barBackgroundRegion);
+
+        Array<TextureAtlas.AtlasRegion> barBackgroundBlinkRegions = texAtlas.findRegions("hacking_bar_blink");
+        Animation<TextureRegion> barBackgroundBlinkAnimation = new Animation<TextureRegion>(1/12f, barBackgroundBlinkRegions, Animation.PlayMode.LOOP);
+
+        HashMap<Integer, Animation> stillList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+
+        stillList.put(0, barBackgroundAnimation);
+        animeList.put(0, barBackgroundBlinkAnimation);
+
+        //animC.animations.put(MenuComponent.STATE_INACTIVE, stillList);
+        animC.animations.put(MenuComponent.STATE_ACTIVE, animeList);
+
+        entity.add(textureC);
+        entity.add(stateC);
+        entity.add(transformC);
+        entity.add(actionC);
+        entity.add(animC);
+
+        engine.addEntity(entity);
+
+        return entity;
     }
 }
