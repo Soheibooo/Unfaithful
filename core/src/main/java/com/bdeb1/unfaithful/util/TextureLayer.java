@@ -15,8 +15,8 @@ public class TextureLayer extends Layer {
 		                               texture.getHeight ());
 	}
 
-	public void setDrawingBounds (int x, int y, int width, int height) {
-		drawingBounds.setBounds (x, y, width, height);
+	public void setDrawingBounds (float x, float y, float width, float height) {
+		drawingBounds.setBounds ((int)x, (int)y, (int)width, (int)height);
 	}
 
 	@Override

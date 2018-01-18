@@ -18,7 +18,6 @@ package com.bdeb1.unfaithful;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -26,6 +25,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.*;
 
+import com.bdeb1.unfaithful.util.Constants;
 import java.util.HashMap;
 
 /**
@@ -172,41 +172,41 @@ public class GameWorld {
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets.uneAnim);
 
-        positionC.position.set(5f, 3.5f, 0.0f);
+        positionC.position.set(Constants.World.HACKER_INITIAL_POSITION);
         //PAS DE STATE POUR LE HACKER
         stateC.set(0);
         actionC.set(HackerComponent.ACTION_NOT_HACKING);
-        
+
         TextureAtlas texAtHacking = Assets.getInstance().manager.get(Assets.ATLAS_HACKING);
         TextureAtlas texAtNOTHacking = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING);
-        
+
         HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
-        
-        
+
+
         Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(1/12f, texAtHacking.getRegions(), PlayMode.LOOP);
         Animation<TextureRegion> animeNotHacking = new Animation<TextureRegion>(1/12f, texAtNOTHacking.getRegions(), PlayMode.LOOP);
-        
-        
+
+
         animeList.put(1, animeHacking);
         animeList.put(2, animeNotHacking);
-        
+
         //DEFAULT
         animC.animations.put(0 ,animeList);
-        
-        
+
+
         entity.add(textureC);
         entity.add(animC);
-        
+
         entity.add(hackerC);
         entity.add(positionC);
         entity.add(stateC);
         entity.add(actionC);
 
         engine.addEntity(entity);
-        
+
         return entity;
     }
-    
+
     public boolean isHacked(int difficultyID) {
         HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
         return hackerC.hacking_gauge >= (50 + difficultyID*difficultyID*10) ? true : false; //1=60; 2=90; 3=140;
