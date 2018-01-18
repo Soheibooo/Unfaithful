@@ -17,16 +17,14 @@ package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.*;
-import com.bdeb1.unfaithful.screens.GUI;
-
 import com.bdeb1.unfaithful.util.Constants;
+
 import java.util.HashMap;
 
 /**
@@ -57,8 +55,6 @@ public class GameWorld {
         target = createTarget();
         comptoir = createDumbYouRE();
         hacker = createHacker();
-        suspiciousGauge = createSuspiciousGauge();
-        menu = registerGUI();
     }
 
     public Entity registerGUI() {
@@ -184,62 +180,6 @@ public class GameWorld {
         engine.addEntity(entity);
         return entity;
 
-    }
-
-    private Entity createSuspiciousGauge() {
-        Entity entity = engine.createEntity();
-
-        AnimationComponent animC
-                = engine.createComponent(AnimationComponent.class);
-        TextureComponent textureC
-                = engine.createComponent(TextureComponent.class);
-        ActionComponent actionC
-                = engine.createComponent(ActionComponent.class);
-        TransformComponent positionC
-                = engine.createComponent(TransformComponent.class);
-        StateComponent stateC
-                = engine.createComponent(StateComponent.class);
-		        positionC.position.set(5.0f, Gdx.graphics.getHeight()
-                                - DISTANCE_BETWEEB_BARS, 0.0f);
-
-        entity.add(textureC);
-        entity.add(animC);
-        entity.add(positionC);
-        entity.add(stateC);
-        //Not used for now (to talk with Samuel, I have a plan to make it conditional on the system) -Soso
-        entity.add(actionC);
-
-        stateC.set(GaugeStateComponent.STATE_NORMAL);
-        TextureAtlas suspiciousGauge = 
-                Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICION);
-
-        TextureAtlas.AtlasRegion suspiciousGaugeImage 
-                = suspiciousGauge.findRegion("suspicion_bar0000");
-
-        Array<TextureAtlas.AtlasRegion> simpleSuspiciousGaugeRegion
-                = new Array<>();
-        simpleSuspiciousGaugeRegion.add(suspiciousGaugeImage);
-
-        Animation<TextureRegion> suspiciousGaugeAnim
-                = new Animation<>(
-                        1 / 12f, simpleSuspiciousGaugeRegion);
-        Animation<TextureRegion> suspiciousGaugeBlinkingAnim
-                = new Animation<>(
-                        1 / 12f, suspiciousGauge.getRegions(), PlayMode.LOOP);
-
-        HashMap<Integer, Animation> animeList = new HashMap<>();
-        HashMap<Integer, Animation> animeList2 = new HashMap<>();
-
-        animeList.put(0, suspiciousGaugeAnim);
-        animeList2.put(0, suspiciousGaugeBlinkingAnim);
-
-        //DEFAULT
-        animC.animations.put(0, animeList);
-        animC.animations.put(1, animeList2);
-
-        engine.addEntity(entity);
-
-        return entity;
     }
 
     private Entity createTarget() {

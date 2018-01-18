@@ -104,10 +104,16 @@ public class RenderingSystem extends IteratingSystem {
             }
 
             batch.end();
+        } else if (entity.getComponent(TargetComponent.class) == null) {
+//			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
+        }
+        if (entity.getComponent(MenuComponent.class) != null) {
+//			System.out.println ("Ton menu boi");
         }
     }
 
     public static float PixelsToMeters(float pixelValue) {
         return pixelValue * PIXELS_TO_METRES;
     }
+
 }
