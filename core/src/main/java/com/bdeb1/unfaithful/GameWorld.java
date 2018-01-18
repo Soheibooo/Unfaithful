@@ -17,18 +17,14 @@ package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.bdeb1.unfaithful.components.ActionComponent;
-import com.bdeb1.unfaithful.components.AnimationComponent;
-import com.bdeb1.unfaithful.components.HackerComponent;
-import com.bdeb1.unfaithful.components.LaptopComponent;
-import com.bdeb1.unfaithful.components.StateComponent;
-import com.bdeb1.unfaithful.components.TargetComponent;
-import com.bdeb1.unfaithful.components.TextureComponent;
-import com.bdeb1.unfaithful.components.TransformComponent;
+import com.badlogic.gdx.utils.Array;
+import com.bdeb1.unfaithful.components.*;
 import java.util.HashMap;
 
 /**
@@ -39,8 +35,9 @@ public class GameWorld {
     private int idLevel = 1;
     
     private PooledEngine engine;
-    private Entity hacker, target;
-    
+    private Entity hacker, target, suspiciousGauge, hackingGauge;
+
+    private final int DISTANCE_BETWEEB_BARS = 10;
     
     public GameWorld(PooledEngine engine) {
         this.engine = engine;
@@ -61,6 +58,7 @@ public class GameWorld {
         target = createTarget(difficulty);
         hacker = createHacker(difficulty);
         laptopScreen(hacker);
+		suspiciousGauge = createSuspiciousGauge();
     }
     
     
@@ -71,10 +69,11 @@ public class GameWorld {
                 = engine.createComponent(TransformComponent.class);
         AnimationComponent animC
                 = engine.createComponent(AnimationComponent.class);
-        TextureComponent textureC
+				TextureComponent textureC
                 = engine.createComponent(TextureComponent.class);
         ActionComponent actionC
                 = engine.createComponent(ActionComponent.class);
+
         StateComponent stateC
                 = engine.createComponent(StateComponent.class);
         LaptopComponent laptopC
@@ -108,8 +107,56 @@ public class GameWorld {
         
         engine.addEntity(entity);
         return entity;
+        
     }
-    
+
+    private Entity createSuspiciousGauge() {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        StateComponent stateC
+                = engine.createComponent(StateComponent.class);
+		        positionC.position.set(5.0f, Gdx.graphics.getHeight() - DISTANCE_BETWEEB_BARS, 0.0f);
+
+        entity.add(textureC);
+        entity.add(animC);
+        entity.add(positionC);
+        entity.add(stateC);
+        //Not used for now (to talk with Samuel, I have a plan to make it conditional on the system) -Soso
+        entity.add(actionC);
+
+        stateC.set(GaugeStateComponent.STATE_NORMAL);
+        TextureAtlas suspiciousGauge = Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICION);
+
+        TextureAtlas.AtlasRegion suspiciousGaugeImage = suspiciousGauge.findRegion("suspicion_bar0000");
+
+       Array<TextureAtlas.AtlasRegion> simpleSuspiciousGaugeRegion = new Array<TextureAtlas.AtlasRegion>();
+       simpleSuspiciousGaugeRegion.add(suspiciousGaugeImage);
+
+        Animation<TextureRegion> suspiciousGaugeAnim = new Animation<TextureRegion>(1/12f, simpleSuspiciousGaugeRegion);
+        Animation<TextureRegion> suspiciousGaugeBlinkingAnim = new Animation<TextureRegion>(1/12f, suspiciousGauge.getRegions(), PlayMode.LOOP);
+
+
+        HashMap<Integer, Animation> animeList = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> animeList2 = new HashMap<Integer, Animation>();
+
+        animeList.put(0, suspiciousGaugeAnim);
+        animeList2.put(0, suspiciousGaugeBlinkingAnim);
+
+        //DEFAULT
+        animC.animations.put(0 ,animeList);
+        animC.animations.put(1 ,animeList2);
+
+        engine.addEntity(entity);
+
+        return entity;
+        
+    }
+
+
     private Entity createTarget(float difficultyKey) {
         Entity entity = engine.createEntity();
 
@@ -123,6 +170,8 @@ public class GameWorld {
                 = engine.createComponent(TextureComponent.class);
         TargetComponent targetC
                 = engine.createComponent(TargetComponent.class);
+        ActionComponent actionC
+                = engine.createComponent(ActionComponent.class);
 
 //        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets.uneAnim);
 //        animC.animations.put(CharacterComponent.STATE_DEAD, Assets.uneAnim);
@@ -131,18 +180,22 @@ public class GameWorld {
         positionC.position.set(5.0f, 1.0f, 0.0f);
         stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
         targetC.difficultyAddition = -difficultyKey * 5;
-        
+
+        stateC.set(0);
+        actionC.set(TargetComponent.ACTION_TALKING);
+
         entity.add(textureC);
         entity.add(animC);
         entity.add(targetC);
         entity.add(positionC);
         entity.add(stateC);
+
         
 
         engine.addEntity(entity);
-        
+
         return entity;
-    }
+}
 
     private Entity createHacker(float difficultyKey) {
                 Entity entity = engine.createEntity();

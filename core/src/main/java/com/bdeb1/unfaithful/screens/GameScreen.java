@@ -28,9 +28,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Toast;
@@ -105,6 +107,12 @@ public class GameScreen implements Screen {
         int btnX = Gdx.graphics.getWidth() - textureBtnPause.getWidth() - 5;
         int btnY = Gdx.graphics.getHeight() - textureBtnPause.getHeight() - 5;
         Button btnPause = gui.addButton(btnX, btnY, textureBtnPause, textureBtnPauseHover);
+        btnPause.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                pauseAction();
+            }
+        });
 
         Pixmap pixmapPBHB = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
         Pixmap pixmapPBHF = Assets.getInstance().manager.get(Assets.SPRITE_NAME);
@@ -135,7 +143,7 @@ public class GameScreen implements Screen {
         //int progressBarSuspicousY = Gdx.graphics.getHeight() - textureProgressBarSuspiciousBackground.getHeight() - 5;
         //ProgressBar progressBarSuspicious = gui.addProgressBar(progressBarSuspicousX, progressBarSuspicousY, textureProgressBarSuspiciousBackground, textureProgressBarSuspiciousFill);
         stage.addActor(btnPause);
-        stage.addActor(progressBarHack);
+        //stage.addActor(progressBarHack);
         //stage.addActor(progressBarSuspicious);
 
     }
@@ -169,12 +177,8 @@ public class GameScreen implements Screen {
     }
 
     private void updateInput() {
-        if (Gdx.input.isKeyPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
-            if (isPaused) {
-                resume();
-            } else {
-                pause();
-            }
+        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
+            pauseAction();
         }
         if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 
@@ -184,6 +188,14 @@ public class GameScreen implements Screen {
             engine.getSystem(HackerSystem.class).setIsHacking(false);
         }
 
+    }
+
+    private void pauseAction() {
+        if (isPaused) {
+            resume();
+        } else {
+            pause();
+        }
     }
 
     private void draw(float delta) {
