@@ -85,7 +85,7 @@ public class RenderingSystem extends IteratingSystem {
 			batch.begin ();
 
 			if (entity.getComponent (HackerComponent.class) != null) {
-				System.out.println (width + ", " + height + ", " + t.position);
+				//System.out.println (width + ", " + height + ", " + t.position);
 				batch.draw (tex.region, t.position.x, t.position.y,
 				            width * Constants.World.SCALE,
 				            height * Constants.World.SCALE);

@@ -60,9 +60,9 @@ public class AnimationSystem extends IteratingSystem {
         
 
         for (int i : animationC.animations.keySet()) {
-            System.out.println("CLE: " + i);
-            System.out.println("VALUE: " + animationC.animations.get(i).toString());
-            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
+//            System.out.println("CLE: " + i);
+//            System.out.println("VALUE: " + animationC.animations.get(i).toString());
+//            System.out.println("POUR TANT LE STATE EST: " + stateC.get());
         }
         if (animationC.animations.containsKey(stateC.get())) {
             
