@@ -85,7 +85,6 @@ public class RenderingSystem extends IteratingSystem {
 			batch.begin ();
 
 			if (entity.getComponent (HackerComponent.class) != null) {
-				System.out.println (width + ", " + height + ", " + t.position);
 				batch.draw (tex.region, t.position.x, t.position.y,
 				            width * Constants.World.SCALE,
 				            height * Constants.World.SCALE);
@@ -99,10 +98,10 @@ public class RenderingSystem extends IteratingSystem {
 
 			batch.end ();
 		} else if (entity.getComponent (TargetComponent.class) == null) {
-			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
+//			System.out.println ("NOT RENDERING THIS (NOT TARGET THO)");
 		}
 		if (entity.getComponent (MenuComponent.class) != null) {
-			System.out.println ("Ton menu boi");
+//			System.out.println ("Ton menu boi");
 		}
 	}
 

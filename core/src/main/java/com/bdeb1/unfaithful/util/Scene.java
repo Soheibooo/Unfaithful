@@ -1,9 +1,9 @@
-
 package com.bdeb1.unfaithful.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,11 +13,11 @@ import com.badlogic.gdx.utils.Array;
 
 public class Scene {
 
-	public  OrthographicCamera camera;
-	public final Vector3       CAMERA_ORIGIN;
-	private Rectangle          bounds;
-	private Direction          directionCamera;
-	private Array<Layer>       layers;
+	public final Vector3            CAMERA_ORIGIN;
+	public       OrthographicCamera camera;
+	private      Rectangle          bounds;
+	private      Direction          directionCamera;
+	private      Array<Layer>       layers;
 
 
 	private Animation<TextureRegion> animation;
@@ -54,9 +54,10 @@ public class Scene {
 		               Constants.World.CAMERA_PAN_EASE;
 
 		// move with keys
-		if (Gdx.input.isKeyPressed (Input.Keys.RIGHT)) {
+		if (Gdx.input.isKeyPressed (Input.Keys.RIGHT) || touchedRight ()) {
 			camera.translate (dc, 0);
-		} else if (Gdx.input.isKeyPressed (Input.Keys.LEFT)) {
+		} else if (Gdx.input.isKeyPressed (Input.Keys.LEFT) || touchedLeft
+			  ()) {
 			camera.translate (- dc, 0);
 			// move back automagically
 		} else if (directionCamera == Direction.Right) {
@@ -84,6 +85,35 @@ public class Scene {
 			directionCamera = Direction.Center;
 		}
 		camera.update ();
+	}
+
+	private boolean touchedRight () {
+		Vector3 clickedPos = new Vector3 (0, 0, 0);
+		if (Gdx.input.isTouched ()) {
+			clickedPos.set (Gdx.input.getX (), Gdx.input.getY (), 0);
+		} else {
+			return false;
+		}
+
+		if (Constants.World.TOUCHABLE_RIGHT.contains (clickedPos.x, 10)) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean touchedLeft () {
+		Vector3 clickedPos = new Vector3 (0, 0, 0);
+		if (Gdx.input.isTouched ()) {
+			clickedPos.set (Gdx.input.getX (), Gdx.input.getY (), 0);
+		} else {
+			return false;
+		}
+
+		if (Constants.World.TOUCHABLE_LEFT.contains (clickedPos.x, 10)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void draw (Batch batch) {
