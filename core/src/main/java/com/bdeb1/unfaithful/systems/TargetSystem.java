@@ -32,12 +32,15 @@ import com.bdeb1.unfaithful.components.TransformComponent;
  */
 public class TargetSystem extends IntervalIteratingSystem {
 
+    
     private static final float TIME_STEP = 1 / 45f;
 
-    private static final int WIDTH_SCREEN_TOT = 900;
-    private static final int WIDTH_ZONE_SAFE = 300;
-    private static final int WIDTH_ZONE_SUSPICION = 300;
+    private static final int WIDTH_SCREEN_TOT = 3200;
+    private static final int WIDTH_ZONE_SAFE = 640;
+    private static final int WIDTH_ZONE_SUSPICION = 700;
 
+    
+    private int randWaitingTime = RandomComponent.rand.nextInt(5);
     private int randPositionTar = 0;
     private int randTimeStay = 0;
     private int randDir = 0;
@@ -51,11 +54,7 @@ public class TargetSystem extends IntervalIteratingSystem {
 
     public TargetSystem() {
         super(Family.all(
-                ActionComponent.class,
-                StateComponent.class,
-                TargetComponent.class,
-                RandomComponent.class,
-                TransformComponent.class
+                TargetComponent.class
         ).get(), TIME_STEP);
 
         actionM = ComponentMapper.getFor(ActionComponent.class);
@@ -63,10 +62,11 @@ public class TargetSystem extends IntervalIteratingSystem {
         targetM = ComponentMapper.getFor(TargetComponent.class);
         randomM = ComponentMapper.getFor(RandomComponent.class);
         transformM = ComponentMapper.getFor(TransformComponent.class);
+        movementM = ComponentMapper.getFor(MovementComponent.class);
     }
 
     @Override
-    protected void processEntity(Entity entity) {
+     protected void processEntity(Entity entity) {
         ActionComponent actionC = actionM.get(entity);
         StateComponent stateC = stateM.get(entity);
         TargetComponent targetC = targetM.get(entity);
@@ -75,10 +75,10 @@ public class TargetSystem extends IntervalIteratingSystem {
 
         //Time between changing action
         RandomComponent randomC = randomM.get(entity);
-
+        
         //Out of screen
         //ZONE SAFE
-        if (transformC.position.x < WIDTH_ZONE_SAFE || transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE) {
+        if (transformC.position.x < WIDTH_ZONE_SAFE || transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - 50) {
             if (targetC.suspicion_gauge >= 0) {
                 targetC.suspicion_gauge -= 0.05f;
             }
@@ -117,20 +117,27 @@ public class TargetSystem extends IntervalIteratingSystem {
             stateC.state = TargetComponent.STATE_DONE;
         }
 
-        if (actionC.time > randomC.value
+        
+        
+        //System.out.println(actionC.time);
+        
+        if (actionC.time > randWaitingTime
                 && (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
                 || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN)) {
 
             //TO ADJUST DIFFICULTY
-            randomC.value = RandomComponent.rand.nextInt(
-                    (int) (35 + targetC.difficultyAddition)
-                    - Math.max(15, (int) targetC.suspicion_gauge / 5 + 2)
+            randWaitingTime = RandomComponent.rand.nextInt(2
+                    /*(int) (50 + targetC.difficultyAddition)
+                    - Math.max(15, (int) (targetC.suspicion_gauge+1) / 5 + 2)*/
             );
 
             randPositionTar = RandomComponent.rand.nextInt(WIDTH_SCREEN_TOT - 2 * WIDTH_ZONE_SAFE - 2 * WIDTH_ZONE_SUSPICION) + WIDTH_ZONE_SAFE + WIDTH_ZONE_SUSPICION;
-            randTimeStay = RandomComponent.rand.nextInt(8 - (int) targetC.difficultyAddition);
+            randTimeStay = RandomComponent.rand.nextInt(8);
             randDir = RandomComponent.rand.nextInt(2);
-
+            
+            System.out.println("Wait: " + randWaitingTime);
+            System.out.println("STAY: " + randTimeStay);
+            System.out.println("Dir: " + randDir);
             if (actionC.action == TargetComponent.ACTION_LEFT_SCREEN) {
                 System.out.println("Allo");
                 movementC.speed = 5;
@@ -162,12 +169,16 @@ public class TargetSystem extends IntervalIteratingSystem {
                 
             }
             if (transformC.position.x > WIDTH_SCREEN_TOT) {
-                    actionC.action = TargetComponent.ACTION_RIGHT_SCREEN;
+                if (actionC.action != TargetComponent.ACTION_RIGHT_SCREEN)
+                        actionC.action = TargetComponent.ACTION_RIGHT_SCREEN;
                     movementC.speed = 0;
-                } else if (transformC.position.x < 0) {
-                    actionC.action = TargetComponent.ACTION_LEFT_SCREEN;
+                } else if (transformC.position.x < -50) {
+                    if (actionC.action != TargetComponent.ACTION_LEFT_SCREEN)
+                        actionC.action = TargetComponent.ACTION_LEFT_SCREEN;
                     movementC.speed = 0;
                 }
         }
     }
-}
+
+    }
+

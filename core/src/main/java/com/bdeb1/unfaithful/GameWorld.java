@@ -26,6 +26,7 @@ import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.ComptoirComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.LaptopComponent;
+import com.bdeb1.unfaithful.components.MovementComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
@@ -149,7 +150,12 @@ public class GameWorld {
 			  .createComponent (TargetComponent.class);
 		ActionComponent actionC = engine
 			  .createComponent (ActionComponent.class);
-		positionC.position.set (5.0f, 1.0f, 0.0f);
+                MovementComponent movementC
+                        = engine.createComponent (MovementComponent.class);
+                
+		positionC.position.set (3200, 130, 0.0f);
+                
+                movementC.speed = -5;
 		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
 		targetC.difficultyAddition = - level * 5;
 
@@ -187,7 +193,7 @@ public class GameWorld {
 		animC.animations.put (1, animeActionWalk);
 
 		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
-		actionC.set (TargetComponent.ACTION_WALK_RIGHT);
+		actionC.set (TargetComponent.ACTION_WALK_LEFT);
 
 		entity.add (textureC);
 		entity.add (animC);
@@ -195,6 +201,7 @@ public class GameWorld {
 		entity.add (positionC);
 		entity.add (stateC);
 		entity.add (actionC);
+                entity.add(movementC);
 
 		engine.addEntity (entity);
 
