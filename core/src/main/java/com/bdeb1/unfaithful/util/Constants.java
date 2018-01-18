@@ -30,6 +30,7 @@ public final class Constants {
 		public static final Rectangle TOUCHABLE_RIGHT         = new Rectangle (
 			  TOUCHABLE_LEFT.width * 4, 0, TOUCHABLE_LEFT.width,
 			  TOUCHABLE_LEFT.height);
+		public static Direction CAMERA_DIRECTION = Direction.Center;
 
 		public static boolean PAUSE = false;
 	}
