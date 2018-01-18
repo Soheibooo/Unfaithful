@@ -46,10 +46,30 @@ public class Assets {
     }
 
     //------------------------ATLAS
-    public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING
+    public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LV1
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LV1
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/pas_hacking_lvl2.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/hacking_lvl2.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/joe_pas_hacking_lvl3.atlas", TextureAtlas.class);
+
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/joe_hacking_lvl3.atlas", TextureAtlas.class);
+    
     public static final AssetDescriptor<TextureAtlas> ATLAS_HOMESCREEN
             = new AssetDescriptor<TextureAtlas>(
             "atlas/homescreen.atlas", TextureAtlas.class);
@@ -58,9 +78,7 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
             "atlas/tuto.atlas", TextureAtlas.class);
 
-    public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
-            = new AssetDescriptor<TextureAtlas>(
-                    "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
+    
 
        public static final AssetDescriptor<TextureAtlas> ATLAS_RIGHT_TO_LEFT
             = new AssetDescriptor<TextureAtlas>(
@@ -175,6 +193,12 @@ public class Assets {
     public static final AssetDescriptor<Texture> SPLASH_LV2_2
             = new AssetDescriptor<Texture>("image/splash_win_lvl1_2.png", Texture.class);
     
+    public static final AssetDescriptor<Texture> SPLASH_LV3_1
+            = new AssetDescriptor<Texture>("image/splash_win_lvl2_1.png", Texture.class);
+    
+    public static final AssetDescriptor<Texture> SPLASH_LV3_2
+            = new AssetDescriptor<Texture>("image/splash_win_lvl2_2.png", Texture.class);
+    
    public static final AssetDescriptor<Texture> FOREGROUND_LV1 = new
 	      AssetDescriptor<Texture> ("image/comptoir.png", Texture.class);
    
@@ -204,10 +228,15 @@ public class Assets {
      */
     public void load() {
         //Atlas
-        manager.load(ATLAS_NOTHACKING);
+        manager.load(ATLAS_HACKING_LV1);
+        manager.load(ATLAS_NOTHACKING_LV1);
+        manager.load(ATLAS_HACKING_LV2);
+        manager.load(ATLAS_NOTHACKING_LV2);
+        manager.load(ATLAS_HACKING_LV3);
+        manager.load(ATLAS_NOTHACKING_LV3);
         manager.load(ATLAS_TUTO);
         manager.load(ATLAS_HOMESCREEN);
-        manager.load(ATLAS_HACKING);
+        
         manager.load(ATLAS_BACKGROUND_LV1);
         manager.load(ATLAS_BACKGROUND_LV2);
         manager.load(ATLAS_BACKGROUND_LV3);
@@ -240,6 +269,8 @@ public class Assets {
         manager.load(SPLASH_LV1_2);
         manager.load(SPLASH_LV2_1);
         manager.load(SPLASH_LV2_2);
+        manager.load(SPLASH_LV3_1);
+        manager.load(SPLASH_LV3_2);
         manager.load (FOREGROUND_LV1);
         manager.load (FOREGROUND_LV2);
         manager.load(FOREGROUND_LV3);

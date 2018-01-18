@@ -1,0 +1,118 @@
+
+joe_hacking_lvl3.png
+size: 2048,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hacking_lvl30000
+  rotate: false
+  xy: 210, 2
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30001
+  rotate: false
+  xy: 418, 139
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30002
+  rotate: false
+  xy: 626, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30003
+  rotate: false
+  xy: 418, 2
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30004
+  rotate: false
+  xy: 626, 139
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30005
+  rotate: false
+  xy: 834, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30006
+  rotate: false
+  xy: 626, 2
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30007
+  rotate: false
+  xy: 834, 139
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30008
+  rotate: false
+  xy: 1042, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30010
+  rotate: false
+  xy: 2, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30011
+  rotate: false
+  xy: 2, 139
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30012
+  rotate: false
+  xy: 210, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30013
+  rotate: false
+  xy: 2, 2
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30009
+  rotate: false
+  xy: 2, 2
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30014
+  rotate: false
+  xy: 210, 139
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1
+hacking_lvl30015
+  rotate: false
+  xy: 418, 276
+  size: 206, 135
+  orig: 206, 135
+  offset: 0, 0
+  index: -1

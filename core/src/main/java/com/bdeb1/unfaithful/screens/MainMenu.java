@@ -32,7 +32,7 @@ import com.bdeb1.unfaithful.Unfaithful;
  */
 public class MainMenu implements Screen {
 
-    private static final int STARTING_LEVEL = 1;
+    private static final int STARTING_LEVEL = 3;
     
     private Unfaithful game;
     private TextureAtlas atlas;

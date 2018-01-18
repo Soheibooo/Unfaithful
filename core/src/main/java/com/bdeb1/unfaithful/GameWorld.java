@@ -286,28 +286,28 @@ public class GameWorld {
         actionC.set(HackerComponent.ACTION_NOT_HACKING);
 
         TextureAtlas texAtHacking = Assets.getInstance().manager
-                .get(Assets.ATLAS_HACKING);
+                .get(Assets.ATLAS_HACKING_LV1);
         TextureAtlas texAtNOTHacking = Assets.getInstance().manager
-                .get(Assets.ATLAS_NOTHACKING);
+                .get(Assets.ATLAS_NOTHACKING_LV1);
 
         switch (level) {
             case 1:
                 texAtHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_HACKING);
+                        .get(Assets.ATLAS_HACKING_LV1);
                 texAtNOTHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_NOTHACKING);
+                        .get(Assets.ATLAS_NOTHACKING_LV1);
                 break;
             case 2:
                 texAtHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_HACKING);
+                        .get(Assets.ATLAS_HACKING_LV2);
                 texAtNOTHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_NOTHACKING);
+                        .get(Assets.ATLAS_NOTHACKING_LV2);
                 break;
             case 3:
                 texAtHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_HACKING);
+                        .get(Assets.ATLAS_HACKING_LV3);
                 texAtNOTHacking = Assets.getInstance().manager
-                        .get(Assets.ATLAS_NOTHACKING);
+                        .get(Assets.ATLAS_NOTHACKING_LV3);
                 break;
             default:
                 break;
