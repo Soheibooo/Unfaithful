@@ -17,7 +17,6 @@ package com.bdeb1.unfaithful.screens;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
@@ -26,6 +25,10 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -35,7 +38,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
-import com.bdeb1.unfaithful.Toast;
 import com.bdeb1.unfaithful.Unfaithful;
 import com.bdeb1.unfaithful.systems.ActionSystem;
 import com.bdeb1.unfaithful.systems.AnimationSystem;
@@ -45,21 +47,21 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
-import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
+import com.bdeb1.unfaithful.util.TextureLayer;
 
 /**
- *
  * @author Soheib El-Harrache
  */
 public class GameScreen implements Screen {
 
     private GameWorld gWorld;
     private PooledEngine engine;
-    private Game game;
+    private Unfaithful game;
     private boolean isPaused;
     private Stage stage;
+    private int level;
 
     private Scene background;
     private SpriteBatch batch;
@@ -69,19 +71,24 @@ public class GameScreen implements Screen {
 //            .build();
 //    private Toast toast;
 
-    public GameScreen(Unfaithful game) {
+    public GameScreen(Unfaithful game, int level) {
         super();
         this.game = game;
         this.stage = new Stage();
+        this.level = level;
         Gdx.input.setInputProcessor(stage);
 
         this.batch = new SpriteBatch();
-        this.backgroundAtlas = Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND);
+        this.backgroundAtlas =
+                Assets.getInstance().manager.get(Assets.ATLAS_BACKGROUND_LV1);
 
-        Animation<TextureRegion> animation = new Animation<TextureRegion>(1f / 2f, backgroundAtlas.getRegions());
+        Animation<TextureRegion> animation =
+                new Animation<>(1f / 2f, backgroundAtlas.getRegions());
         Dimension visibleDimension = new Dimension(Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight());
         this.background = new Scene(visibleDimension, animation);
+        background.addLayer (new TextureLayer (
+			  Assets.getInstance ().manager.get (Assets.COMPTOIR)));
 
         this.engine = new PooledEngine();
         this.engine.addSystem(new RenderingSystem(game.sb));
@@ -92,7 +99,7 @@ public class GameScreen implements Screen {
         this.engine.addSystem(new TargetSystem());
         this.engine.addSystem(new HackerSystem());
         this.engine.addSystem(new LaptopSystem());
-        this.gWorld = new GameWorld(engine);
+        this.gWorld = new GameWorld(engine, level);
 
         isPaused = false;
 
@@ -174,83 +181,9 @@ public class GameScreen implements Screen {
 
         updateInput();
 
-        if (gWorld.isHacked(gWorld.getIDLevel())) {
-            if (gWorld.getIDLevel() < 3) {
-                //add transitions
-                gWorld.generateLevel(gWorld.getIDLevel() + 1);
-            } else {
-                //Insert Code for End screen
-                //Later
-            }
+        if (gWorld.isHacked()) {
+            game.setScreen(new SplashScreen(game, level+1));
         }
-    }
-
-    private void updateInput() {
-        if (Gdx.input.isKeyJustPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
-            pauseAction();
-        }
-        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-
-            engine.getSystem(HackerSystem.class).setIsHacking(true);
-        } else {
-
-            engine.getSystem(HackerSystem.class).setIsHacking(false);
-        }
-
-    }
-
-    private void pauseAction() {
-        if (isPaused) {
-            resume();
-        } else {
-            pause();
-        }
-    }
-
-    private void draw(float delta) {
-        //UI
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.setProjectionMatrix(background.camera.combined);
-//        toast = toastFactory.create("All started when i saw my girlfriend flirting with some guy at the gym. \n"
-//                + "I got mad and as an apprentice hacker I decided to test my skill on her and finally \n"
-//                + "get my revenge. I then decided to start with her facebook account.", Toast.Length.LONG);
-
-        batch.begin();
-        background.draw(batch);
-        batch.end();
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-
-        engine.getSystem(ActionSystem.class).setProcessing(false);
-        engine.getSystem(AnimationSystem.class).setProcessing(false);
-        engine.getSystem(HackerSystem.class).setProcessing(false);
-        engine.getSystem(MovementSystem.class).setProcessing(false);
-        engine.getSystem(RenderingSystem.class).setProcessing(false);
-        engine.getSystem(StateSystem.class).setProcessing(false);
-        engine.getSystem(TargetSystem.class).setProcessing(false);
-        isPaused = true;
-
-    }
-
-    @Override
-    public void resume() {
-
-        engine.getSystem(ActionSystem.class).setProcessing(true);
-        engine.getSystem(AnimationSystem.class).setProcessing(true);
-        engine.getSystem(HackerSystem.class).setProcessing(true);
-        engine.getSystem(MovementSystem.class).setProcessing(true);
-        engine.getSystem(RenderingSystem.class).setProcessing(true);
-        engine.getSystem(StateSystem.class).setProcessing(true);
-        engine.getSystem(TargetSystem.class).setProcessing(true);
-        isPaused = false;
     }
 
     @Override
@@ -262,5 +195,75 @@ public class GameScreen implements Screen {
         background.dispose();
         backgroundAtlas.dispose();
         batch.dispose();
+        engine.clearPools();
     }
-}
+
+	private void pauseAction () {
+		if (isPaused) {
+			resume ();
+		} else {
+			pause ();
+		}
+	}
+
+	private void updateInput () {
+		if (Gdx.input
+			  .isKeyJustPressed (Keys.ESCAPE))
+		{ //TODO add buttonpause on screen
+			pauseAction ();
+		}
+		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
+			engine.getSystem (HackerSystem.class).setIsHacking (true);
+		} else {
+
+			engine.getSystem (HackerSystem.class).setIsHacking (false);
+		}
+	}
+
+	private void draw (float delta) {
+		//UI
+		Gdx.gl.glClearColor (0, 0, 0, 1);
+		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
+		game.sb.setProjectionMatrix (background.camera.combined);
+		//        toast = toastFactory.create("All started when i saw my
+        // girlfriend flirting with some guy at the gym. \n"
+		//                + "I got mad and as an apprentice hacker I decided
+        // to test my skill on her and finally \n"
+		//                + "get my revenge. I then decided to start with her
+        // facebook account.", Toast.Length.LONG);
+
+		game.sb.begin ();
+		background.draw (game.sb);
+		game.sb.end ();
+
+    }
+
+	@Override
+	public void resize (int width, int height) {
+	}
+
+	@Override
+	public void pause () {
+
+		engine.getSystem (ActionSystem.class).setProcessing (false);
+		engine.getSystem (AnimationSystem.class).setProcessing (false);
+		engine.getSystem (HackerSystem.class).setProcessing (false);
+		engine.getSystem (MovementSystem.class).setProcessing (false);
+		engine.getSystem (RenderingSystem.class).setProcessing (false);
+		engine.getSystem (StateSystem.class).setProcessing (false);
+		engine.getSystem (TargetSystem.class).setProcessing (false);
+		isPaused = true;
+	}
+
+	@Override
+	public void resume () {
+
+		engine.getSystem (ActionSystem.class).setProcessing (true);
+		engine.getSystem (AnimationSystem.class).setProcessing (true);
+		engine.getSystem (HackerSystem.class).setProcessing (true);
+		engine.getSystem (MovementSystem.class).setProcessing (true);
+		engine.getSystem (RenderingSystem.class).setProcessing (true);
+		engine.getSystem (StateSystem.class).setProcessing (true);
+		engine.getSystem (TargetSystem.class).setProcessing (true);
+		isPaused = false;
+	}
