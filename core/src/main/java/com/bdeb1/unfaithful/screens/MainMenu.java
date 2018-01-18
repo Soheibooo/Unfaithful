@@ -18,6 +18,11 @@ package com.bdeb1.unfaithful.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.Unfaithful;
 
@@ -28,7 +33,12 @@ import com.bdeb1.unfaithful.Unfaithful;
 public class MainMenu implements Screen {
 
     private Unfaithful game;
-    
+    private TextureAtlas atlas;
+    private Animation animation;
+    private float elapsedTime = 0;
+    private boolean mainMenuActive = true;
+    private Stage stage;
+
     public MainMenu(Unfaithful game) {
         this.game = game;
     }
@@ -44,13 +54,70 @@ public class MainMenu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Assets.getInstance().manager.update()) {
-            //Level 1
-            //game.setScreen(new GameScreen(game, 1));
-            game.setScreen(new SplashScreen(game, 1));
-        } else {
-            //Show % loading
-            //(int) (Assets.getInstance().manager.getProgress() * 100);
+            if (atlas == null) {
+                this.atlas = Assets.getInstance().manager.get(Assets.ATLAS_HOMESCREEN);
+                this.animation = new Animation(1/12f, atlas.getRegions());
+                this.stage = new Stage();
+                Gdx.input.setInputProcessor(stage);
+
+                addMenuButtons();
+            }
+
+            game.sb.begin();
+            elapsedTime += delta;
+            game.sb.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0, 0,
+                    Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            game.sb.end();
+            stage.act(delta);
+            stage.draw();
+
+            if (!mainMenuActive) {
+                game.setScreen(new SplashScreen(game, 1));
+            }
         }
+    }
+
+    private void addMenuButtons() {
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(3);
+        textButtonStyle.font = font;
+
+        TextureAtlas.AtlasRegion defaultRegion = Assets.getInstance().manager.get(Assets.ATLAS_MENU).findRegion("menu_bar0000");
+        Sprite defaultSprite = new Sprite(defaultRegion);
+        String[] regions = new String[]{"menu_bar_select0000", "menu_bar_select0001", "menu_bar_select0002", "menu_bar_select0003"};
+
+        AnimatedTextButton playButton = new AnimatedTextButton("Play", textButtonStyle, defaultSprite);
+        playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        playButton.setPosition(Gdx.graphics.getWidth() / 2 - 250, 400);
+        playButton.setWidth(500);
+        playButton.setHeight(100);
+        playButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                mainMenuActive = false;
+                return true;
+            }
+        });
+        stage.addActor(playButton);
+
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        defaultSprite = new Sprite(defaultRegion);
+
+        playButton = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
+        playButton.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        playButton.setPosition(Gdx.graphics.getWidth() / 2 - 200, 200);
+        playButton.setWidth(400);
+        playButton.setHeight(80);
+        playButton.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                System.exit(0);
+                return true;
+            }
+        });
+        stage.addActor(playButton);
     }
 
     @Override

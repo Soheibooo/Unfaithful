@@ -50,6 +50,11 @@ public class Assets {
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/pas_hacking_joe_lvl1.atlas", TextureAtlas.class);
 
+    public static final AssetDescriptor<TextureAtlas> ATLAS_HOMESCREEN
+            = new AssetDescriptor<TextureAtlas>(
+            "atlas/homescreen.atlas", TextureAtlas.class);
+
+
     public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/hacking_joe_lvl1.atlas", TextureAtlas.class);
@@ -175,6 +180,7 @@ public class Assets {
     public void load() {
         //Atlas
         manager.load(ATLAS_NOTHACKING);
+        manager.load(ATLAS_HOMESCREEN);
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);
         manager.load(ATLAS_BAR_SUSPICIOUS_HACKING);
