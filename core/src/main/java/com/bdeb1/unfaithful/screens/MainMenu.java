@@ -32,6 +32,8 @@ import com.bdeb1.unfaithful.Unfaithful;
  */
 public class MainMenu implements Screen {
 
+    private static final int STARTING_LEVEL = 1;
+    
     private Unfaithful game;
     private TextureAtlas atlas;
     private Animation animation;
@@ -72,7 +74,7 @@ public class MainMenu implements Screen {
             stage.draw();
 
             if (!mainMenuActive) {
-                game.setScreen(new SplashScreen(game, 2));
+                game.setScreen(new SplashScreen(game, STARTING_LEVEL));
             }
         }
     }

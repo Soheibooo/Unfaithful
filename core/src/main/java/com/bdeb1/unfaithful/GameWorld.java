@@ -106,7 +106,10 @@ public class GameWorld {
                         .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV2);
                 break;
             case 3:
-
+                atTextureLaptopHack = Assets.getInstance().manager
+                        .get(Assets.ATLAS_HACKING_LAPSCREEN_LV3);
+                atTextureLaptop = Assets.getInstance().manager
+                        .get(Assets.ATLAS_NOTHACKING_LAPSCREEN_LV3);
                 break;
             default:
                 break;
@@ -155,7 +158,7 @@ public class GameWorld {
                 break;
             case 3:
                 textureC.region = new TextureRegion(
-                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV1));
+                        Assets.getInstance().manager.get(Assets.FOREGROUND_LV3));
                 break;
             default:
                 textureC.region = new TextureRegion(

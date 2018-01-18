@@ -70,6 +70,10 @@ public class Assets {
     public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV2
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/background_animated_lvl2.atlas", TextureAtlas.class);
+    
+    public static final AssetDescriptor<TextureAtlas> ATLAS_BACKGROUND_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/background_lvl3_animated.atlas", TextureAtlas.class);
 
     public static final AssetDescriptor<TextureAtlas> ATLAS_BAR_SUSPICIOUS_HACKING
             = new AssetDescriptor<TextureAtlas>(
@@ -105,6 +109,14 @@ public class Assets {
                     "atlas/ecran_fbi_hacking_fail.atlas", TextureAtlas.class);
         
         public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN_LV2
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/ecran_fbi_pas_hacking.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_HACKING_LAPSCREEN_LV3
+            = new AssetDescriptor<TextureAtlas>(
+                    "atlas/nasa_Hacking_fail.atlas", TextureAtlas.class);
+        
+        public static final AssetDescriptor<TextureAtlas> ATLAS_NOTHACKING_LAPSCREEN_LV3
             = new AssetDescriptor<TextureAtlas>(
                     "atlas/ecran_fbi_pas_hacking.atlas", TextureAtlas.class);
 
@@ -165,6 +177,9 @@ public class Assets {
    
    public static final AssetDescriptor<Texture> FOREGROUND_LV2 = new
 	      AssetDescriptor<Texture> ("image/foreground_lvl2.png", Texture.class);
+   
+   public static final AssetDescriptor<Texture> FOREGROUND_LV3 = new
+	      AssetDescriptor<Texture> ("image/background_lvl3_foreground.png", Texture.class);
 
     //------------------------SOUNDS
     public static final AssetDescriptor<Sound> SOUND_NAME
@@ -173,6 +188,9 @@ public class Assets {
     //------------------------MUSICS
     public static final AssetDescriptor<Music> MUSIC_NAME
             = new AssetDescriptor<Music>("music/exemple_music.ogg", Music.class);
+    
+    public static final AssetDescriptor<Music> MUSIC_PETITE_MELODIE
+            = new AssetDescriptor<Music>("music/petite_melody.mp3", Music.class);
 
     //------------------------TEXTS
     public static final ArrayList<String> HACKING_PROGRESS_LV1
@@ -188,6 +206,7 @@ public class Assets {
         manager.load(ATLAS_HACKING);
         manager.load(ATLAS_BACKGROUND_LV1);
         manager.load(ATLAS_BACKGROUND_LV2);
+        manager.load(ATLAS_BACKGROUND_LV3);
         manager.load(ATLAS_BAR_SUSPICIOUS_HACKING);
         manager.load(ATLAS_MENU);
         manager.load(ATLAS_RIGHT_TO_LEFT);
@@ -197,10 +216,12 @@ public class Assets {
         manager.load(WOMAN_ROTATING_SUSPICIOUSLY);
         
         manager.load(ATLAS_HACKING_LAPSCREEN_LV1);
-        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV1);
-        
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV1);       
         manager.load(ATLAS_HACKING_LAPSCREEN_LV2);
         manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV2);
+        manager.load(ATLAS_HACKING_LAPSCREEN_LV3);
+        manager.load(ATLAS_NOTHACKING_LAPSCREEN_LV3);
+        
         //Sprites
         manager.load(SPRITE_NAME);
         manager.load(TEXTURE_NAME);
@@ -217,12 +238,14 @@ public class Assets {
         manager.load(SPLASH_LV2_2);
         manager.load (FOREGROUND_LV1);
         manager.load (FOREGROUND_LV2);
+        manager.load(FOREGROUND_LV3);
 
         //Sounds
         manager.load(SOUND_NAME);
 
         //Musics
         manager.load(MUSIC_NAME);
+        manager.load(MUSIC_PETITE_MELODIE);
 
         //Texts
         HACKING_PROGRESS_LV1.add("Found IP address of a suspicious account");
