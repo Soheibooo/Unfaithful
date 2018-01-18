@@ -24,6 +24,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.LaptopComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
@@ -59,8 +60,55 @@ public class GameWorld {
         idLevel = difficulty;
         target = createTarget(difficulty);
         hacker = createHacker(difficulty);
+        laptopScreen(hacker);
     }
     
+    
+    private Entity laptopScreen(Entity hacker) {
+        Entity entity = engine.createEntity();
+        
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        AnimationComponent animC
+                = engine.createComponent(AnimationComponent.class);
+        TextureComponent textureC
+                = engine.createComponent(TextureComponent.class);
+        ActionComponent actionC
+                = engine.createComponent(ActionComponent.class);
+        StateComponent stateC
+                = engine.createComponent(StateComponent.class);
+        LaptopComponent laptopC
+                = engine.createComponent(LaptopComponent.class);
+        
+        
+        stateC.set(0);
+        actionC.set(LaptopComponent.ACTION_NOT_HACKING);
+        
+        TextureAtlas atTextureLaptopHack = Assets.getInstance().manager.get(Assets.ATLAS_HACKING_LAPSCREEN);
+        TextureAtlas atTextureLaptop = Assets.getInstance().manager.get(Assets.ATLAS_NOTHACKING_LAPSCREEN);
+        
+        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(1/12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(1/12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
+        
+        HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
+        anime.put(1, laptopHack);
+        anime.put(2, laptopNotHack);
+        
+        animC.animations.put(0, anime);
+        
+        TransformComponent positionRel = hacker.getComponent(TransformComponent.class);
+        
+        
+        positionC.position.set(positionRel.position.x + 5, positionRel.position.y + 5, 0);
+        
+        entity.add(textureC);
+        entity.add(animC);
+        entity.add(positionC);
+        entity.add(actionC);
+        
+        engine.addEntity(entity);
+        return entity;
+    }
     
     private Entity createTarget(float difficultyKey) {
         Entity entity = engine.createEntity();
