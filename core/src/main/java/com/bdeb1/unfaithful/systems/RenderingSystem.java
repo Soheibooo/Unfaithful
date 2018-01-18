@@ -22,6 +22,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 import com.bdeb1.unfaithful.components.TransformComponent;
@@ -80,18 +81,21 @@ public class RenderingSystem extends IteratingSystem {
             float originY = height / 2f;
 
             batch.begin();
-            batch.draw(tex.region,
-                    t.position.x - originX,
-                    t.position.y - originY,
-                    originX,
-                    originY,
-                    width,
-                    height,
-                    PixelsToMeters(t.scale.x),
-                    PixelsToMeters(t.scale.y),
-                    t.rotation);
-            batch.end();
-            
+
+            if (entity.getComponent (HackerComponent.class) != null) {
+                System.out.println (width + ", " + height + ", " + t.position);
+                batch.draw (tex.region, t.position.x , t.position.y , width,
+                            height);
+            } else {
+
+                batch.draw (tex.region, t.position.x - originX,
+                            t.position.y - originY, originX, originY, width,
+                            height, PixelsToMeters (t.scale.x),
+                            PixelsToMeters (t.scale.y), t.rotation);
+            }
+
+            batch.end ();
+
         } else if (entity.getComponent(TargetComponent.class) == null) {
             System.out.println("NOT RENDERING THIS (NOT TARGET THO)");
         }
