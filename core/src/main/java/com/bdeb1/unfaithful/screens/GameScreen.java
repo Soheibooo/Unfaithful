@@ -87,12 +87,7 @@ public class GameScreen implements Screen {
 		                                            Gdx.graphics.getHeight ());
 		this.background = new Scene (visibleDimension, animation);
 
-		TextureLayer comptoir = new TextureLayer (
-			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
-		comptoir.setDrawingBounds (0, 0, Constants.World.SCENE_DIMENSION.width,
-		                           Constants.World.SCENE_DIMENSION.height);
-		background.addLayer (comptoir);
-
+		
 		this.engine = new PooledEngine ();
 		this.engine.addSystem (new RenderingSystem (game.sb));
 		this.engine.addSystem (new AnimationSystem ());
@@ -191,13 +186,14 @@ public class GameScreen implements Screen {
 	public void render (float delta) {
 		update (delta);
 		draw (delta);
+                engine.update (delta);
 		//        toast.render(Gdx.graphics.getDeltaTime());
-		engine.update (delta);
+		
 	}
 
 	private void update (float delta) {
 		background.update (delta);
-
+                
 		updateInput ();
 
 		if (gWorld.isHacked ()) {
@@ -224,12 +220,6 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor (0, 0, 0, 1);
 		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
 		game.sb.setProjectionMatrix (background.camera.combined);
-		//        toast = toastFactory.create("All started when i saw my
-		// girlfriend flirting with some guy at the gym. \n"
-		//                + "I got mad and as an apprentice hacker I decided
-		// to test my skill on her and finally \n"
-		//                + "get my revenge. I then decided to start with her
-		// facebook account.", Toast.Length.LONG);
 
 		game.sb.begin ();
 		background.draw (game.sb);
@@ -249,7 +239,7 @@ public class GameScreen implements Screen {
 		engine.getSystem (AnimationSystem.class).setProcessing (false);
 		engine.getSystem (HackerSystem.class).setProcessing (false);
 		engine.getSystem (MovementSystem.class).setProcessing (false);
-		engine.getSystem (RenderingSystem.class).setProcessing (false);
+		//engine.getSystem (RenderingSystem.class).setProcessing (false);
 		engine.getSystem (StateSystem.class).setProcessing (false);
 		engine.getSystem (TargetSystem.class).setProcessing (false);
 		isPaused = true;

@@ -37,7 +37,7 @@ public class GameWorld {
 
     private PooledEngine engine;
 
-    private Entity hacker, target, suspiciousGauge, hackingGauge, menu;
+    private Entity hacker, target, suspiciousGauge, hackingGauge, menu, comptoir;
     private int level;
 
     private final int DISTANCE_BETWEEB_BARS = 10;
@@ -52,8 +52,10 @@ public class GameWorld {
     public void generateLevel() {
         engine.clearPools();
         engine.removeAllEntities();
-
+        
+        
         target = createTarget();
+        comptoir = createDumbYouRE();
         hacker = createHacker();
         suspiciousGauge = createSuspiciousGauge();
         menu = registerGUI();
@@ -112,7 +114,28 @@ public class GameWorld {
         return entity;
 		//suspiciousGauge = createSuspiciousGauge();
     }
+    
+    private Entity createDumbYouRE() {
+        Entity entity = engine.createEntity();
+        
+        TransformComponent positionC
+                = engine.createComponent(TransformComponent.class);
+        TextureComponent textureC
+                = engine.createComponent(TextureComponent.class);
+        
+        
+        textureC.region = new TextureRegion(Assets.getInstance().manager.get(Assets.COMPTOIR));
 
+
+
+        positionC.position.set(0, 0, 0);
+        
+        entity.add(positionC);
+        entity.add(textureC);
+
+        engine.addEntity(entity);
+        return entity;
+    }
 
     private Entity laptopScreen(Entity hacker) {
         Entity entity = engine.createEntity();
@@ -241,16 +264,43 @@ public class GameWorld {
         positionC.position.set(5.0f, 1.0f, 0.0f);
         stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
         targetC.difficultyAddition = -level * 5;
-
-        stateC.set(0);
-        actionC.set(TargetComponent.ACTION_TALKING);
+        
+        TextureAtlas atTextureMarche = Assets.getInstance().manager.get(Assets.WOMAN_WALKING);
+        TextureAtlas atTextureMarcheSus = Assets.getInstance().manager.get(Assets.WOMAN_WALKING_SUSPICIOUSLY);
+        TextureAtlas atTextureRotate = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING);
+        TextureAtlas atTextureRotateSus = Assets.getInstance().manager.get(Assets.WOMAN_ROTATING_SUSPICIOUSLY);
+        
+        Animation<TextureRegion> womanWalk = new Animation<TextureRegion>(1/12f, atTextureMarche.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion>(1/12f, atTextureMarcheSus.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotate = new Animation<TextureRegion>(1/12f, atTextureRotate.getRegions(), PlayMode.LOOP);
+        Animation<TextureRegion> womanRotateSus = new Animation<TextureRegion>(1/12f, atTextureRotateSus.getRegions(), PlayMode.LOOP);
+        
+        HashMap<Integer, Animation> animeActionWalk = new HashMap<>();
+        HashMap<Integer, Animation> animeActionRotate = new HashMap<>();
+        
+        
+        
+        animeActionWalk.put(TargetComponent.ACTION_WALK_LEFT, womanWalk);
+        animeActionWalk.put(TargetComponent.ACTION_WALK_RIGHT, womanWalk);
+        animeActionWalk.put(1, womanWalkSus);
+        animeActionWalk.put(1, womanWalkSus);
+        
+        animeActionRotate.put(0, womanRotate);
+        animeActionRotate.put(1, womanRotateSus);
+        
+        animC.animations.put(1, animeActionWalk);
+        //animC.animations.put(2, animeActionRotate);
+        
+        stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
+        actionC.set(TargetComponent.ACTION_WALK_RIGHT);
 
         entity.add(textureC);
         entity.add(animC);
         entity.add(targetC);
         entity.add(positionC);
         entity.add(stateC);
-
+        entity.add(actionC);
+        
         engine.addEntity(entity);
 
         return entity;
