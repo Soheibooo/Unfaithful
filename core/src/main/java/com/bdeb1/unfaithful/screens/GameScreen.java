@@ -20,6 +20,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -31,8 +32,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
 import com.bdeb1.unfaithful.Unfaithful;
@@ -44,10 +47,8 @@ import com.bdeb1.unfaithful.systems.MovementSystem;
 import com.bdeb1.unfaithful.systems.RenderingSystem;
 import com.bdeb1.unfaithful.systems.StateSystem;
 import com.bdeb1.unfaithful.systems.TargetSystem;
-import com.bdeb1.unfaithful.util.Constants;
 import com.bdeb1.unfaithful.util.Dimension;
 import com.bdeb1.unfaithful.util.Scene;
-import com.bdeb1.unfaithful.util.TextureLayer;
 
 /**
  * @author Soheib El-Harrache
@@ -64,6 +65,8 @@ public class GameScreen implements Screen {
 	private Scene        background;
 	private SpriteBatch  batch;
 	private TextureAtlas backgroundAtlas;
+	private AnimatedProgressBar hackingBar;
+	private AnimatedProgressBar suspicionBar;
 	//    Toast.ToastFactory toastFactory = new Toast.ToastFactory.Builder()
 	//            .font(new BitmapFont())
 	//            .build();
@@ -89,12 +92,7 @@ public class GameScreen implements Screen {
 		                                            Gdx.graphics.getHeight ());
 		this.background = new Scene (visibleDimension, animation);
 
-		TextureLayer comptoir = new TextureLayer (
-			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
-		comptoir.setDrawingBounds (0, 0, Constants.World.SCENE_DIMENSION.width,
-		                           Constants.World.SCENE_DIMENSION.height);
-		background.addLayer (comptoir);
-
+		
 		this.engine = new PooledEngine ();
 		this.engine.addSystem (new RenderingSystem (game.sb));
 		this.engine.addSystem (new AnimationSystem ());
@@ -128,10 +126,105 @@ public class GameScreen implements Screen {
 
 
 		addMenuButtons();
+		addProgressBar();
 		stage.addActor (btnPause);
 	}
 
-	private void addMenuButtons() {
+    private void addProgressBar() {
+        String[] suspiciousRegionsBackground = new String[]{"suspicion_bar0000",
+                "suspicion_bar0001",
+                "suspicion_bar0002",
+                "suspicion_bar0003",
+                "suspicion_bar0004",
+                "suspicion_bar0005",
+                "suspicion_bar0015",
+                "suspicion_bar0016",
+                "suspicion_bar0017",
+                "suspicion_bar0018",
+                "suspicion_bar0006",
+                "suspicion_bar0007",
+                "suspicion_bar0008",
+                "suspicion_bar0009",
+                "suspicion_bar0010",
+                "suspicion_bar0011",
+                "suspicion_bar0012",
+                "suspicion_bar0013",
+                "suspicion_bar0014"};
+
+        String[] suspiciousRegionsForeground = new String[]{"suspicion_bar_progress0006",
+                "suspicion_bar_progress0007",
+                "suspicion_bar_progress0008",
+                "suspicion_bar_progress0015",
+                "suspicion_bar_progress0016",
+                "suspicion_bar_progress0017",
+                "suspicion_bar_progress0018",
+                "suspicion_bar_progress0009",
+                "suspicion_bar_progress0000",
+                "suspicion_bar_progress0001",
+                "suspicion_bar_progress0002",
+                "suspicion_bar_progress0010",
+                "suspicion_bar_progress0011",
+                "suspicion_bar_progress0012",
+                "suspicion_bar_progress0003",
+                "suspicion_bar_progress0004",
+                "suspicion_bar_progress0005",
+                "suspicion_bar_progress0013",
+                "suspicion_bar_progress0014"};
+
+        String[] hackingRegionsBackground = new String[]{"hacking_bar0000",
+                "hacking_bar0001",
+                "hacking_bar0002",
+                "hacking_bar0003",
+                "hacking_bar0004",
+                "hacking_bar0005",
+                "hacking_bar0006",
+                "hacking_bar0007",
+                "hacking_bar0008",
+                "hacking_bar0009"};
+
+        String[] hackingRegionsForeground = new String[]{"hacking_bar_progress0000",
+                "hacking_bar_progress0001",
+                "hacking_bar_progress0002",
+                "hacking_bar_progress0003",
+                "hacking_bar_progress0004",
+                "hacking_bar_progress0005",
+                "hacking_bar_progress0006",
+                "hacking_bar_progress0007",
+                "hacking_bar_progress0008",
+                "hacking_bar_progress0009"};
+
+
+        Pixmap                pixmap   = new Pixmap(0, 0, Pixmap.Format.RGBA8888);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
+        pixmap.dispose();
+        ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
+        progressBarStyle.background = drawable;
+
+        AnimatedProgressBar suspiciousBar = new AnimatedProgressBar(0, 100, 1, false, progressBarStyle);
+        suspiciousBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsBackground, 0.1f);
+        suspiciousBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), suspiciousRegionsForeground, 0.1f);
+        suspiciousBar.setPosition(220, Gdx.graphics.getHeight() - 35);
+        suspiciousBar.size(200, 30);
+        //suspiciousBar.freeze();
+        suspiciousBar.setValue(100);
+        stage.addActor(suspiciousBar);
+
+        Pixmap pixmap2 = new Pixmap(200, 20, Pixmap.Format.RGBA8888);
+        TextureRegionDrawable drawable2 = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap2)));
+        pixmap2.dispose();
+        ProgressBar.ProgressBarStyle progressBarStyle2 = new ProgressBar.ProgressBarStyle();
+        progressBarStyle2.background = drawable2;
+
+        AnimatedProgressBar hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
+        hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsBackground, 0.1f);
+        hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsForeground, 0.1f);
+        hackingBar.setPosition(10, Gdx.graphics.getHeight() - 30);
+        hackingBar.size(200, 20);
+        hackingBar.setValue(0);
+        stage.addActor(hackingBar);
+    }
+
+    private void addMenuButtons() {
 		TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
 		textButtonStyle.font = new BitmapFont();
 		TextureAtlas.AtlasRegion defaultRegion = Assets.getInstance().manager.get(Assets.ATLAS_MENU).findRegion("menu_bar0000");
@@ -183,7 +276,6 @@ public class GameScreen implements Screen {
 	public void render (float delta) {
 		update (delta);
 		draw (delta);
-		//        toast.render(Gdx.graphics.getDeltaTime());
 		engine.update (delta);
 
 		stage.act(Gdx.graphics.getDeltaTime());
@@ -192,7 +284,7 @@ public class GameScreen implements Screen {
 
 	private void update (float delta) {
 		background.update (delta);
-
+                
 		updateInput ();
 
 		if (gWorld.isHacked ()) {
@@ -221,12 +313,6 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor (0, 0, 0, 1);
 		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
 		game.sb.setProjectionMatrix (background.camera.combined);
-		//        toast = toastFactory.create("All started when i saw my
-		// girlfriend flirting with some guy at the gym. \n"
-		//                + "I got mad and as an apprentice hacker I decided
-		// to test my skill on her and finally \n"
-		//                + "get my revenge. I then decided to start with her
-		// facebook account.", Toast.Length.LONG);
 
 		game.sb.begin ();
 		background.draw (game.sb);
@@ -244,7 +330,7 @@ public class GameScreen implements Screen {
 		engine.getSystem (AnimationSystem.class).setProcessing (false);
 		engine.getSystem (HackerSystem.class).setProcessing (false);
 		engine.getSystem (MovementSystem.class).setProcessing (false);
-		engine.getSystem (RenderingSystem.class).setProcessing (false);
+		//engine.getSystem (RenderingSystem.class).setProcessing (false);
 		engine.getSystem (StateSystem.class).setProcessing (false);
 		engine.getSystem (TargetSystem.class).setProcessing (false);
 		isPaused = true;

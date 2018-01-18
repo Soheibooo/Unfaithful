@@ -17,7 +17,6 @@ package com.bdeb1.unfaithful;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -25,9 +24,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
-import com.bdeb1.unfaithful.components.GaugeStateComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
 import com.bdeb1.unfaithful.components.LaptopComponent;
+import com.bdeb1.unfaithful.components.MenuComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
 import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
@@ -40,9 +39,8 @@ import java.util.HashMap;
  */
 public class GameWorld {
 
-	private final int DISTANCE_BETWEEB_BARS = 10;
 	private PooledEngine engine;
-	private Entity hacker, laptop, target, suspiciousGauge, hackingGauge, menu;
+	private Entity       hacker, laptop, comptoir, target;
 	private int level;
 
 	public GameWorld (PooledEngine engine, int level) {
@@ -56,12 +54,12 @@ public class GameWorld {
 		engine.removeAllEntities ();
 
 		target = createTarget ();
-		laptop = createLaptopScreen (hacker);
+		comptoir = createDumbYouRE ();
+		laptop = createLaptopScreen ();
 		hacker = createHacker ();
-		suspiciousGauge = createSuspiciousGauge ();
 	}
 
-	private Entity createLaptopScreen (Entity hacker) {
+	private Entity createLaptopScreen () {
 		Entity entity = engine.createEntity ();
 
 		TransformComponent positionC = engine
@@ -78,21 +76,21 @@ public class GameWorld {
 			  .createComponent (LaptopComponent.class);
 
 		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION.x +
-		                        Constants.World.D_HACKER_SCREEN.x * Constants
-			                          .World.SCALE,
+		                        Constants.World.D_HACKER_SCREEN.x *
+		                        Constants.World.SCALE,
 		                        Constants.World.HACKER_INITIAL_POSITION.y +
-		                        Constants.World.D_HACKER_SCREEN.y * Constants
-			                          .World.SCALE, 0);
+		                        Constants.World.D_HACKER_SCREEN.y *
+		                        Constants.World.SCALE, 0);
 
 		stateC.set (0);
 		actionC.set (LaptopComponent.ACTION_NOT_HACKING);
 
 		TextureAtlas atTextureLaptopHack = Assets.getInstance ().manager
 			  .get (Assets.ATLAS_HACKING_LAPSCREEN);
-		TextureAtlas atTextureLaptop     = Assets.getInstance ().manager
+		TextureAtlas atTextureLaptop = Assets.getInstance ().manager
 			  .get (Assets.ATLAS_NOTHACKING_LAPSCREEN);
 
-		Animation<TextureRegion> laptopHack    = new Animation<TextureRegion> (
+		Animation<TextureRegion> laptopHack = new Animation<TextureRegion> (
 			  1 / 12f, atTextureLaptopHack.getRegions (), PlayMode.LOOP);
 		Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion> (
 			  1 / 12f, atTextureLaptop.getRegions (), PlayMode.LOOP);
@@ -114,59 +112,25 @@ public class GameWorld {
 		return entity;
 	}
 
-	private Entity createSuspiciousGauge () {
+	private Entity createDumbYouRE () {
 		Entity entity = engine.createEntity ();
 
-		AnimationComponent animC = engine
-			  .createComponent (AnimationComponent.class);
-		TextureComponent textureC = engine
-			  .createComponent (TextureComponent.class);
-		ActionComponent actionC = engine
-			  .createComponent (ActionComponent.class);
 		TransformComponent positionC = engine
 			  .createComponent (TransformComponent.class);
-		StateComponent stateC = engine.createComponent (StateComponent.class);
-		positionC.position
-			  .set (5.0f, Gdx.graphics.getHeight () - DISTANCE_BETWEEB_BARS,
-			        0.0f);
+		TextureComponent textureC = engine
+			  .createComponent (TextureComponent.class);
 
-		entity.add (textureC);
-		entity.add (animC);
+
+		textureC.region = new TextureRegion (
+			  Assets.getInstance ().manager.get (Assets.COMPTOIR));
+
+
+		positionC.position.set (0, 0, 0);
+
 		entity.add (positionC);
-		entity.add (stateC);
-		//Not used for now (to talk with Samuel, I have a plan to make it
-        // conditional on the system) -Soso
-		entity.add (actionC);
-
-		stateC.set (GaugeStateComponent.STATE_NORMAL);
-		TextureAtlas suspiciousGauge = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BAR_SUSPICION);
-
-		TextureAtlas.AtlasRegion suspiciousGaugeImage = suspiciousGauge
-			  .findRegion ("suspicion_bar0000");
-
-		Array<TextureAtlas.AtlasRegion> simpleSuspiciousGaugeRegion
-			  = new Array<> ();
-		simpleSuspiciousGaugeRegion.add (suspiciousGaugeImage);
-
-		Animation<TextureRegion> suspiciousGaugeAnim = new Animation<> (1 / 12f,
-		                                                                simpleSuspiciousGaugeRegion);
-		Animation<TextureRegion> suspiciousGaugeBlinkingAnim = new
-              Animation<> (
-			  1 / 12f, suspiciousGauge.getRegions (), PlayMode.LOOP);
-
-		HashMap<Integer, Animation> animeList  = new HashMap<> ();
-		HashMap<Integer, Animation> animeList2 = new HashMap<> ();
-
-		animeList.put (0, suspiciousGaugeAnim);
-		animeList2.put (0, suspiciousGaugeBlinkingAnim);
-
-		//DEFAULT
-		animC.animations.put (0, animeList);
-		animC.animations.put (1, animeList2);
+		entity.add (textureC);
 
 		engine.addEntity (entity);
-
 		return entity;
 	}
 
@@ -186,23 +150,61 @@ public class GameWorld {
 			  .createComponent (ActionComponent.class);
 
 		//        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets
-        // .uneAnim);
+		// .uneAnim);
 		//        animC.animations.put(CharacterComponent.STATE_DEAD, Assets
-        // .uneAnim);
+		// .uneAnim);
 		//        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets
-        // .uneAnim);
+		// .uneAnim);
 		positionC.position.set (5.0f, 1.0f, 0.0f);
 		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
 		targetC.difficultyAddition = - level * 5;
 
-		stateC.set (0);
-		actionC.set (TargetComponent.ACTION_TALKING);
+		TextureAtlas atTextureMarche    = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_WALKING);
+		TextureAtlas atTextureMarcheSus = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_WALKING_SUSPICIOUSLY);
+		TextureAtlas atTextureRotate    = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_ROTATING);
+		TextureAtlas atTextureRotateSus = Assets.getInstance ().manager
+			  .get (Assets.WOMAN_ROTATING_SUSPICIOUSLY);
+
+		Animation<TextureRegion> womanWalk      = new
+			  Animation<TextureRegion> (
+			  1 / 12f, atTextureMarche.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanWalkSus   = new
+			  Animation<TextureRegion> (
+			  1 / 12f, atTextureMarcheSus.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanRotate    = new
+			  Animation<TextureRegion> (
+			  1 / 12f, atTextureRotate.getRegions (), PlayMode.LOOP);
+		Animation<TextureRegion> womanRotateSus = new
+			  Animation<TextureRegion> (
+			  1 / 12f, atTextureRotateSus.getRegions (), PlayMode.LOOP);
+
+		HashMap<Integer, Animation> animeActionWalk   = new HashMap<> ();
+		HashMap<Integer, Animation> animeActionRotate = new HashMap<> ();
+
+
+		animeActionWalk.put (TargetComponent.ACTION_WALK_LEFT, womanWalk);
+		animeActionWalk.put (TargetComponent.ACTION_WALK_RIGHT, womanWalk);
+		animeActionWalk.put (1, womanWalkSus);
+		animeActionWalk.put (1, womanWalkSus);
+
+		animeActionRotate.put (0, womanRotate);
+		animeActionRotate.put (1, womanRotateSus);
+
+		animC.animations.put (1, animeActionWalk);
+		//animC.animations.put(2, animeActionRotate);
+
+		stateC.set (TargetComponent.STATE_UNSUSPICIOUS);
+		actionC.set (TargetComponent.ACTION_WALK_RIGHT);
 
 		entity.add (textureC);
 		entity.add (animC);
 		entity.add (targetC);
 		entity.add (positionC);
 		entity.add (stateC);
+		entity.add (actionC);
 
 		engine.addEntity (entity);
 
@@ -225,11 +227,11 @@ public class GameWorld {
 			  .createComponent (ActionComponent.class);
 
 		//        animC.animations.put(CharacterComponent.STATE_ALIVE, Assets
-        // .uneAnim);
+		// .uneAnim);
 		//        animC.animations.put(CharacterComponent.STATE_DEAD, Assets
-        // .uneAnim);
+		// .uneAnim);
 		//        animC.animations.put(CharacterComponent.STATE_FRENZY, Assets
-        // .uneAnim);
+		// .uneAnim);
 		positionC.position.set (Constants.World.HACKER_INITIAL_POSITION);
 
 		//PAS DE STATE POUR LE HACKER
@@ -246,11 +248,11 @@ public class GameWorld {
 
 
 		Animation<TextureRegion> animeHacking    = new
-              Animation<TextureRegion> (
+			  Animation<TextureRegion> (
 			  1 / 12f, texAtHacking.getRegions (), PlayMode.LOOP);
 		Animation<TextureRegion> animeNotHacking
 		                                         = new
-              Animation<TextureRegion> (
+			  Animation<TextureRegion> (
 			  1 / 12f, texAtNOTHacking.getRegions (), PlayMode.LOOP);
 
 
@@ -278,4 +280,5 @@ public class GameWorld {
 		return hackerC.hacking_gauge >=
 		       (50 + level * level * 10); //1=60; 2=90; 3=140;
 	}
+
 }
