@@ -26,6 +26,7 @@ import com.bdeb1.unfaithful.components.ActionComponent;
  * @author Soheib El-Harrache
  */
 public class ActionSystem extends IteratingSystem {
+
     private ComponentMapper<ActionComponent> actionC;
 
     public ActionSystem() {

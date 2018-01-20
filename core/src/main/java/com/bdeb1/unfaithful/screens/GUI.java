@@ -1,25 +1,15 @@
 package com.bdeb1.unfaithful.screens;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
-import com.bdeb1.unfaithful.Assets;
-import com.bdeb1.unfaithful.components.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GUI {
+
     private static GUI instance;
     private BitmapFont font;
 
@@ -47,7 +37,7 @@ public class GUI {
         return button;
     }
 
-   /* public Entity registerGUI(PooledEngine engine) {
+    /* public Entity registerGUI(PooledEngine engine) {
         Entity entity = engine.createEntity();
 
         AnimationComponent animC
@@ -95,7 +85,6 @@ public class GUI {
 
         return entity;
     }*/
-
     public ProgressBar addProgressBar(int x, int y, Texture textureBackground, Texture textureFill) {
         ProgressBar.ProgressBarStyle progressBarStyle = new ProgressBar.ProgressBarStyle();
         progressBarStyle.background = new TextureRegionDrawable(new TextureRegion(textureBackground));

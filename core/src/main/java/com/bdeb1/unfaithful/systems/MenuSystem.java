@@ -6,7 +6,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.bdeb1.unfaithful.components.*;
 
-public class MenuSystem  extends IteratingSystem {
+public class MenuSystem extends IteratingSystem {
+
     private ComponentMapper<MenuComponent> menuM;
     private ComponentMapper<StateComponent> stateM;
     private ComponentMapper<TransformComponent> transformM;

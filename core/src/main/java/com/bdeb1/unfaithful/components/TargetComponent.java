@@ -22,25 +22,22 @@ import com.badlogic.ashley.core.Component;
  * @author Soheib El-Harrache
  */
 public class TargetComponent implements Component {
+
     public static final int STATE_UNSUSPICIOUS = 1;
     public static final int STATE_SUSPICIOUS = 2;
     public static final int STATE_FRENZY = 3;
     public static final int STATE_DONE = 4;
-    
-    
+
     public static final int ACTION_WALK_LEFT = 12;
     public static final int ACTION_WALK_RIGHT = 13;
     public static final int ACTION_LEFT_SCREEN = 14;
     public static final int ACTION_RIGHT_SCREEN = 15;
     public static final int ACTION_WATCHING = 16;
-    
-    
-    
-    
+
     public static final int TRIGGER_POINT_SUSPICIOUS = 30;
     public static final int TRIGGER_POINT_FRENZY = 70;
     public static final int TRIGGER_POINT_DONE = 100;
-    
+
     public float suspicion_gauge = 0;
     public float difficultyAddition = 0;
 }

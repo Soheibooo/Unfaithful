@@ -22,5 +22,6 @@ import com.badlogic.ashley.core.Component;
  * @author Soheib El-Harrache
  */
 public class MovementComponent implements Component {
+
     public float speed = 0;
 }

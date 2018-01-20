@@ -27,12 +27,13 @@ import com.bdeb1.unfaithful.components.TransformComponent;
  * @author Samuel
  */
 public class HackerSystem extends IteratingSystem {
+
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<TransformComponent> transformM;
 
-    
     private boolean isHacking = false;
+
     public HackerSystem() {
         super(Family.all(
                 HackerComponent.class,
@@ -42,32 +43,29 @@ public class HackerSystem extends IteratingSystem {
         transformM = ComponentMapper.getFor(TransformComponent.class);
         hackerM = ComponentMapper.getFor(HackerComponent.class);
         actionM = ComponentMapper.getFor(ActionComponent.class);
-        
-        
+
     }
+
     public void setIsHacking(boolean b) {
         isHacking = b;
     }
-    
+
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         transformM.get(entity).isHidden = false;
         HackerComponent hackerC = hackerM.get(entity);
         ActionComponent actionC = actionM.get(entity);
-        
+
         // Test usage: System.out.println(deltaTime);
-        if(isHacking) {
+        if (isHacking) {
             actionC.set(HackerComponent.ACTION_HACKING);
-            
 
             //Add constant later for difficult: HACK_MAX_GAUGE
-            
             hackerC.hacking_gauge += deltaTime * 7;
-        }
-        else{
+        } else {
             actionC.set(HackerComponent.ACTION_NOT_HACKING);
-            
+
         }
-        
+
     }
 }

@@ -33,7 +33,7 @@ import com.bdeb1.unfaithful.Unfaithful;
 public class MainMenu implements Screen {
 
     private static final int STARTING_LEVEL = 1;
-    
+
     private Unfaithful game;
     private TextureAtlas atlas;
     private Animation animation;
@@ -44,7 +44,7 @@ public class MainMenu implements Screen {
     public MainMenu(Unfaithful game) {
         this.game = game;
     }
-    
+
     @Override
     public void show() {
 
@@ -58,7 +58,7 @@ public class MainMenu implements Screen {
         if (Assets.getInstance().manager.update()) {
             if (atlas == null) {
                 this.atlas = Assets.getInstance().manager.get(Assets.ATLAS_HOMESCREEN);
-                this.animation = new Animation(1/12f, atlas.getRegions());
+                this.animation = new Animation(1 / 12f, atlas.getRegions());
                 this.stage = new Stage();
                 Gdx.input.setInputProcessor(stage);
 
@@ -67,7 +67,7 @@ public class MainMenu implements Screen {
 
             game.sb.begin();
             elapsedTime += delta;
-            game.sb.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0, 0,
+            game.sb.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), 0, 0,
                     Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             game.sb.end();
             stage.act(delta);
@@ -108,16 +108,16 @@ public class MainMenu implements Screen {
         defaultSprite = new Sprite(defaultRegion);
 
         button = new AnimatedTextButton("Help", textButtonStyle, defaultSprite);
-        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU),
+                regions, 0.25f);
         button.setPosition(Gdx.graphics.getWidth() / 2 - 200, 300);
         button.setWidth(400);
         button.setHeight(80);
         button.addListener(new InputListener() {
 
-
-
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y,
+                    int pointer, int button) {
                 game.setScreen(new HelpScreen(game));
                 return true;
             }
@@ -129,13 +129,15 @@ public class MainMenu implements Screen {
         defaultSprite = new Sprite(defaultRegion);
 
         button = new AnimatedTextButton("Quit", textButtonStyle, defaultSprite);
-        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU), regions, 0.25f);
+        button.setAnimation(Assets.getInstance().manager.get(Assets.ATLAS_MENU),
+                regions, 0.25f);
         button.setPosition(Gdx.graphics.getWidth() / 2 - 200, 200);
         button.setWidth(400);
         button.setHeight(80);
         button.addListener(new InputListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y,
+                    int pointer, int button) {
                 System.exit(0);
                 return true;
             }
@@ -160,7 +162,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void hide() {
-        
+
     }
 
     @Override

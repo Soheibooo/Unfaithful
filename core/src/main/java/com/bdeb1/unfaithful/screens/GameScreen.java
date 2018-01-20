@@ -24,18 +24,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bdeb1.unfaithful.Assets;
 import com.bdeb1.unfaithful.GameWorld;
@@ -56,153 +49,151 @@ import com.bdeb1.unfaithful.util.Scene;
  */
 public class GameScreen implements Screen {
 
-	private GameWorld    gWorld;
-	private PooledEngine engine;
-	private Unfaithful   game;
-	private boolean      isPaused;
-	private Stage        stage;
-	private int          level;
+    private GameWorld gWorld;
+    private PooledEngine engine;
+    private Unfaithful game;
+    private boolean isPaused;
+    private Stage stage;
+    private int level;
 
-	private Scene        background;
-	private SpriteBatch  batch;
-	private TextureAtlas backgroundAtlas;
-	private AnimatedProgressBar hackingBar;
-	private AnimatedProgressBar suspiciousBar;
-        
-        private Music music;
-        private Music typing;
+    private Scene background;
+    private SpriteBatch batch;
+    private TextureAtlas backgroundAtlas;
+    private AnimatedProgressBar hackingBar;
+    private AnimatedProgressBar suspiciousBar;
 
-	public GameScreen (Unfaithful game, int level) {
-		super ();
-		this.game = game;
-		this.stage = new Stage ();
-		this.level = level;
-                this.music = Assets.getInstance ().manager
-			  .get (Assets.MUSIC_PETITE_MELODIE);
-                this.typing = Assets.getInstance ().manager
-			  .get (Assets.MUSIC_TYPING);
-                
-                music.setLooping(true);
-                music.setVolume(0.8f);
-                music.play();
-                
-                typing.setLooping(true);
-                typing.setVolume(0.8f);
-                typing.play();
-                
-		Gdx.input.setInputProcessor (stage);
+    private Music music;
+    private Music typing;
 
-		stage.act ();
+    public GameScreen(Unfaithful game, int level) {
+        super();
+        this.game = game;
+        this.stage = new Stage();
+        this.level = level;
+        this.music = Assets.getInstance().manager
+                .get(Assets.MUSIC_PETITE_MELODIE);
+        this.typing = Assets.getInstance().manager
+                .get(Assets.MUSIC_TYPING);
 
-		this.batch = new SpriteBatch ();
-                switch (level) {
-                    case 1:
-                        this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV1);
-                        break;
-                    case 2:
-                        //TODO chante
-                        this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV2);
-                        break;
-                    case 3:
-                        this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV3);
-                        break;
-                    default:
-                        this.backgroundAtlas = Assets.getInstance ().manager
-			  .get (Assets.ATLAS_BACKGROUND_LV1);
-                        break;
-                }
+        music.setLooping(true);
+        music.setVolume(0.8f);
+        music.play();
 
-		Animation<TextureRegion> animation = new Animation<> (1f / 2f,
-		                                                      backgroundAtlas
-			                                                        .getRegions ());
-		Dimension visibleDimension = new Dimension (Gdx.graphics.getWidth (),
-		                                            Gdx.graphics.getHeight ());
-		this.background = new Scene (visibleDimension, animation);
+        typing.setLooping(true);
+        typing.setVolume(0.8f);
+        typing.play();
 
+        Gdx.input.setInputProcessor(stage);
 
-		this.engine = new PooledEngine ();
-		this.engine.addSystem (new RenderingSystem (game.sb));
-		this.engine.addSystem (new AnimationSystem ());
-		this.engine.addSystem (new StateSystem ());
-		this.engine.addSystem (new ActionSystem ());
-		this.engine.addSystem (new MovementSystem ());
-		this.engine.addSystem (new TargetSystem ());
-		this.engine.addSystem (new HackerSystem ());
-		this.engine.addSystem (new LaptopSystem ());
-		this.gWorld = new GameWorld (engine, level);
+        stage.act();
 
-		isPaused = false;
+        this.batch = new SpriteBatch();
+        switch (level) {
+            case 1:
+                this.backgroundAtlas = Assets.getInstance().manager
+                        .get(Assets.ATLAS_BACKGROUND_LV1);
+                break;
+            case 2:
+                //TODO chante
+                this.backgroundAtlas = Assets.getInstance().manager
+                        .get(Assets.ATLAS_BACKGROUND_LV2);
+                break;
+            case 3:
+                this.backgroundAtlas = Assets.getInstance().manager
+                        .get(Assets.ATLAS_BACKGROUND_LV3);
+                break;
+            default:
+                this.backgroundAtlas = Assets.getInstance().manager
+                        .get(Assets.ATLAS_BACKGROUND_LV1);
+                break;
+        }
 
-		Gdx.input.setInputProcessor (stage);
-		addProgressBar();
-	}
+        Animation<TextureRegion> animation = new Animation<>(1f / 2f,
+                backgroundAtlas
+                        .getRegions());
+        Dimension visibleDimension = new Dimension(Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight());
+        this.background = new Scene(visibleDimension, animation);
+
+        this.engine = new PooledEngine();
+        this.engine.addSystem(new RenderingSystem(game.sb));
+        this.engine.addSystem(new AnimationSystem());
+        this.engine.addSystem(new StateSystem());
+        this.engine.addSystem(new ActionSystem());
+        this.engine.addSystem(new MovementSystem());
+        this.engine.addSystem(new TargetSystem());
+        this.engine.addSystem(new HackerSystem());
+        this.engine.addSystem(new LaptopSystem());
+        this.gWorld = new GameWorld(engine, level);
+
+        isPaused = false;
+
+        Gdx.input.setInputProcessor(stage);
+        addProgressBar();
+    }
 
     private void addProgressBar() {
         String[] suspiciousRegionsBackground = new String[]{"suspicion_bar0000",
-                "suspicion_bar0001",
-                "suspicion_bar0002",
-                "suspicion_bar0003",
-                "suspicion_bar0004",
-                "suspicion_bar0005",
-                "suspicion_bar0015",
-                "suspicion_bar0016",
-                "suspicion_bar0017",
-                "suspicion_bar0018",
-                "suspicion_bar0006",
-                "suspicion_bar0007",
-                "suspicion_bar0008",
-                "suspicion_bar0009",
-                "suspicion_bar0010",
-                "suspicion_bar0011",
-                "suspicion_bar0012",
-                "suspicion_bar0013",
-                "suspicion_bar0014"};
+            "suspicion_bar0001",
+            "suspicion_bar0002",
+            "suspicion_bar0003",
+            "suspicion_bar0004",
+            "suspicion_bar0005",
+            "suspicion_bar0015",
+            "suspicion_bar0016",
+            "suspicion_bar0017",
+            "suspicion_bar0018",
+            "suspicion_bar0006",
+            "suspicion_bar0007",
+            "suspicion_bar0008",
+            "suspicion_bar0009",
+            "suspicion_bar0010",
+            "suspicion_bar0011",
+            "suspicion_bar0012",
+            "suspicion_bar0013",
+            "suspicion_bar0014"};
 
         String[] suspiciousRegionsForeground = new String[]{"suspicion_bar_progress0006",
-                "suspicion_bar_progress0007",
-                "suspicion_bar_progress0008",
-                "suspicion_bar_progress0015",
-                "suspicion_bar_progress0016",
-                "suspicion_bar_progress0017",
-                "suspicion_bar_progress0018",
-                "suspicion_bar_progress0009",
-                "suspicion_bar_progress0000",
-                "suspicion_bar_progress0001",
-                "suspicion_bar_progress0002",
-                "suspicion_bar_progress0010",
-                "suspicion_bar_progress0011",
-                "suspicion_bar_progress0012",
-                "suspicion_bar_progress0003",
-                "suspicion_bar_progress0004",
-                "suspicion_bar_progress0005",
-                "suspicion_bar_progress0013",
-                "suspicion_bar_progress0014"};
+            "suspicion_bar_progress0007",
+            "suspicion_bar_progress0008",
+            "suspicion_bar_progress0015",
+            "suspicion_bar_progress0016",
+            "suspicion_bar_progress0017",
+            "suspicion_bar_progress0018",
+            "suspicion_bar_progress0009",
+            "suspicion_bar_progress0000",
+            "suspicion_bar_progress0001",
+            "suspicion_bar_progress0002",
+            "suspicion_bar_progress0010",
+            "suspicion_bar_progress0011",
+            "suspicion_bar_progress0012",
+            "suspicion_bar_progress0003",
+            "suspicion_bar_progress0004",
+            "suspicion_bar_progress0005",
+            "suspicion_bar_progress0013",
+            "suspicion_bar_progress0014"};
 
         String[] hackingRegionsBackground = new String[]{"hacking_bar0000",
-                "hacking_bar0001",
-                "hacking_bar0002",
-                "hacking_bar0003",
-                "hacking_bar0004",
-                "hacking_bar0005",
-                "hacking_bar0006",
-                "hacking_bar0007",
-                "hacking_bar0008",
-                "hacking_bar0009"};
+            "hacking_bar0001",
+            "hacking_bar0002",
+            "hacking_bar0003",
+            "hacking_bar0004",
+            "hacking_bar0005",
+            "hacking_bar0006",
+            "hacking_bar0007",
+            "hacking_bar0008",
+            "hacking_bar0009"};
 
         String[] hackingRegionsForeground = new String[]{"hacking_bar_progress0000",
-                "hacking_bar_progress0001",
-                "hacking_bar_progress0002",
-                "hacking_bar_progress0003",
-                "hacking_bar_progress0004",
-                "hacking_bar_progress0005",
-                "hacking_bar_progress0006",
-                "hacking_bar_progress0007",
-                "hacking_bar_progress0008",
-                "hacking_bar_progress0009"};
-
+            "hacking_bar_progress0001",
+            "hacking_bar_progress0002",
+            "hacking_bar_progress0003",
+            "hacking_bar_progress0004",
+            "hacking_bar_progress0005",
+            "hacking_bar_progress0006",
+            "hacking_bar_progress0007",
+            "hacking_bar_progress0008",
+            "hacking_bar_progress0009"};
 
         Pixmap pixmap = new Pixmap(0, 0, Pixmap.Format.RGBA8888);
         TextureRegionDrawable drawable = new TextureRegionDrawable(new TextureRegion(new Texture(pixmap)));
@@ -242,113 +233,112 @@ public class GameScreen implements Screen {
         stage.addActor(hackingBar);
     }
 
-	private void pauseAction () {
-		if (isPaused) {
-			resume ();
-		} else {
-			pause ();
-		}
-	}
+    private void pauseAction() {
+        if (isPaused) {
+            resume();
+        } else {
+            pause();
+        }
+    }
 
-	@Override
-	public void show () {
-	}
+    @Override
+    public void show() {
+    }
 
-	@Override
-	public void render (float delta) {
-		update (delta);
-		draw (delta);
+    @Override
+    public void render(float delta) {
+        update(delta);
+        draw(delta);
 
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
 
-		engine.update (delta);
-	}
+        engine.update(delta);
+    }
 
-	private void update (float delta) {
-		background.update (delta);
-                hackingBar.setValue(gWorld.getHackBarProgress());
-		updateInput ();
+    private void update(float delta) {
+        background.update(delta);
+        hackingBar.setValue(gWorld.getHackBarProgress());
+        updateInput();
 
-		if (gWorld.isHacked ()) {
-			game.setScreen (new SplashScreen (game, level + 1));
-		}
-	}
+        if (gWorld.isHacked()) {
+            game.setScreen(new SplashScreen(game, level + 1));
+        }
+    }
 
-	private void updateInput () {
-		if (Gdx.input
-			  .isKeyJustPressed (Keys.ESCAPE))
-		{ //TODO add buttonpause on screen
-			pauseAction ();
-		}
-		if (Gdx.input.isKeyPressed (Keys.SPACE)) {
-                        typing.play();
-			engine.getSystem (HackerSystem.class).setIsHacking (true);
-			engine.getSystem (LaptopSystem.class).setIsHacking (true);
-		} else if (Gdx.input.isKeyPressed (Keys.LEFT)) {
-			engine.getSystem (HackerSystem.class).setIsHacking (false);
-			engine.getSystem (LaptopSystem.class).setIsHacking (false);
+    private void updateInput() {
+        if (Gdx.input
+                .isKeyJustPressed(Keys.ESCAPE)) { //TODO add buttonpause on screen
+            pauseAction();
+        }
+        if (Gdx.input.isKeyPressed(Keys.SPACE)) {
+            typing.play();
+            engine.getSystem(HackerSystem.class).setIsHacking(true);
+            engine.getSystem(LaptopSystem.class).setIsHacking(true);
+        } else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+            engine.getSystem(HackerSystem.class).setIsHacking(false);
+            engine.getSystem(LaptopSystem.class).setIsHacking(false);
 
-		} else if (Gdx.input.isKeyPressed (Keys.RIGHT)) {
-			engine.getSystem (HackerSystem.class).setIsHacking (false);
-			engine.getSystem (LaptopSystem.class).setIsHacking (false);
-		} else {
-                        typing.pause();
-			engine.getSystem (HackerSystem.class).setIsHacking (false);
-			engine.getSystem (LaptopSystem.class).setIsHacking (false);
-		}
-	}
+        } else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+            engine.getSystem(HackerSystem.class).setIsHacking(false);
+            engine.getSystem(LaptopSystem.class).setIsHacking(false);
+        } else {
+            typing.pause();
+            engine.getSystem(HackerSystem.class).setIsHacking(false);
+            engine.getSystem(LaptopSystem.class).setIsHacking(false);
+        }
+    }
 
-	private void draw (float delta) {
-		//UI
-		Gdx.gl.glClearColor (0, 0, 0, 1);
-		Gdx.gl.glClear (GL20.GL_COLOR_BUFFER_BIT);
-		game.sb.setProjectionMatrix (background.camera.combined);
+    private void draw(float delta) {
+        //UI
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        game.sb.setProjectionMatrix(background.camera.combined);
 
-		game.sb.begin ();
-		background.draw (game.sb);
-		game.sb.end ();
-	}
+        game.sb.begin();
+        background.draw(game.sb);
+        game.sb.end();
+    }
 
-	@Override
-	public void resize (int width, int height) {
-	}
+    @Override
+    public void resize(int width, int height) {
+    }
 
-	@Override
-	public void pause () {
+    @Override
+    public void pause() {
 
-		engine.getSystem (ActionSystem.class).setProcessing (false);
-		engine.getSystem (AnimationSystem.class).setProcessing (false);
-		engine.getSystem (HackerSystem.class).setProcessing (false);
-		engine.getSystem (MovementSystem.class).setProcessing (false);
-		//engine.getSystem (RenderingSystem.class).setProcessing (false);
-		engine.getSystem (StateSystem.class).setProcessing (false);
-		engine.getSystem (TargetSystem.class).setProcessing (false);
-		isPaused = true;
-	}
+        engine.getSystem(ActionSystem.class).setProcessing(false);
+        engine.getSystem(AnimationSystem.class).setProcessing(false);
+        engine.getSystem(HackerSystem.class).setProcessing(false);
+        engine.getSystem(MovementSystem.class).setProcessing(false);
+        //engine.getSystem (RenderingSystem.class).setProcessing (false);
+        engine.getSystem(StateSystem.class).setProcessing(false);
+        engine.getSystem(TargetSystem.class).setProcessing(false);
+        isPaused = true;
+    }
 
-	@Override
-	public void resume () {
+    @Override
+    public void resume() {
 
-		engine.getSystem (ActionSystem.class).setProcessing (true);
-		engine.getSystem (AnimationSystem.class).setProcessing (true);
-		engine.getSystem (HackerSystem.class).setProcessing (true);
-		engine.getSystem (MovementSystem.class).setProcessing (true);
-		engine.getSystem (RenderingSystem.class).setProcessing (true);
-		engine.getSystem (StateSystem.class).setProcessing (true);
-		engine.getSystem (TargetSystem.class).setProcessing (true);
-		isPaused = false;
-	}
+        engine.getSystem(ActionSystem.class).setProcessing(true);
+        engine.getSystem(AnimationSystem.class).setProcessing(true);
+        engine.getSystem(HackerSystem.class).setProcessing(true);
+        engine.getSystem(MovementSystem.class).setProcessing(true);
+        engine.getSystem(RenderingSystem.class).setProcessing(true);
+        engine.getSystem(StateSystem.class).setProcessing(true);
+        engine.getSystem(TargetSystem.class).setProcessing(true);
+        isPaused = false;
+    }
 
-	@Override
-	public void hide () {
-	}
+    @Override
+    public void hide() {
+    }
 
-	@Override
-	public void dispose () {
-		background.dispose ();
-		backgroundAtlas.dispose ();
-		batch.dispose ();
-		engine.clearPools ();
-	}
+    @Override
+    public void dispose() {
+        background.dispose();
+        backgroundAtlas.dispose();
+        batch.dispose();
+        engine.clearPools();
+    }
 }

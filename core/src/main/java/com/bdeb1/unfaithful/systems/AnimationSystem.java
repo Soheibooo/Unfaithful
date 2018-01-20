@@ -24,7 +24,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.AnimationComponent;
 import com.bdeb1.unfaithful.components.StateComponent;
-import com.bdeb1.unfaithful.components.TargetComponent;
 import com.bdeb1.unfaithful.components.TextureComponent;
 
 /**
@@ -58,10 +57,10 @@ public class AnimationSystem extends IteratingSystem {
         AnimationComponent animationC = animationM.get(entity);
 
         if (animationC.animations.containsKey(stateC.get())) {
-            
+
             TextureComponent tex = textureM.get(entity);
-            Animation animation = 
-                    animationC.animations.get(stateC.get()).get(actionC.get());
+            Animation animation
+                    = animationC.animations.get(stateC.get()).get(actionC.get());
             tex.region = (TextureRegion) animation.getKeyFrame(stateC.time);
         }
     }

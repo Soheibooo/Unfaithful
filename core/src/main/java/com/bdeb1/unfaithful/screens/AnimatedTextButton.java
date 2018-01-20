@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class AnimatedTextButton extends TextButton {
+
     private TextureAtlas atlas;
     private String[] regions;
     private Sprite defaultSprite;
@@ -18,7 +19,8 @@ public class AnimatedTextButton extends TextButton {
     private int animationIndex;
     private boolean activated = false;
 
-    public AnimatedTextButton(String text, TextButtonStyle style, Sprite defaultSprite) {
+    public AnimatedTextButton(String text, TextButtonStyle style,
+            Sprite defaultSprite) {
         super(text, style);
         this.defaultSprite = defaultSprite;
         getStyle().up = new SpriteDrawable(defaultSprite);
@@ -33,12 +35,14 @@ public class AnimatedTextButton extends TextButton {
 
         addListener(new InputListener() {
             @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            public void enter(InputEvent event, float x, float y,
+                    int pointer, Actor fromActor) {
                 activated = true;
             }
 
             @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+            public void exit(InputEvent event, float x, float y,
+                    int pointer, Actor toActor) {
                 activated = false;
                 getStyle().up = new SpriteDrawable(defaultSprite);
             }
@@ -63,7 +67,8 @@ public class AnimatedTextButton extends TextButton {
 
     }
 
-    public void setAnimation(TextureAtlas atlas, String[] regions, float speed) {
+    public void setAnimation(TextureAtlas atlas, String[] regions,
+            float speed) {
         this.atlas = atlas;
         this.regions = regions;
         this.animationSpeed = speed;

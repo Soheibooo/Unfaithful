@@ -57,7 +57,7 @@ public class GameWorld {
         engine.clearPools();
         engine.removeAllEntities();
 
-        //target = createTarget();
+        target = createTarget();
         comptoir = createDumbYouRE();
         laptop = createLaptopScreen();
         hacker = createHacker();
@@ -135,12 +135,12 @@ public class GameWorld {
                 break;
         }
 
-        Animation<TextureRegion> laptopHack = new Animation<TextureRegion>(
+        Animation<TextureRegion> laptopHack = new Animation<>(
                 1 / 12f, atTextureLaptopHack.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> laptopNotHack = new Animation<TextureRegion>(
+        Animation<TextureRegion> laptopNotHack = new Animation<>(
                 1 / 12f, atTextureLaptop.getRegions(), PlayMode.LOOP);
 
-        HashMap<Integer, Animation> anime = new HashMap<Integer, Animation>();
+        HashMap<Integer, Animation> anime = new HashMap<>();
         anime.put(1, laptopHack);
         anime.put(2, laptopNotHack);
 
@@ -210,6 +210,9 @@ public class GameWorld {
                 .createComponent(TargetComponent.class);
         ActionComponent actionC = engine
                 .createComponent(ActionComponent.class);
+        MovementComponent movementC = engine
+                .createComponent(MovementComponent.class);
+
         positionC.position.set(5.0f, 1.0f, 0.0f);
         stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
         targetC.difficultyAddition = -level * 5;
@@ -247,13 +250,13 @@ public class GameWorld {
                 break;
         }
 
-        Animation<TextureRegion> womanWalk = new Animation<TextureRegion>(
+        Animation<TextureRegion> womanWalk = new Animation<>(
                 1 / 12f, atTextureMarche.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanWalkSus = new Animation<TextureRegion>(
+        Animation<TextureRegion> womanWalkSus = new Animation<>(
                 1 / 12f, atTextureMarcheSus.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanRotate = new Animation<TextureRegion>(
+        Animation<TextureRegion> womanRotate = new Animation<>(
                 1 / 12f, atTextureRotate.getRegions(), PlayMode.LOOP);
-        Animation<TextureRegion> womanRotateSus = new Animation<TextureRegion>(
+        Animation<TextureRegion> womanRotateSus = new Animation<>(
                 1 / 12f, atTextureRotateSus.getRegions(), PlayMode.LOOP);
 
         HashMap<Integer, Animation> animeActionWalk = new HashMap<>();
@@ -278,6 +281,7 @@ public class GameWorld {
         entity.add(positionC);
         entity.add(stateC);
         entity.add(actionC);
+        entity.add(movementC);
 
         engine.addEntity(entity);
 
@@ -334,12 +338,12 @@ public class GameWorld {
         }
 
         HashMap<Integer, Animation> animeList
-                = new HashMap<Integer, Animation>();
+                = new HashMap<>();
 
-        Animation<TextureRegion> animeHacking = new Animation<TextureRegion>(
+        Animation<TextureRegion> animeHacking = new Animation<>(
                 1 / 12f, texAtHacking.getRegions(), PlayMode.LOOP);
         Animation<TextureRegion> animeNotHacking
-                = new Animation<TextureRegion>(1 / 12f,
+                = new Animation<>(1 / 12f,
                         texAtNOTHacking.getRegions(),
                         PlayMode.LOOP);
 

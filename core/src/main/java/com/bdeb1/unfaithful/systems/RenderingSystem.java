@@ -36,93 +36,95 @@ import com.bdeb1.unfaithful.util.Constants;
  */
 public class RenderingSystem extends IteratingSystem {
 
-	//A REVOIR
-	static final        float PPM              = 16.0f;
-	public static final float PIXELS_TO_METRES = 1.0f / PPM;
-	static final        float FRUSTUM_WIDTH    = Gdx.graphics.getWidth () /
-	                                             PPM;
-	//37.5f;
-	static final        float FRUSTUM_HEIGHT   = Gdx.graphics.getHeight () /
-	                                             PPM;//.0f;
-	private SpriteBatch        batch;
-	private OrthographicCamera cam;
+    //A REVOIR
+    static final float PPM = 16.0f;
+    public static final float PIXELS_TO_METRES = 1.0f / PPM;
+    static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth()
+            / PPM;
+    //37.5f;
+    static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight()
+            / PPM;//.0f;
+    private SpriteBatch batch;
+    private OrthographicCamera cam;
 
-	private ComponentMapper<TextureComponent>   textureM;
-	private ComponentMapper<TransformComponent> transformM;
-	{
-		System.out.println ("NOT RENDERING THIS (NOT TARGET THO) ");
-	}
+    private ComponentMapper<TextureComponent> textureM;
+    private ComponentMapper<TransformComponent> transformM;
 
-	{
-		//			System.out.println ("Ton menu boi");
-	}
-	public RenderingSystem (SpriteBatch batch) {
-		super (Family.all (TransformComponent.class, TextureComponent.class)
-		             .get ());
-		this.batch = batch;
+    {
+        System.out.println("NOT RENDERING THIS (NOT TARGET THO) ");
+    }
 
-		textureM = ComponentMapper.getFor (TextureComponent.class);
-		transformM = ComponentMapper.getFor (TransformComponent.class);
+    {
+        //			System.out.println ("Ton menu boi");
+    }
 
-		cam = new OrthographicCamera (FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-		cam.position.set (FRUSTUM_WIDTH / 2f, FRUSTUM_HEIGHT / 2f, 0);
-	}
+    public RenderingSystem(SpriteBatch batch) {
+        super(Family.all(TransformComponent.class, TextureComponent.class)
+                .get());
+        this.batch = batch;
 
-	@Override
-	public void update (float deltaTime) {
-		super.update (deltaTime);
-		cam.update ();
-		batch.setProjectionMatrix (cam.combined);
-		batch.enableBlending ();
-	}
+        textureM = ComponentMapper.getFor(TextureComponent.class);
+        transformM = ComponentMapper.getFor(TransformComponent.class);
 
-	@Override
-	protected void processEntity (Entity entity, float f) {
-		TextureComponent   tex = textureM.get (entity);
-		TransformComponent t   = transformM.get (entity);
+        cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        cam.position.set(FRUSTUM_WIDTH / 2f, FRUSTUM_HEIGHT / 2f, 0);
+    }
 
-		if (! (tex.region == null || t.isHidden)) {
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
+        batch.enableBlending();
+    }
 
-			float width  = tex.region.getRegionWidth ();
-			float height = tex.region.getRegionHeight ();
+    @Override
+    protected void processEntity(Entity entity, float f) {
+        TextureComponent tex = textureM.get(entity);
+        TransformComponent t = transformM.get(entity);
 
-			batch.begin ();
+        if (!(tex.region == null || t.isHidden)) {
 
-			if (entity.getComponent (HackerComponent.class) != null) {
-				batch.draw (tex.region, t.position.x, t.position.y,
-				            width * Constants.World.SCALE,
-				            height * Constants.World.SCALE);
-			} else if (entity.getComponent (TargetComponent.class) != null) {
-				ActionComponent actionC = ComponentMapper
-					  .getFor (ActionComponent.class).get (entity);
-				if (actionC.action == TargetComponent.ACTION_WALK_RIGHT) {
-					width = width * - 1;
-				}
-				batch.draw (tex.region, t.position.x, t.position.y,
-				            width * Constants.World.SCALE,
-				            height * Constants.World.SCALE);
-			} else if (entity.getComponent (LaptopComponent.class) != null) {
-				batch.draw (tex.region, t.position.x, t.position.y,
-				            width * Constants.World.SCALE,
-				            height * Constants.World.SCALE);
-			} else if (entity.getComponent (ComptoirComponent.class) != null) {
-				batch.draw (tex.region, 0, 0,
-				            Constants.World.SCENE_DIMENSION.width,
-				            Constants.World.SCENE_DIMENSION.height);
-			} else {
-				//                batch.draw(tex.region, t.position.x -
-				// originX,
-				//                        t.position.y - originY, originX,
-				// originY, width,
-				//                        height, PixelsToMeters(t.scale.x),
-				//                        PixelsToMeters(t.scale.y), t
-				// .rotation);
-				batch.draw (tex.region, t.position.x, t.position.y,
-				            width * Constants.World.SCALE,
-				            Constants.World.SCALE);
-			}
+            float width = tex.region.getRegionWidth();
+            float height = tex.region.getRegionHeight();
 
-			batch.end ();
-		}
-	}
+            batch.begin();
+
+            if (entity.getComponent(HackerComponent.class) != null) {
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        height * Constants.World.SCALE);
+            } else if (entity.getComponent(TargetComponent.class) != null) {
+                ActionComponent actionC = ComponentMapper
+                        .getFor(ActionComponent.class).get(entity);
+                if (actionC.action == TargetComponent.ACTION_WALK_RIGHT) {
+                    width = width * - 1;
+                }
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        height * Constants.World.SCALE);
+            } else if (entity.getComponent(LaptopComponent.class) != null) {
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        height * Constants.World.SCALE);
+            } else if (entity.getComponent(ComptoirComponent.class) != null) {
+                batch.draw(tex.region, 0, 0,
+                        Constants.World.SCENE_DIMENSION.width,
+                        Constants.World.SCENE_DIMENSION.height);
+            } else {
+                //                batch.draw(tex.region, t.position.x -
+                // originX,
+                //                        t.position.y - originY, originX,
+                // originY, width,
+                //                        height, PixelsToMeters(t.scale.x),
+                //                        PixelsToMeters(t.scale.y), t
+                // .rotation);
+                batch.draw(tex.region, t.position.x, t.position.y,
+                        width * Constants.World.SCALE,
+                        Constants.World.SCALE);
+            }
+
+            batch.end();
+        }
+    }
 }

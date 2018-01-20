@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class AnimatedProgressBar extends ProgressBar {
+
     private TextureAtlas atlasBackground;
     private String[] regionsBackground;
     private float animationBackgroundTimer;
@@ -22,7 +23,7 @@ public class AnimatedProgressBar extends ProgressBar {
     public boolean freezeAnimation = false;
 
     public AnimatedProgressBar(float min, float max, float stepSize, boolean vertical, ProgressBarStyle progressBarStyle) {
-         super(min, max, stepSize, vertical, progressBarStyle);
+        super(min, max, stepSize, vertical, progressBarStyle);
 
         addAction(new Action() {
             @Override
@@ -81,7 +82,8 @@ public class AnimatedProgressBar extends ProgressBar {
 
     public void freeze() {
         freezeAnimation = true;
-        TextureAtlas.AtlasRegion textureBackground = this.atlasBackground.findRegion(regionsBackground[0]);
+        TextureAtlas.AtlasRegion textureBackground
+                = this.atlasBackground.findRegion(regionsBackground[0]);
         Sprite spriteBackground = new Sprite(textureBackground);
         spriteBackground.setSize(getWidth(), getHeight());
         getStyle().background = new SpriteDrawable(spriteBackground);

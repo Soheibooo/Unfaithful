@@ -15,7 +15,6 @@
  */
 package com.bdeb1.unfaithful;
 
-import com.badlogic.ashley.core.PooledEngine;
 import com.bdeb1.unfaithful.screens.MainMenu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;

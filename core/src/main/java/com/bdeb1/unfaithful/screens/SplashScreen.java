@@ -41,16 +41,22 @@ public class SplashScreen implements Screen {
         switch (transitionLevel) {
             case 1:
                 //Ajoute les splash du premier niveau
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_1));
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV1_1));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV1_2));
                 break;
             case 2:
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_1));
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV2_2));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV2_1));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV2_2));
                 break;
             case 3:
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV3_1));
-                splashes.add(Assets.getInstance().manager.get(Assets.SPLASH_LV3_2));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV3_1));
+                splashes.add(
+                        Assets.getInstance().manager.get(Assets.SPLASH_LV3_2));
                 break;
             default:
                 break;
@@ -69,7 +75,7 @@ public class SplashScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-        
+
         //Precaution taken
         if (splashes.size() != step) {
             game.sb.begin();

@@ -34,8 +34,8 @@ public class HelpScreen implements Screen {
 
         game.sb.begin();
         elapsedTime += delta;
-        game.sb.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true),0, 0,
-        Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.sb.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), 0, 0,
+                Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.sb.end();
 
         if (elapsedTime > 0.5f) {
