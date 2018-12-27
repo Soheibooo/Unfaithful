@@ -23,6 +23,7 @@ import java.util.Random;
  * @author Soheib El-Harrache
  */
 public class RandomComponent implements Component {
+
     public static Random rand = new Random();
     public float value = 0;
 }

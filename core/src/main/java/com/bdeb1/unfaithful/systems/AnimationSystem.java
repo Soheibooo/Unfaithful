@@ -57,12 +57,11 @@ public class AnimationSystem extends IteratingSystem {
         AnimationComponent animationC = animationM.get(entity);
 
         if (animationC.animations.containsKey(stateC.get())) {
+
             TextureComponent tex = textureM.get(entity);
-            Animation animation = 
-                    animationC.animations.get(stateC.get()).get(actionC.get());
+            Animation animation
+                    = animationC.animations.get(stateC.get()).get(actionC.get());
             tex.region = (TextureRegion) animation.getKeyFrame(stateC.time);
         }
-
-        stateC.time += deltaTime;
     }
 }

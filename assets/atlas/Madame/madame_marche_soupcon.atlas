@@ -1,0 +1,118 @@
+
+madame_marche_soupcon.png
+size: 512,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 2, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 0
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 2, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 1
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 54, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 2
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 54, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 3
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 106, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 4
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 106, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 5
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 158, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 6
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 158, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 7
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 210, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 8
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 210, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 9
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 262, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 10
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 262, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 11
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 314, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 12
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 314, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 13
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 366, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 14
+femme_animation_avec_soupcon
+  rotate: false
+  xy: 366, 2
+  size: 50, 115
+  orig: 50, 115
+  offset: 0, 0
+  index: 15

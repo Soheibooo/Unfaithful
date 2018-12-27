@@ -12,14 +12,16 @@ public class DesktopLauncher {
     }
 
     private static LwjglApplication createApplication() {
-        return new LwjglApplication(new Unfaithful(), getDefaultConfiguration());
+        return new LwjglApplication(new Unfaithful (), getDefaultConfiguration());
     }
 
     private static LwjglApplicationConfiguration getDefaultConfiguration() {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.title = "Unfaithful";
-        configuration.width = 1200;
-        configuration.height = 800;
+        configuration.width = 1600;
+        configuration.height = 900;
+        configuration.resizable = false;
+
         for (int size : new int[] { 128, 64, 32, 16 }) {
             configuration.addIcon("libgdx" + size + ".png", FileType.Internal);
         }

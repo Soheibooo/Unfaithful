@@ -21,15 +21,16 @@ import com.badlogic.ashley.core.Component;
  *
  * @author Soheib El-Harrache
  */
-public class ActionComponent implements Component {  
+public class ActionComponent implements Component {
+
     public int action = 0;
     public float time = 0.0f;
 
-    public int get(){
+    public int get() {
         return action;
     }
-    
-    public void set(int newAction){
+
+    public void set(int newAction) {
         action = newAction;
         time = 0.0f;
     }

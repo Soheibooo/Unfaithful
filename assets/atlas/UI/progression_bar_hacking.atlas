@@ -1,0 +1,272 @@
+
+progression_bar_hacking.png
+size: 256,32
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hacking_bar
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0000
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0001
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0002
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0003
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0004
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0005
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0006
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0007
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0008
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0009
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0010
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0011
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0012
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0013
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0014
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0015
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0016
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_blink0017
+  rotate: false
+  xy: 2, 6
+  size: 79, 24
+  orig: 79, 24
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0000
+  rotate: false
+  xy: 83, 12
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0001
+  rotate: false
+  xy: 83, 12
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0002
+  rotate: false
+  xy: 83, 12
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0003
+  rotate: false
+  xy: 83, 2
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0004
+  rotate: false
+  xy: 83, 2
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0005
+  rotate: false
+  xy: 83, 2
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0010
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0006
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0007
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0008
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0009
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0011
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0012
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0013
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0014
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0015
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0016
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0017
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1
+hacking_bar_progress0018
+  rotate: false
+  xy: 83, 22
+  size: 77, 8
+  orig: 77, 8
+  offset: 0, 0
+  index: -1

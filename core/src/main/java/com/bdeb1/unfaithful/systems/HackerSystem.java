@@ -21,44 +21,51 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.HackerComponent;
+import com.bdeb1.unfaithful.components.TransformComponent;
+
 /**
- *
  * @author Samuel
  */
 public class HackerSystem extends IteratingSystem {
+
     private ComponentMapper<HackerComponent> hackerM;
     private ComponentMapper<ActionComponent> actionM;
+    private ComponentMapper<TransformComponent> transformM;
+
     private boolean isHacking = false;
+
     public HackerSystem() {
         super(Family.all(
                 HackerComponent.class,
-                ActionComponent.class
+                ActionComponent.class,
+                TransformComponent.class
         ).get());
+        transformM = ComponentMapper.getFor(TransformComponent.class);
         hackerM = ComponentMapper.getFor(HackerComponent.class);
         actionM = ComponentMapper.getFor(ActionComponent.class);
+
     }
+
     public void setIsHacking(boolean b) {
         isHacking = b;
     }
-    
+
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
+        transformM.get(entity).isHidden = false;
         HackerComponent hackerC = hackerM.get(entity);
         ActionComponent actionC = actionM.get(entity);
-        
+
         // Test usage: System.out.println(deltaTime);
-        if(isHacking) {
+        if (isHacking) {
             actionC.set(HackerComponent.ACTION_HACKING);
-            
 
             //Add constant later for difficult: HACK_MAX_GAUGE
-            
-            hackerC.hacking_gauge += deltaTime;
-        }
-        else{
+            hackerC.hacking_gauge += deltaTime * 7;
+        } else {
             actionC.set(HackerComponent.ACTION_NOT_HACKING);
+
         }
-        
+
     }
-    
 }

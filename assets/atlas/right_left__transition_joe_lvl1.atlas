@@ -1,0 +1,48 @@
+
+right_left__transition_joe_lvl1.png
+size: 512,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+hacking_joe_lvl1_transition
+  rotate: false
+  xy: 194, 328
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: -1
+left_joe_lvl1
+  rotate: false
+  xy: 2, 328
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: 0
+left_joe_lvl1
+  rotate: false
+  xy: 2, 165
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: 1
+pas_hacking_joe_lvl1_transition
+  rotate: false
+  xy: 194, 2
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: -1
+right_joe_lvl1
+  rotate: false
+  xy: 2, 2
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: 0
+right_joe_lvl1
+  rotate: false
+  xy: 194, 165
+  size: 190, 161
+  orig: 190, 161
+  offset: 0, 0
+  index: 1
