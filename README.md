@@ -1,7 +1,7 @@
 # Unfaithful
 
 Unfaithful is a game created during a Game Jam near Montreal
-in less than 48h (patched later) inspired by an old game 
+in less than 48h *(patched later)* inspired by an old game 
 named "Office Lover Kiss". But this time, it's around hacking 
 systems to get through levels within a ridiculous storyline.
 
@@ -31,9 +31,9 @@ Written in Java, it uses:
 ## Team
 
 Dev Team:
-- Soheib El-Harrache as **Lead Programmer**
-- Samuel Montambault as **Programmer** and **Music/Sound Artist**
-- Hantz as **Programmer**
+- [Soheib El-Harrache](https://github.com/Soheibooo) as **Lead Programmer**
+- [Samuel Montambault](https://github.com/MysticFragilist) as **Programmer** and **Music/Sound Artist**
+- [Hantz Vius](https://github.com/nhatzHK) as **Programmer**
 - Nicolas Signori as **Programmer**
 - Laurent Romulus as **Programmer**
 
