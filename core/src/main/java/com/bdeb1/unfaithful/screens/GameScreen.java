@@ -263,6 +263,7 @@ public class GameScreen implements Screen {
 
         if (gWorld.isHacked()) {
             game.setScreen(new SplashScreen(game, level + 1));
+            this.dispose();
         }
     }
 
@@ -336,6 +337,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        typing.dispose();
+        music.dispose();
+        stage.dispose();
         background.dispose();
         backgroundAtlas.dispose();
         batch.dispose();

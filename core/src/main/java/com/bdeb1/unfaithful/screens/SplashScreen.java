@@ -78,9 +78,10 @@ public class SplashScreen implements Screen {
 
         //Precaution taken
         if (splashes.size() != step) {
+            game.sb.setProjectionMatrix(game.cam.combined);
             game.sb.begin();
             game.sb.draw(splashes.get(step), 0, 0,
-                    Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    game.cam.viewportWidth, game.cam.viewportHeight);
             //TODO Render le bouton aussi
             game.sb.end();
         }

@@ -34,7 +34,7 @@ public class MainMenu implements Screen {
 
     private static final int STARTING_LEVEL = 1;
 
-    private Unfaithful game;
+    private final Unfaithful game;
     private TextureAtlas atlas;
     private Animation animation;
     private float elapsedTime = 0;
