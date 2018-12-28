@@ -35,7 +35,7 @@ Dev Team:
 - [Soheib El-Harrache](https://github.com/Soheibooo) as **Lead Programmer**
 - [Samuel Montambault](https://github.com/MysticFragilist) as **Programmer** and **Music/Sound Artist**
 - [Hantz Vius](https://github.com/nhatzHK) as **Programmer**
-- Nicolas Signori as **Programmer**
+- [Nicolas Signori](https://github.com/woofi7) as **Programmer**
 - Laurent Romulus as **Programmer**
 
 Artistic Team:
