@@ -9,6 +9,7 @@ Special thanks to Veselin and Aleksandrina for their
 humorous appearance in this project!
 
 The git history has been cleaned up for this release.
+The Game Jam took place on 16th January, 2018.
 
 ## Gameplay
 (TODO gifs, screenshots)
