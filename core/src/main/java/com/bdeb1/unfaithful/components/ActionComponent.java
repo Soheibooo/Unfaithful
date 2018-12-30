@@ -32,6 +32,8 @@ public class ActionComponent implements Component {
 
     public void set(int newAction) {
         action = newAction;
-        time = 0.0f;
+        if(newAction != action) {
+            time = 0.0f;
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.bdeb1.unfaithful.components.ActionComponent;
 import com.bdeb1.unfaithful.components.MovementComponent;
 import com.bdeb1.unfaithful.components.RandomComponent;
@@ -39,7 +40,7 @@ public class TargetSystem extends IntervalIteratingSystem {
     private static final int WIDTH_ZONE_SUSPICION = 700;
 
     private int randWaitingTime = RandomComponent.rand.nextInt(5);
-    private int randPositionTar = 0;
+    private int positionToGo = 0;
     private int randTimeStay = 0;
     private int randDir = 0;
 
@@ -70,38 +71,15 @@ public class TargetSystem extends IntervalIteratingSystem {
         TargetComponent targetC = targetM.get(entity);
         TransformComponent transformC = transformM.get(entity);
         MovementComponent movementC = movementM.get(entity);
-
+        
         //Time between changing action
         RandomComponent randomC = randomM.get(entity);
 
-        //Out of screen
-        //ZONE SAFE
-        if (transformC.position.x < WIDTH_ZONE_SAFE || transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - 50) {
-            if (targetC.suspicion_gauge >= 0) {
-                targetC.suspicion_gauge -= 0.05f;
-            }
-        } else if (transformC.position.x > WIDTH_ZONE_SAFE && transformC.position.x < WIDTH_ZONE_SUSPICION) {
-            if (movementC.speed > 0) {
-                targetC.suspicion_gauge += 0.1f;
-            } else {
-                if (targetC.suspicion_gauge >= 0) {
-                    targetC.suspicion_gauge -= 0.05f;
-                }
-            }
-        } else if (transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - WIDTH_ZONE_SUSPICION && transformC.position.x < WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE) {
-            if (movementC.speed > 0) {
-                if (targetC.suspicion_gauge >= 0) {
-                    targetC.suspicion_gauge -= 0.05f;
-                }
-
-            } else {
-
-                targetC.suspicion_gauge += 0.1f;
-            }
-        } else { //Zone de Danger tres radioactive
-            targetC.suspicion_gauge = 100f;
-        }
-
+        
+        //if hacker is hacking
+        processSuspiciousGauge(targetC, transformC, movementC);
+        
+        
         if (targetC.suspicion_gauge < TargetComponent.TRIGGER_POINT_SUSPICIOUS) {
             stateC.state = TargetComponent.STATE_UNSUSPICIOUS;
 
@@ -114,8 +92,131 @@ public class TargetSystem extends IntervalIteratingSystem {
         } else {
             stateC.state = TargetComponent.STATE_DONE;
         }
-
-        //System.out.println(actionC.time);
+        
+        processActionTarget(actionC, movementC, transformC);
+        processMovementTarget(actionC, movementC, transformC);
+        
+    }
+    
+    private void processSuspiciousGauge(TargetComponent targetC, TransformComponent transformC, MovementComponent movementC) {
+        // Three places: the safe zone, the suspicious zone, and the danger zone
+        
+        //SAFE
+        if (transformC.position.x < WIDTH_ZONE_SAFE || transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - 50) {
+            
+            if (targetC.suspicion_gauge >= 0) {
+                targetC.suspicion_gauge -= 0.013f;
+            }
+        //Suspicion left
+        } else if (transformC.position.x > WIDTH_ZONE_SAFE && transformC.position.x < WIDTH_ZONE_SUSPICION + WIDTH_ZONE_SAFE) {
+            
+            if (movementC.speed > 0) {
+                targetC.suspicion_gauge += 0.1f;
+            } else {
+                if (targetC.suspicion_gauge >= 0) {
+                    targetC.suspicion_gauge -= 0.013f;
+                }
+            }
+        //Suspicion Right
+        } else if (transformC.position.x >= WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE - WIDTH_ZONE_SUSPICION && transformC.position.x < WIDTH_SCREEN_TOT - WIDTH_ZONE_SAFE) {
+            if (movementC.speed > 0) {
+                if (targetC.suspicion_gauge >= 0) {
+                    targetC.suspicion_gauge -= 0.013f;
+                }
+            } else {
+                targetC.suspicion_gauge += 0.1f;
+            }
+        //DANGER
+        } else {
+            targetC.suspicion_gauge = 100f;
+        }
+        
+        
+        
+    }
+    
+    /**
+     * process the current action that is being execute. (Walking, waiting, side of screen, etc)
+     * 
+     * @param actionC
+     * @param movementC
+     * @param transformC 
+     */
+    private void processActionTarget(ActionComponent actionC, MovementComponent movementC, TransformComponent transformC) {
+        
+        if(transformC.position.x <= -50) {
+            actionC.set(TargetComponent.ACTION_LEFT_SCREEN);
+        }
+        if(transformC.position.x >= WIDTH_SCREEN_TOT) {
+            actionC.set(TargetComponent.ACTION_RIGHT_SCREEN);
+        }
+        if(movementC.speed == 0.0f) {
+            actionC.set(TargetComponent.ACTION_WAITING);
+        }
+        else {
+            if(randDir == 0) {
+                actionC.set(TargetComponent.ACTION_WALK_RIGHT);
+            }
+            else {
+                actionC.set(TargetComponent.ACTION_WALK_LEFT);
+            }
+        }
+        
+    }
+    
+    private void processMovementTarget(ActionComponent actionC, MovementComponent movementC, TransformComponent transformC) {
+        
+        
+        //movementC.speed = 2;
+        
+        //At the side of the gameworld (left or right)
+        if (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
+                || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN) {
+            
+            randWaitingTime = RandomComponent.rand.nextInt(3);
+            
+            //set the random position that the target will aim to stop and wait at
+            positionToGo = RandomComponent.rand.nextInt(WIDTH_SCREEN_TOT - 2 * WIDTH_ZONE_SAFE - 2 * WIDTH_ZONE_SUSPICION) + WIDTH_ZONE_SAFE + WIDTH_ZONE_SUSPICION;
+            actionC.time = 0.0f;
+            movementC.speed = 2.0f;
+            
+        }
+        
+        //if the walk is to the right and the waiting position has been achieve
+        if(actionC.action == TargetComponent.ACTION_WALK_RIGHT && transformC.position.x >= positionToGo
+                ||
+                //if the walk is to the left and the waiting position has been achieve
+                actionC.action == TargetComponent.ACTION_WALK_LEFT && transformC.position.x <= positionToGo) {
+            
+            //is going to set the action to WAITING for which it's going to enter in the next if statement
+            movementC.speed = 0.0f;
+            
+        }
+        
+        if (actionC.action == TargetComponent.ACTION_WAITING && actionC.time > randWaitingTime) {
+            
+            if(actionC.time > randWaitingTime) {
+                randDir = RandomComponent.rand.nextInt(2);
+                
+                switch(randDir) {
+                    case 0:
+                        positionToGo = WIDTH_SCREEN_TOT;
+                        break;
+                    case 1:
+                        positionToGo = -50;
+                        break;
+                }
+            }
+        }
+        
+        if(actionC.action == TargetComponent.ACTION_WALK_LEFT && transformC.position.x <= positionToGo
+                //for a limited time
+                && actionC.time > randWaitingTime) {
+            actionC.time = 0.0f;
+            movementC.speed = 0.0f;
+        }
+        
+        /*
         if (actionC.time > randWaitingTime
                 && (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
                 || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN)) {
@@ -123,23 +224,26 @@ public class TargetSystem extends IntervalIteratingSystem {
             //TO ADJUST DIFFICULTY
             randWaitingTime = RandomComponent.rand.nextInt(2
             /*(int) (50 + targetC.difficultyAddition)
-                    - Math.max(15, (int) (targetC.suspicion_gauge+1) / 5 + 2)*/
+                    - Math.max(15, (int) (targetC.suspicion_gauge+1) / 5 + 2)
             );
 
+            //set the random positionthat the target will aim to stop
             randPositionTar = RandomComponent.rand.nextInt(WIDTH_SCREEN_TOT - 2 * WIDTH_ZONE_SAFE - 2 * WIDTH_ZONE_SUSPICION) + WIDTH_ZONE_SAFE + WIDTH_ZONE_SUSPICION;
-            randTimeStay = RandomComponent.rand.nextInt(8);
+            //setup the time that the AI will wait
+            randTimeStay = RandomComponent.rand.nextInt(8); 
+            
             randDir = RandomComponent.rand.nextInt(2);
 
             System.out.println("Wait: " + randWaitingTime);
             System.out.println("STAY: " + randTimeStay);
             System.out.println("Dir: " + randDir);
             if (actionC.action == TargetComponent.ACTION_LEFT_SCREEN) {
-                System.out.println("Allo");
-                movementC.speed = 5;
+                
+                movementC.speed = 2;
                 actionC.action = TargetComponent.ACTION_WALK_RIGHT;
 
             } else if (actionC.action == TargetComponent.ACTION_RIGHT_SCREEN) {
-                movementC.speed = -5;
+                movementC.speed = -2;
                 actionC.action = TargetComponent.ACTION_WALK_LEFT;
             }
 
@@ -154,9 +258,9 @@ public class TargetSystem extends IntervalIteratingSystem {
 
                 if (actionC.time >= randTimeStay) {
                     if (randDir == 0) {
-                        movementC.speed = -5;
+                        movementC.speed = -2;
                     } else {
-                        movementC.speed = 5;
+                        movementC.speed = 2;
                     }
                 }
 
@@ -173,6 +277,8 @@ public class TargetSystem extends IntervalIteratingSystem {
                 movementC.speed = 0;
             }
         }
+        */
+        transformC.position.x += movementC.speed;
     }
 
 }
