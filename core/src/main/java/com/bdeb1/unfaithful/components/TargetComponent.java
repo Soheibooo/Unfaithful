@@ -30,10 +30,7 @@ public class TargetComponent implements Component {
 
     public static final int ACTION_WALK_LEFT = 12;
     public static final int ACTION_WALK_RIGHT = 13;
-    public static final int ACTION_LEFT_SCREEN = 14;
-    public static final int ACTION_RIGHT_SCREEN = 15;
-    public static final int ACTION_WATCHING = 16;
-    public static final int ACTION_WAITING = 17;
+    //public static final int ACTION_WAITING = 15;
 
     public static final int TRIGGER_POINT_SUSPICIOUS = 30;
     public static final int TRIGGER_POINT_FRENZY = 70;

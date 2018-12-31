@@ -213,7 +213,7 @@ public class GameWorld {
         MovementComponent movementC = engine
                 .createComponent(MovementComponent.class);
 
-        positionC.position.set(5.0f, 170.0f, 0.0f);
+        positionC.position.set(-50.0f, 170.0f, 0.0f);
         stateC.set(TargetComponent.STATE_UNSUSPICIOUS);
         targetC.difficultyAddition = -level * 5;
 

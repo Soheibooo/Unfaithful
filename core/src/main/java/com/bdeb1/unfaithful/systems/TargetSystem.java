@@ -39,11 +39,12 @@ public class TargetSystem extends IntervalIteratingSystem {
     private static final int WIDTH_ZONE_SAFE = 640;
     private static final int WIDTH_ZONE_SUSPICION = 700;
 
-    private int randWaitingTime = RandomComponent.rand.nextInt(5);
+    private int randWaitingTime = RandomComponent.rand.nextInt(5) + 1;
     private int positionToGo = 0;
     private int randTimeStay = 0;
-    private int randDir = 0;
+    private float timerWaitingStand = 0;
 
+    
     private ComponentMapper<ActionComponent> actionM;
     private ComponentMapper<StateComponent> stateM;
     private ComponentMapper<TargetComponent> targetM;
@@ -93,7 +94,7 @@ public class TargetSystem extends IntervalIteratingSystem {
             stateC.state = TargetComponent.STATE_DONE;
         }
         
-        processActionTarget(actionC, movementC, transformC);
+        processActionStateTarget(actionC, movementC, transformC);
         processMovementTarget(actionC, movementC, transformC);
         
     }
@@ -142,19 +143,12 @@ public class TargetSystem extends IntervalIteratingSystem {
      * @param movementC
      * @param transformC 
      */
-    private void processActionTarget(ActionComponent actionC, MovementComponent movementC, TransformComponent transformC) {
+    private void processActionStateTarget(ActionComponent actionC, MovementComponent movementC, TransformComponent transformC) {
         
-        if(transformC.position.x <= -50) {
-            actionC.set(TargetComponent.ACTION_LEFT_SCREEN);
-        }
-        if(transformC.position.x >= WIDTH_SCREEN_TOT) {
-            actionC.set(TargetComponent.ACTION_RIGHT_SCREEN);
-        }
         if(movementC.speed == 0.0f) {
-            actionC.set(TargetComponent.ACTION_WAITING);
         }
         else {
-            if(randDir == 0) {
+            if(movementC.speed > 0) {
                 actionC.set(TargetComponent.ACTION_WALK_RIGHT);
             }
             else {
@@ -170,15 +164,18 @@ public class TargetSystem extends IntervalIteratingSystem {
         //movementC.speed = 2;
         
         //At the side of the gameworld (left or right)
-        if (actionC.action == TargetComponent.ACTION_LEFT_SCREEN
-                || actionC.action == TargetComponent.ACTION_RIGHT_SCREEN) {
+        //System.out.println("position = " + transformC.position.x);
+        if (transformC.position.x <= -50
+                || transformC.position.x >= WIDTH_SCREEN_TOT) {
             
             randWaitingTime = RandomComponent.rand.nextInt(3);
             
             //set the random position that the target will aim to stop and wait at
             positionToGo = RandomComponent.rand.nextInt(WIDTH_SCREEN_TOT - 2 * WIDTH_ZONE_SAFE - 2 * WIDTH_ZONE_SUSPICION) + WIDTH_ZONE_SAFE + WIDTH_ZONE_SUSPICION;
             actionC.time = 0.0f;
-            movementC.speed = 2.0f;
+            
+            float dir = -1 * (transformC.position.x / Math.abs(transformC.position.x));
+            movementC.speed = 2.0f * dir;
             
         }
         
@@ -190,13 +187,13 @@ public class TargetSystem extends IntervalIteratingSystem {
             
             //is going to set the action to WAITING for which it's going to enter in the next if statement
             movementC.speed = 0.0f;
+            timerWaitingStand += TIME_STEP;
             
         }
         
-        if (actionC.action == TargetComponent.ACTION_WAITING && actionC.time > randWaitingTime) {
+        if (movementC.speed == 0 && timerWaitingStand > randWaitingTime) {
             
-            if(actionC.time > randWaitingTime) {
-                randDir = RandomComponent.rand.nextInt(2);
+                int randDir = RandomComponent.rand.nextInt(2);
                 
                 switch(randDir) {
                     case 0:
@@ -206,14 +203,24 @@ public class TargetSystem extends IntervalIteratingSystem {
                         positionToGo = -50;
                         break;
                 }
-            }
+            
         }
         
-        if(actionC.action == TargetComponent.ACTION_WALK_LEFT && transformC.position.x <= positionToGo
+        //will only go once the position has been achieve and the waiting timeout has been done
+        System.out.println("Time of the action: " + timerWaitingStand + "\nWalk : " + actionC.action+ "\nPosition : " + transformC.position.x);
+        if(actionC.action == TargetComponent.ACTION_WALK_LEFT || actionC.action == TargetComponent.ACTION_WALK_RIGHT 
+                
+                && transformC.position.x <= positionToGo
                 //for a limited time
-                && actionC.time > randWaitingTime) {
-            actionC.time = 0.0f;
-            movementC.speed = 0.0f;
+                && timerWaitingStand > randWaitingTime) {
+            
+            System.out.println("HIT");
+            timerWaitingStand = 0f;
+            float dir = RandomComponent.rand.nextInt(2);
+            //if 0, put it at -1f
+            dir = (dir == 0) ? -1f : dir;
+            
+            movementC.speed = 2.0f * dir;
         }
         
         /*
