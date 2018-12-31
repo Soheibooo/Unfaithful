@@ -79,7 +79,7 @@ public class GameWorld {
         LaptopComponent laptopC = engine
                 .createComponent(LaptopComponent.class);
 
-        Vector3 v3 = new Vector3();
+        Vector3 v3;
         switch (level) {
             case 1:
                 v3 = D_HACKER_SCREEN;
@@ -336,6 +336,8 @@ public class GameWorld {
             default:
                 break;
         }
+        //Set max gauge for level
+        hackerC.hacking_gauge_max = (50 + (level * level * 10));
 
         HashMap<Integer, Animation> animeList
                 = new HashMap<>();
@@ -369,10 +371,14 @@ public class GameWorld {
     public boolean isHacked() {
         HackerComponent hackerC = hacker.getComponent(HackerComponent.class);
         return hackerC.hacking_gauge
-                >= (50 + level * level * 10); //1=60; 2=90; 3=140;
+                >= hackerC.hacking_gauge_max; //1=60; 2=90; 3=140;
     }
 
     public float getHackBarProgress() {
         return hacker.getComponent(HackerComponent.class).hacking_gauge;
+    }
+    
+    public float getHackBarMaxValue() {
+        return hacker.getComponent(HackerComponent.class).hacking_gauge_max;
     }
 }

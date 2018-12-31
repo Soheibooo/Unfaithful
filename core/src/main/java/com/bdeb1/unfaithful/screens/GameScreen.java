@@ -224,7 +224,8 @@ public class GameScreen implements Screen {
         progressBarStyle2.knobAfter = drawable2;
         progressBarStyle2.knob = drawable2;
 
-        hackingBar = new AnimatedProgressBar(0, 100, 2, false, progressBarStyle2);
+        hackingBar = new AnimatedProgressBar(0, gWorld.getHackBarMaxValue(),
+                2, false, progressBarStyle2);
         hackingBar.setAnimationBackground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsBackground, 0.1f);
         hackingBar.setAnimationForeground(Assets.getInstance().manager.get(Assets.ATLAS_BAR_SUSPICIOUS_HACKING), hackingRegionsForeground, 0.1f);
         hackingBar.setPosition(10, Gdx.graphics.getHeight() - 30);

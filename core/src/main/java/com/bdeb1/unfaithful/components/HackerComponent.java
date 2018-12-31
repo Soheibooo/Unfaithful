@@ -30,4 +30,5 @@ public class HackerComponent implements Component {
     public float score = 0;
 
     public float hacking_gauge = 0;
+    public float hacking_gauge_max = 0;
 }
