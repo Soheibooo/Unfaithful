@@ -8,8 +8,15 @@ systems to get through levels within a ridiculous storyline.
 Special thanks to Veselin and Aleksandrina for their
 humorous appearance in this project!
 
-The git history has been cleaned up for this release.
 The Game Jam took place on 16th January, 2018.
+
+---
+
+THIS IS FOR EDUCATIONAL PURPOSE.
+
+SOME FEATURES ARE STILL A WIP AND THE GAME IS **NOT** COMPLETED.
+
+WE PLAN ON FIXING IT ON OUR FREE TIME.
 
 ## Gameplay
 (TODO gifs, screenshots)
@@ -40,7 +47,7 @@ Dev Team:
 
 Artistic Team:
 - Pierrick Maubois as **Lead Artist**
-- (Ajouter les 2 autres)
+- (Add 2 others)
 
 ## License
 Apache License, Version 2.0
